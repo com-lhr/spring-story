@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @MapperScan("com.yc")
 public class SpringStoryApplication implements WebMvcConfigurer {
 
-
+	
 	//嘎嘎嘎嘎嘎58686
 
 	//滚滚滚
