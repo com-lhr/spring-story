@@ -24,6 +24,10 @@ public class StBook implements Serializable {
 
     private Float bPrice;
 
+    private String bName;
+
+    private String bAuthor;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -104,5 +108,21 @@ public class StBook implements Serializable {
 
     public void setbPrice(Float bPrice) {
         this.bPrice = bPrice;
+    }
+
+    public String getbName() {
+        return bName;
+    }
+
+    public void setbName(String bName) {
+        this.bName = bName == null ? null : bName.trim();
+    }
+
+    public String getbAuthor() {
+        return bAuthor;
+    }
+
+    public void setbAuthor(String bAuthor) {
+        this.bAuthor = bAuthor == null ? null : bAuthor.trim();
     }
 }
