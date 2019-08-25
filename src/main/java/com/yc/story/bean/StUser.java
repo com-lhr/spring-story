@@ -74,3 +74,4 @@ public class StUser implements Serializable {
     public void setIntegral(Integer integral) {
         this.integral = integral;
     }
+}
