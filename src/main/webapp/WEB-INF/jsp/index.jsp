@@ -147,19 +147,6 @@
         </li>
       </ul>
       <!--作者-->
-       <ul class="press clear">
-        <h4>出版社</h4>
-       <li class="ease"><a href="javascript:;"><img src="img/Press.jpg"></a></li>
-       <li class="ease"><a href="javascript:;"><img src="img/Press.jpg"></a></li>
-       <li class="ease"><a href="javascript:;"><img src="img/Press.jpg"></a></li>
-       <li class="ease"><a href="javascript:;"><img src="img/Press.jpg"></a></li>
-       <li class="ease"><a href="javascript:;"><img src="img/Press.jpg"></a></li>
-       <li class="ease"><a href="javascript:;"><img src="img/Press.jpg"></a></li>
-       <li class="ease"><a href="javascript:;"><img src="img/Press.jpg"></a></li>
-       <li class="ease"><a href="javascript:;"><img src="img/Press.jpg"></a></li>
-       <li class="ease"><a href="javascript:;"><img src="img/Press.jpg"></a></li>
-      </ul>
-    <!--出版社-->
   </div>
   
 </div><!--内容-->
