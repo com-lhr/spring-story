@@ -11,7 +11,27 @@ public class StCollection implements Serializable {
 
     private Integer cStatus;
 
-    private static final long serialVersionUID = 1L;
+    private StBook stBook;
+    
+    private StUser stUser;
+    
+    public StBook getStBook() {
+		return stBook;
+	}
+
+	public void setStBook(StBook stBook) {
+		this.stBook = stBook;
+	}
+
+	public StUser getStUser() {
+		return stUser;
+	}
+
+	public void setStUser(StUser stUser) {
+		this.stUser = stUser;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
