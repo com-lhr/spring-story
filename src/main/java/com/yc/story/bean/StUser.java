@@ -13,6 +13,8 @@ public class StUser implements Serializable {
 
     private Integer tickets;
 
+    private String uPwd;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -53,5 +55,13 @@ public class StUser implements Serializable {
 
     public void setTickets(Integer tickets) {
         this.tickets = tickets;
+    }
+
+    public String getuPwd() {
+        return uPwd;
+    }
+
+    public void setuPwd(String uPwd) {
+        this.uPwd = uPwd == null ? null : uPwd.trim();
     }
 }
