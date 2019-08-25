@@ -14,8 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SpringStoryApplication implements WebMvcConfigurer {
 
 	//嘎嘎嘎嘎嘎58686
-
-
+	//test
 	//lhr
 	//sad
 
