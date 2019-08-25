@@ -17,11 +17,9 @@ public class CollectionBiz {
 	@Resource
 	private StCollectionMapper scm;
 	
-	@Resource
-	private StCollectionExample sce;
-	
 	// 查询个人收藏
 	public List<StCollection> query(StUser su){
+		StCollectionExample sce = new StCollectionExample();
 		sce.createCriteria().andUIdEqualTo(su.getId());
 		return scm.selectByExample(sce);
 	}

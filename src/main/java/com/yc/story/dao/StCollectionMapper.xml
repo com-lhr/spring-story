@@ -6,6 +6,9 @@
     <result column="u_id" jdbcType="INTEGER" property="uId" />
     <result column="b_id" jdbcType="INTEGER" property="bId" />
     <result column="c_status" jdbcType="INTEGER" property="cStatus" />
+    
+    
+    
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
