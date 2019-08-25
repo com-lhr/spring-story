@@ -15,6 +15,8 @@ public class StUser implements Serializable {
 
     private String uPwd;
 
+    private Integer integral;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -64,4 +66,11 @@ public class StUser implements Serializable {
     public void setuPwd(String uPwd) {
         this.uPwd = uPwd == null ? null : uPwd.trim();
     }
-}
+
+    public Integer getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(Integer integral) {
+        this.integral = integral;
+    }
