@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class StBook implements Serializable {
+	
+	// 图书编号
     private Integer id;
 
+    // 图片地址
     private String bFace;
 
     private Date bTime;
