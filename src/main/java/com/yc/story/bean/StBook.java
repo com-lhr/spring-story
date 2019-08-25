@@ -27,6 +27,8 @@ public class StBook implements Serializable {
     private String bName;
 
     private String bAuthor;
+    
+    private StCategory stCategory;
 
     private static final long serialVersionUID = 1L;
 
@@ -125,4 +127,12 @@ public class StBook implements Serializable {
     public void setbAuthor(String bAuthor) {
         this.bAuthor = bAuthor == null ? null : bAuthor.trim();
     }
+
+	public StCategory getStCategory() {
+		return stCategory;
+	}
+
+	public void setStCategory(StCategory stCategory) {
+		this.stCategory = stCategory;
+	}
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,42 +79,18 @@
   <div class="box_2 box_con">
   <h3>最新上架</h3>
       <ul class="clear">
-          <li><a href="javascript:;"><span class="icon_span"></span></a>
-             <a href="javascript:;"><b>[ 历史 ]</b></a>
-             <a href="javascript:;"><strong>新西兰岛屿湾旅行攻略</strong></a><time>2016-8-9</time></li>
-          <li><a href="javascript:;"><span class="icon_span pos_book"></span></a>
-             <a href="javascript:;"><b>[ 历史 ]</b></a>
-             <a href="javascript:;"><strong>新西兰岛屿湾旅行攻略</strong></a><time>2016-8-9</time></li>
-          <li><a href="javascript:;"><span class="icon_span"></span></a>
-             <a href="javascript:;"><b>[ 历史 ]</b></a>
-             <a href="javascript:;"><strong>新西兰岛屿湾旅行攻略</strong></a><time>2016-8-9</time></li>
-          <li><a href="javascript:;"><span class="icon_span"></span></a>
-             <a href="javascript:;"><b>[ 历史 ]</b></a>
-             <a href="javascript:;"><strong>新西兰岛屿湾旅行攻略</strong></a><time>2016-8-9</time></li>
-          <li><a href="javascript:;"><span class="icon_span"></span></a>
-             <a href="javascript:;"><b>[ 历史 ]</b></a>
-             <a href="javascript:;"><strong>新西兰岛屿湾旅行攻略</strong></a><time>2016-8-9</time></li>
-          <li><a href="javascript:;"><span class="icon_span"></span></a>
-             <a href="javascript:;"><b>[ 历史 ]</b></a>
-             <a href="javascript:;"><strong>新西兰岛屿湾旅行攻略</strong></a><time>2016-8-9</time></li>
-          <li><a href="javascript:;"><span class="icon_span"></span></a>
-             <a href="javascript:;"><b>[ 历史 ]</b></a>
-             <a href="javascript:;"><strong>新西兰岛屿湾旅行攻略</strong></a><time>2016-8-9</time></li>
-          <li><a href="javascript:;"><span class="icon_span"></span></a>
-             <a href="javascript:;"><b>[ 历史 ]</b></a>
-             <a href="javascript:;"><strong>新西兰岛屿湾旅行攻略</strong></a><time>2016-8-9</time></li>
-          <li><a href="javascript:;"><span class="icon_span"></span></a>
-             <a href="javascript:;"><b>[ 历史 ]</b></a>
-             <a href="javascript:;"><strong>新西兰岛屿湾旅行攻略</strong></a><time>2016-8-9</time></li>
-          <li><a href="javascript:;"><span class="icon_span"></span></a>
-             <a href="javascript:;"><b>[ 历史 ]</b></a>
-             <a href="javascript:;"><strong>新西兰岛屿湾旅行攻略</strong></a><time>2016-8-9</time></li>
+      <c:forEach items="${newbook }" var="b">
+        <li><a href="javascript:;"><span class="icon_span"></span></a>
+             <a href="javascript:;"><b>[${b.stCategory.caName } ]</b></a>
+             <a href="javascript:;"><strong>${b.bName }</strong></a><time><fmt:formatDate value="${b.bTime}" 
+          	pattern="yyyy-MM-dd"/></time></li>
+      </c:forEach>
      </ul>
   </div>
   
   <div class="box_3 clear">
       <ul  class="author clear">
-        <h4>作者</h4>
+        <h4>大神</h4>
         <li>
             <a href="http://bb.com"><img  src="img/other.jpg">
              <div class="mask"></div><p>路遥</p></a>

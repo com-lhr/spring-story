@@ -14,6 +14,8 @@
     <result column="b_price" jdbcType="REAL" property="bPrice" />
     <result column="b_name" jdbcType="VARCHAR" property="bName" />
     <result column="b_author" jdbcType="VARCHAR" property="bAuthor" />
+    <association property="stCategory" column="id" fetchType="lazy"
+    select="com.yc.story.dao.StCategoryMapper.selectByPrimaryKey"></association>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
