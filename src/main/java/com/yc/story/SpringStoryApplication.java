@@ -12,18 +12,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Controller
 @MapperScan("com.yc")
 public class SpringStoryApplication implements WebMvcConfigurer {
-
-
+	//  lhrrrrrr
 	//嘎嘎嘎嘎嘎58686
-
 	//滚滚滚
-
 	
 	//嘎
-
 	//lhr
-	//sad
-	
+	//sad	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringStoryApplication.class, args);
 	}		
