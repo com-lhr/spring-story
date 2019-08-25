@@ -30,7 +30,7 @@
   </div>-->
   <div class="delu2 clear">
       <div class="self ease">
-      <a href="javascript:;" class="clear">雪剑无影<span class="icon ease"></span></a>
+      <a href="login.html" class="clear">未登录<span class="icon ease"></span></a>
       <div class="clear"></div>
        <ul  class="clear">
          <li><a href="self.html">个人中心</a></li>
