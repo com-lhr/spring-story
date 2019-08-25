@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yc.story.Biz.CategoryBiz;
 import com.yc.story.bean.StCategory;
 
 @Controller
