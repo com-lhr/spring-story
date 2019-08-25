@@ -9,7 +9,7 @@
 .box .list li:hover a{color:#fff;}
 .box .list .active a{ font-weight:bold;}
 
-.box .con{ margin-left:50px; width:850px;}
+.box .con{ margin-left:50px; width:740px;}
 .box .con li{float:left; }
 .box .con .position{ height:30px;}
 .box .con .position .acative{color:#16A1E7;}
