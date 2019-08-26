@@ -16,7 +16,16 @@
     <result column="b_author" jdbcType="VARCHAR" property="bAuthor" />
     <association property="stCategory" column="id" fetchType="lazy"
     select="com.yc.story.dao.StCategoryMapper.selectByPrimaryKey"></association>
+    
+   <!--  <association property="">
+    
+    </association> -->
+    
   </resultMap>
+  <select id="findByCateforyAndTime" resultMap="BaseResultMap">
+	select * FROM st_book b JOIN st_category c ON  b.b_category = c.id WHERE c.ca_name = #{caName}
+ 	ORDER BY b.b_time DESC
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

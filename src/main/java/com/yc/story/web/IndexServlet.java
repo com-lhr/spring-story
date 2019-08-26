@@ -31,6 +31,7 @@ public class IndexServlet {
 	
 	@RequestMapping("toindex")
 	public String toIndex(Model model) {
+		//首页的最新上架功能 根据时间排序找出最新的十本小说
 		model.addAttribute("newbook", bbiz.newbook());
 		return "index";
 	}
