@@ -37,7 +37,7 @@
         <a href="javascript:;"></a>
         <a href="javascript:;"></a>
     </p>
-</div><!--banner结束-->
+</div>
 
 <div class="box">
   <div class="box_1 box_con">
