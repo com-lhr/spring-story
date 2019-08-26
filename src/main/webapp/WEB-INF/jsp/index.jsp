@@ -101,7 +101,7 @@
         </li>
         <li>
             <a href="javascript:;"><img  src="img/other.jpg">
-             <div class="mask"></div><p>路遥路遥</p></a>
+             <div class="mask"></div><p>路遥</p></a>
         </li>
         <li>
             <a href="javascript:;"><img  src="img/other.jpg">
