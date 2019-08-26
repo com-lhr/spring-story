@@ -11,7 +11,6 @@
 <link  href="css/index_article.css" rel="stylesheet" type="text/css">
 <script src="js/jquery.js"></script>
 <script src="js/js.js"></script>
-
 </head>
 
 <body>

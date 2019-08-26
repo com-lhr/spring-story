@@ -33,4 +33,9 @@ public class BookBiz {
 		PageHelper.startPage(1,10);
 		return bookMapper.selectByExample(bookExample);
 	}
+	
+	/*public List<StBook> findByCateforyAndOrderbReadCnt(Integer bCategory){
+		StBookExample bookExample = new StBookExample();
+		
+	}*/
 }
