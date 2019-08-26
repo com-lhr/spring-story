@@ -563,6 +563,136 @@ public class StUserExample {
             addCriterion("integral not between", value1, value2, "integral");
             return (Criteria) this;
         }
+
+        public Criteria andLevelIsNull() {
+            addCriterion("level is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIsNotNull() {
+            addCriterion("level is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelEqualTo(Integer value) {
+            addCriterion("level =", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelNotEqualTo(Integer value) {
+            addCriterion("level <>", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelGreaterThan(Integer value) {
+            addCriterion("level >", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelGreaterThanOrEqualTo(Integer value) {
+            addCriterion("level >=", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelLessThan(Integer value) {
+            addCriterion("level <", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelLessThanOrEqualTo(Integer value) {
+            addCriterion("level <=", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIn(List<Integer> values) {
+            addCriterion("level in", values, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelNotIn(List<Integer> values) {
+            addCriterion("level not in", values, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelBetween(Integer value1, Integer value2) {
+            addCriterion("level between", value1, value2, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelNotBetween(Integer value1, Integer value2) {
+            addCriterion("level not between", value1, value2, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionIsNull() {
+            addCriterion("u_introduction is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionIsNotNull() {
+            addCriterion("u_introduction is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionEqualTo(String value) {
+            addCriterion("u_introduction =", value, "uIntroduction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionNotEqualTo(String value) {
+            addCriterion("u_introduction <>", value, "uIntroduction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionGreaterThan(String value) {
+            addCriterion("u_introduction >", value, "uIntroduction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionGreaterThanOrEqualTo(String value) {
+            addCriterion("u_introduction >=", value, "uIntroduction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionLessThan(String value) {
+            addCriterion("u_introduction <", value, "uIntroduction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionLessThanOrEqualTo(String value) {
+            addCriterion("u_introduction <=", value, "uIntroduction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionLike(String value) {
+            addCriterion("u_introduction like", value, "uIntroduction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionNotLike(String value) {
+            addCriterion("u_introduction not like", value, "uIntroduction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionIn(List<String> values) {
+            addCriterion("u_introduction in", values, "uIntroduction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionNotIn(List<String> values) {
+            addCriterion("u_introduction not in", values, "uIntroduction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionBetween(String value1, String value2) {
+            addCriterion("u_introduction between", value1, value2, "uIntroduction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUIntroductionNotBetween(String value1, String value2) {
+            addCriterion("u_introduction not between", value1, value2, "uIntroduction");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

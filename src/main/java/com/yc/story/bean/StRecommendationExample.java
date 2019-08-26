@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class StCollectionExample {
+public class StRecommendationExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public StCollectionExample() {
+    public StRecommendationExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -165,66 +165,6 @@ public class StCollectionExample {
             return (Criteria) this;
         }
 
-        public Criteria andUIdIsNull() {
-            addCriterion("u_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUIdIsNotNull() {
-            addCriterion("u_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUIdEqualTo(Integer value) {
-            addCriterion("u_id =", value, "uId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUIdNotEqualTo(Integer value) {
-            addCriterion("u_id <>", value, "uId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUIdGreaterThan(Integer value) {
-            addCriterion("u_id >", value, "uId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("u_id >=", value, "uId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUIdLessThan(Integer value) {
-            addCriterion("u_id <", value, "uId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUIdLessThanOrEqualTo(Integer value) {
-            addCriterion("u_id <=", value, "uId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUIdIn(List<Integer> values) {
-            addCriterion("u_id in", values, "uId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUIdNotIn(List<Integer> values) {
-            addCriterion("u_id not in", values, "uId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUIdBetween(Integer value1, Integer value2) {
-            addCriterion("u_id between", value1, value2, "uId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("u_id not between", value1, value2, "uId");
-            return (Criteria) this;
-        }
-
         public Criteria andBIdIsNull() {
             addCriterion("b_id is null");
             return (Criteria) this;
@@ -285,183 +225,63 @@ public class StCollectionExample {
             return (Criteria) this;
         }
 
-        public Criteria andCStatusIsNull() {
-            addCriterion("c_status is null");
+        public Criteria andRecomtimeIsNull() {
+            addCriterion("recomTime is null");
             return (Criteria) this;
         }
 
-        public Criteria andCStatusIsNotNull() {
-            addCriterion("c_status is not null");
+        public Criteria andRecomtimeIsNotNull() {
+            addCriterion("recomTime is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCStatusEqualTo(Integer value) {
-            addCriterion("c_status =", value, "cStatus");
+        public Criteria andRecomtimeEqualTo(Date value) {
+            addCriterion("recomTime =", value, "recomtime");
             return (Criteria) this;
         }
 
-        public Criteria andCStatusNotEqualTo(Integer value) {
-            addCriterion("c_status <>", value, "cStatus");
+        public Criteria andRecomtimeNotEqualTo(Date value) {
+            addCriterion("recomTime <>", value, "recomtime");
             return (Criteria) this;
         }
 
-        public Criteria andCStatusGreaterThan(Integer value) {
-            addCriterion("c_status >", value, "cStatus");
+        public Criteria andRecomtimeGreaterThan(Date value) {
+            addCriterion("recomTime >", value, "recomtime");
             return (Criteria) this;
         }
 
-        public Criteria andCStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("c_status >=", value, "cStatus");
+        public Criteria andRecomtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("recomTime >=", value, "recomtime");
             return (Criteria) this;
         }
 
-        public Criteria andCStatusLessThan(Integer value) {
-            addCriterion("c_status <", value, "cStatus");
+        public Criteria andRecomtimeLessThan(Date value) {
+            addCriterion("recomTime <", value, "recomtime");
             return (Criteria) this;
         }
 
-        public Criteria andCStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("c_status <=", value, "cStatus");
+        public Criteria andRecomtimeLessThanOrEqualTo(Date value) {
+            addCriterion("recomTime <=", value, "recomtime");
             return (Criteria) this;
         }
 
-        public Criteria andCStatusIn(List<Integer> values) {
-            addCriterion("c_status in", values, "cStatus");
+        public Criteria andRecomtimeIn(List<Date> values) {
+            addCriterion("recomTime in", values, "recomtime");
             return (Criteria) this;
         }
 
-        public Criteria andCStatusNotIn(List<Integer> values) {
-            addCriterion("c_status not in", values, "cStatus");
+        public Criteria andRecomtimeNotIn(List<Date> values) {
+            addCriterion("recomTime not in", values, "recomtime");
             return (Criteria) this;
         }
 
-        public Criteria andCStatusBetween(Integer value1, Integer value2) {
-            addCriterion("c_status between", value1, value2, "cStatus");
+        public Criteria andRecomtimeBetween(Date value1, Date value2) {
+            addCriterion("recomTime between", value1, value2, "recomtime");
             return (Criteria) this;
         }
 
-        public Criteria andCStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("c_status not between", value1, value2, "cStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTimeIsNull() {
-            addCriterion("c_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTimeIsNotNull() {
-            addCriterion("c_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTimeEqualTo(Date value) {
-            addCriterion("c_time =", value, "cTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTimeNotEqualTo(Date value) {
-            addCriterion("c_time <>", value, "cTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTimeGreaterThan(Date value) {
-            addCriterion("c_time >", value, "cTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("c_time >=", value, "cTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTimeLessThan(Date value) {
-            addCriterion("c_time <", value, "cTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTimeLessThanOrEqualTo(Date value) {
-            addCriterion("c_time <=", value, "cTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTimeIn(List<Date> values) {
-            addCriterion("c_time in", values, "cTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTimeNotIn(List<Date> values) {
-            addCriterion("c_time not in", values, "cTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTimeBetween(Date value1, Date value2) {
-            addCriterion("c_time between", value1, value2, "cTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCTimeNotBetween(Date value1, Date value2) {
-            addCriterion("c_time not between", value1, value2, "cTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCRecordIsNull() {
-            addCriterion("c_record is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCRecordIsNotNull() {
-            addCriterion("c_record is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCRecordEqualTo(Integer value) {
-            addCriterion("c_record =", value, "cRecord");
-            return (Criteria) this;
-        }
-
-        public Criteria andCRecordNotEqualTo(Integer value) {
-            addCriterion("c_record <>", value, "cRecord");
-            return (Criteria) this;
-        }
-
-        public Criteria andCRecordGreaterThan(Integer value) {
-            addCriterion("c_record >", value, "cRecord");
-            return (Criteria) this;
-        }
-
-        public Criteria andCRecordGreaterThanOrEqualTo(Integer value) {
-            addCriterion("c_record >=", value, "cRecord");
-            return (Criteria) this;
-        }
-
-        public Criteria andCRecordLessThan(Integer value) {
-            addCriterion("c_record <", value, "cRecord");
-            return (Criteria) this;
-        }
-
-        public Criteria andCRecordLessThanOrEqualTo(Integer value) {
-            addCriterion("c_record <=", value, "cRecord");
-            return (Criteria) this;
-        }
-
-        public Criteria andCRecordIn(List<Integer> values) {
-            addCriterion("c_record in", values, "cRecord");
-            return (Criteria) this;
-        }
-
-        public Criteria andCRecordNotIn(List<Integer> values) {
-            addCriterion("c_record not in", values, "cRecord");
-            return (Criteria) this;
-        }
-
-        public Criteria andCRecordBetween(Integer value1, Integer value2) {
-            addCriterion("c_record between", value1, value2, "cRecord");
-            return (Criteria) this;
-        }
-
-        public Criteria andCRecordNotBetween(Integer value1, Integer value2) {
-            addCriterion("c_record not between", value1, value2, "cRecord");
+        public Criteria andRecomtimeNotBetween(Date value1, Date value2) {
+            addCriterion("recomTime not between", value1, value2, "recomtime");
             return (Criteria) this;
         }
     }

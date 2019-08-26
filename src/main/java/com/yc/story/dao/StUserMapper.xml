@@ -9,6 +9,8 @@
     <result column="tickets" jdbcType="INTEGER" property="tickets" />
     <result column="u_pwd" jdbcType="VARCHAR" property="uPwd" />
     <result column="integral" jdbcType="INTEGER" property="integral" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="u_introduction" jdbcType="VARCHAR" property="uIntroduction" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, u_name, u_tel, u_email, tickets, u_pwd, integral
+    id, u_name, u_tel, u_email, tickets, u_pwd, integral, level, u_introduction
   </sql>
   <select id="selectByExample" parameterType="com.yc.story.bean.StUserExample" resultMap="BaseResultMap">
     select
@@ -106,11 +108,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into st_user (u_name, u_tel, u_email, 
-      tickets, u_pwd, integral
-      )
+      tickets, u_pwd, integral, 
+      level, u_introduction)
     values (#{uName,jdbcType=VARCHAR}, #{uTel,jdbcType=VARCHAR}, #{uEmail,jdbcType=VARCHAR}, 
-      #{tickets,jdbcType=INTEGER}, #{uPwd,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER}
-      )
+      #{tickets,jdbcType=INTEGER}, #{uPwd,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{uIntroduction,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.yc.story.bean.StUser">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -136,6 +138,12 @@
       <if test="integral != null">
         integral,
       </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="uIntroduction != null">
+        u_introduction,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uName != null">
@@ -155,6 +163,12 @@
       </if>
       <if test="integral != null">
         #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="uIntroduction != null">
+        #{uIntroduction,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +202,12 @@
       <if test="record.integral != null">
         integral = #{record.integral,jdbcType=INTEGER},
       </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.uIntroduction != null">
+        u_introduction = #{record.uIntroduction,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +221,9 @@
       u_email = #{record.uEmail,jdbcType=VARCHAR},
       tickets = #{record.tickets,jdbcType=INTEGER},
       u_pwd = #{record.uPwd,jdbcType=VARCHAR},
-      integral = #{record.integral,jdbcType=INTEGER}
+      integral = #{record.integral,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=INTEGER},
+      u_introduction = #{record.uIntroduction,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +249,12 @@
       <if test="integral != null">
         integral = #{integral,jdbcType=INTEGER},
       </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="uIntroduction != null">
+        u_introduction = #{uIntroduction,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -237,7 +265,9 @@
       u_email = #{uEmail,jdbcType=VARCHAR},
       tickets = #{tickets,jdbcType=INTEGER},
       u_pwd = #{uPwd,jdbcType=VARCHAR},
-      integral = #{integral,jdbcType=INTEGER}
+      integral = #{integral,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      u_introduction = #{uIntroduction,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

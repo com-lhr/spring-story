@@ -874,6 +874,66 @@ public class StBookExample {
             addCriterion("b_author not between", value1, value2, "bAuthor");
             return (Criteria) this;
         }
+
+        public Criteria andBReadcntIsNull() {
+            addCriterion("b_readCnt is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBReadcntIsNotNull() {
+            addCriterion("b_readCnt is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBReadcntEqualTo(Integer value) {
+            addCriterion("b_readCnt =", value, "bReadcnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andBReadcntNotEqualTo(Integer value) {
+            addCriterion("b_readCnt <>", value, "bReadcnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andBReadcntGreaterThan(Integer value) {
+            addCriterion("b_readCnt >", value, "bReadcnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andBReadcntGreaterThanOrEqualTo(Integer value) {
+            addCriterion("b_readCnt >=", value, "bReadcnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andBReadcntLessThan(Integer value) {
+            addCriterion("b_readCnt <", value, "bReadcnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andBReadcntLessThanOrEqualTo(Integer value) {
+            addCriterion("b_readCnt <=", value, "bReadcnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andBReadcntIn(List<Integer> values) {
+            addCriterion("b_readCnt in", values, "bReadcnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andBReadcntNotIn(List<Integer> values) {
+            addCriterion("b_readCnt not in", values, "bReadcnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andBReadcntBetween(Integer value1, Integer value2) {
+            addCriterion("b_readCnt between", value1, value2, "bReadcnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andBReadcntNotBetween(Integer value1, Integer value2) {
+            addCriterion("b_readCnt not between", value1, value2, "bReadcnt");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -1,6 +1,7 @@
 package com.yc.story.bean;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class StCollection implements Serializable {
     private Integer id;
@@ -10,6 +11,10 @@ public class StCollection implements Serializable {
     private Integer bId;
 
     private Integer cStatus;
+
+    private Date cTime;
+
+    private Integer cRecord;
 
     private static final long serialVersionUID = 1L;
 
@@ -43,5 +48,21 @@ public class StCollection implements Serializable {
 
     public void setcStatus(Integer cStatus) {
         this.cStatus = cStatus;
+    }
+
+    public Date getcTime() {
+        return cTime;
+    }
+
+    public void setcTime(Date cTime) {
+        this.cTime = cTime;
+    }
+
+    public Integer getcRecord() {
+        return cRecord;
+    }
+
+    public void setcRecord(Integer cRecord) {
+        this.cRecord = cRecord;
     }
 }

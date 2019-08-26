@@ -28,6 +28,8 @@ public class StBook implements Serializable {
 
     private String bAuthor;
 
+    private Integer bReadcnt;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -124,5 +126,13 @@ public class StBook implements Serializable {
 
     public void setbAuthor(String bAuthor) {
         this.bAuthor = bAuthor == null ? null : bAuthor.trim();
+    }
+
+    public Integer getbReadcnt() {
+        return bReadcnt;
+    }
+
+    public void setbReadcnt(Integer bReadcnt) {
+        this.bReadcnt = bReadcnt;
     }
 }

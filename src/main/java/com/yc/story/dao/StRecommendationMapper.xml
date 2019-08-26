@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yc.story.dao.StCollectionMapper">
-  <resultMap id="BaseResultMap" type="com.yc.story.bean.StCollection">
+<mapper namespace="com.yc.story.dao.StRecommendationMapper">
+  <resultMap id="BaseResultMap" type="com.yc.story.bean.StRecommendation">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="u_id" jdbcType="INTEGER" property="uId" />
     <result column="b_id" jdbcType="INTEGER" property="bId" />
-    <result column="c_status" jdbcType="INTEGER" property="cStatus" />
-    <result column="c_time" jdbcType="TIMESTAMP" property="cTime" />
-    <result column="c_record" jdbcType="INTEGER" property="cRecord" />
+    <result column="recomTime" jdbcType="TIMESTAMP" property="recomtime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, u_id, b_id, c_status, c_time, c_record
+    id, b_id, recomTime
   </sql>
-  <select id="selectByExample" parameterType="com.yc.story.bean.StCollectionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.yc.story.bean.StRecommendationExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from st_collection
+    from st_recommendation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,94 +84,65 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from st_collection
+    from st_recommendation
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from st_collection
+    delete from st_recommendation
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.yc.story.bean.StCollectionExample">
-    delete from st_collection
+  <delete id="deleteByExample" parameterType="com.yc.story.bean.StRecommendationExample">
+    delete from st_recommendation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.yc.story.bean.StCollection">
+  <insert id="insert" parameterType="com.yc.story.bean.StRecommendation">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into st_collection (u_id, b_id, c_status, 
-      c_time, c_record)
-    values (#{uId,jdbcType=INTEGER}, #{bId,jdbcType=INTEGER}, #{cStatus,jdbcType=INTEGER}, 
-      #{cTime,jdbcType=TIMESTAMP}, #{cRecord,jdbcType=INTEGER})
+    insert into st_recommendation (b_id, recomTime)
+    values (#{bId,jdbcType=INTEGER}, #{recomtime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.yc.story.bean.StCollection">
+  <insert id="insertSelective" parameterType="com.yc.story.bean.StRecommendation">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into st_collection
+    insert into st_recommendation
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uId != null">
-        u_id,
-      </if>
       <if test="bId != null">
         b_id,
       </if>
-      <if test="cStatus != null">
-        c_status,
-      </if>
-      <if test="cTime != null">
-        c_time,
-      </if>
-      <if test="cRecord != null">
-        c_record,
+      <if test="recomtime != null">
+        recomTime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uId != null">
-        #{uId,jdbcType=INTEGER},
-      </if>
       <if test="bId != null">
         #{bId,jdbcType=INTEGER},
       </if>
-      <if test="cStatus != null">
-        #{cStatus,jdbcType=INTEGER},
-      </if>
-      <if test="cTime != null">
-        #{cTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="cRecord != null">
-        #{cRecord,jdbcType=INTEGER},
+      <if test="recomtime != null">
+        #{recomtime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.yc.story.bean.StCollectionExample" resultType="java.lang.Long">
-    select count(*) from st_collection
+  <select id="countByExample" parameterType="com.yc.story.bean.StRecommendationExample" resultType="java.lang.Long">
+    select count(*) from st_recommendation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update st_collection
+    update st_recommendation
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.uId != null">
-        u_id = #{record.uId,jdbcType=INTEGER},
-      </if>
       <if test="record.bId != null">
         b_id = #{record.bId,jdbcType=INTEGER},
       </if>
-      <if test="record.cStatus != null">
-        c_status = #{record.cStatus,jdbcType=INTEGER},
-      </if>
-      <if test="record.cTime != null">
-        c_time = #{record.cTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.cRecord != null">
-        c_record = #{record.cRecord,jdbcType=INTEGER},
+      <if test="record.recomtime != null">
+        recomTime = #{record.recomtime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -182,45 +150,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update st_collection
+    update st_recommendation
     set id = #{record.id,jdbcType=INTEGER},
-      u_id = #{record.uId,jdbcType=INTEGER},
       b_id = #{record.bId,jdbcType=INTEGER},
-      c_status = #{record.cStatus,jdbcType=INTEGER},
-      c_time = #{record.cTime,jdbcType=TIMESTAMP},
-      c_record = #{record.cRecord,jdbcType=INTEGER}
+      recomTime = #{record.recomtime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yc.story.bean.StCollection">
-    update st_collection
+  <update id="updateByPrimaryKeySelective" parameterType="com.yc.story.bean.StRecommendation">
+    update st_recommendation
     <set>
-      <if test="uId != null">
-        u_id = #{uId,jdbcType=INTEGER},
-      </if>
       <if test="bId != null">
         b_id = #{bId,jdbcType=INTEGER},
       </if>
-      <if test="cStatus != null">
-        c_status = #{cStatus,jdbcType=INTEGER},
-      </if>
-      <if test="cTime != null">
-        c_time = #{cTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="cRecord != null">
-        c_record = #{cRecord,jdbcType=INTEGER},
+      <if test="recomtime != null">
+        recomTime = #{recomtime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yc.story.bean.StCollection">
-    update st_collection
-    set u_id = #{uId,jdbcType=INTEGER},
-      b_id = #{bId,jdbcType=INTEGER},
-      c_status = #{cStatus,jdbcType=INTEGER},
-      c_time = #{cTime,jdbcType=TIMESTAMP},
-      c_record = #{cRecord,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.yc.story.bean.StRecommendation">
+    update st_recommendation
+    set b_id = #{bId,jdbcType=INTEGER},
+      recomTime = #{recomtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
