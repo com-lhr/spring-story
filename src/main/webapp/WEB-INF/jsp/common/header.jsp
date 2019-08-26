@@ -54,7 +54,7 @@
     <div class="active"></div>
     <li><a href="toindex">首页</a></li>
     <c:forEach items="${cList}" var="c">
-    	<li><a href="javascript:;">${c.caName}</a></li>
+    	<li><a href="artCategory?id=${c.id }">${c.caName}</a></li>
     </c:forEach>  
    
     <div class="submission">

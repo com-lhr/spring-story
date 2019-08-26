@@ -6,9 +6,11 @@ import javax.annotation.Resource;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yc.story.Biz.BookBiz;
 import com.yc.story.Biz.CategoryBiz;
 import com.yc.story.bean.StCategory;
 
@@ -17,6 +19,8 @@ public class IndexServlet {
 	
 	@Resource
 	private CategoryBiz cbiz;
+	@Resource
+	private BookBiz bbiz;
 	
 	@ModelAttribute("cList")
 	public List<StCategory> init(){
@@ -26,7 +30,9 @@ public class IndexServlet {
 	
 	
 	@RequestMapping("toindex")
-	public String toIndex() {
+	public String toIndex(Model model) {
+		//首页的最新上架功能 根据时间排序找出最新的十本小说
+		model.addAttribute("newbook", bbiz.newbook());
 		return "index";
 	}
 	

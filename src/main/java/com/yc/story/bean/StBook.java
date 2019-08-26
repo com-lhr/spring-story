@@ -27,6 +27,8 @@ public class StBook implements Serializable {
     private String bName;
 
     private String bAuthor;
+    
+    private StCategory stCategory;
 
     private Integer bReadcnt;
 
@@ -128,6 +130,7 @@ public class StBook implements Serializable {
         this.bAuthor = bAuthor == null ? null : bAuthor.trim();
     }
 
+
     public Integer getbReadcnt() {
         return bReadcnt;
     }
@@ -135,4 +138,13 @@ public class StBook implements Serializable {
     public void setbReadcnt(Integer bReadcnt) {
         this.bReadcnt = bReadcnt;
     }
+
+	public StCategory getStCategory() {
+		return stCategory;
+	}
+
+	public void setStCategory(StCategory stCategory) {
+		this.stCategory = stCategory;
+	}
+
 }

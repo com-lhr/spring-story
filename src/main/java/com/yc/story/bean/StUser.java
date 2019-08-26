@@ -93,6 +93,7 @@ public class StUser implements Serializable {
         this.integral = integral;
     }
 
+
     public Integer getLevel() {
         return level;
     }
@@ -108,4 +109,6 @@ public class StUser implements Serializable {
     public void setuIntroduction(String uIntroduction) {
         this.uIntroduction = uIntroduction == null ? null : uIntroduction.trim();
     }
+
+
 }
