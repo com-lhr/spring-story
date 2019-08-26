@@ -30,11 +30,11 @@ public class springstoryApplicationTests {
 	
 	@Test
 	public void findByCateforyAndTimeTest() {
-		bookMapper.findByCateforyAndTime("玄幻魔法");
+		bookMapper.findByCategoryAndTime("玄幻魔法");
 	}
 	
 	@Test
 	public void findByCateforyAndTimeBIZTest() {
-		biz.findByCateforyAndTime(1);
+		biz.findByCategoryAndTime(1);
 	}
 }

@@ -30,6 +30,8 @@ public class StBook implements Serializable {
     
     private StCategory stCategory;
 
+    private Integer bReadcnt;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -128,6 +130,15 @@ public class StBook implements Serializable {
         this.bAuthor = bAuthor == null ? null : bAuthor.trim();
     }
 
+
+    public Integer getbReadcnt() {
+        return bReadcnt;
+    }
+
+    public void setbReadcnt(Integer bReadcnt) {
+        this.bReadcnt = bReadcnt;
+    }
+
 	public StCategory getStCategory() {
 		return stCategory;
 	}
@@ -135,4 +146,5 @@ public class StBook implements Serializable {
 	public void setStCategory(StCategory stCategory) {
 		this.stCategory = stCategory;
 	}
+
 }

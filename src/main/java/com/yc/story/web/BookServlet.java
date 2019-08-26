@@ -30,7 +30,7 @@ public class BookServlet {
 	public String ArticleCategory(Model model,String id) {
 		//分类页面右边的新书上架功能 根据该类别和时间排序找出十本小说
 		Integer aid = Integer.valueOf(id);
-		model.addAttribute("category_newbooks", bbiz.findByCateforyAndTime(aid));
+		model.addAttribute("category_newbooks", bbiz.findByCategoryAndTime(aid));
 		return "index_article";
 	}
 

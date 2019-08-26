@@ -28,5 +28,5 @@ public interface StBookMapper {
 
     int updateByPrimaryKey(StBook record);
     
-    List<StBook> findByCateforyAndTime(@Param("caName") String caName);
+    List<StBook> findByCategoryAndTime(@Param("caName") String caName);
 }

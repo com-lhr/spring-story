@@ -157,7 +157,7 @@ max-height:200px; font-size:14px;}
 .sc_c b{ font-size:12px; position:absolute;left:30%; top:0px;color:#F00; opacity:0; z-index:3;}
 /*----------------收藏----------------*/
 
-.menu_3  input[type=text]{border:none; background:none; border:1px solid #C7C5C5; border-radius:3px; background:url(../img/user.png) no-repeat;
+.menu_3  input[type=text],.menu_3  input[type=password]{border:none; background:none; border:1px solid #C7C5C5; border-radius:3px; background:url(../img/user.png) no-repeat;
                 width:250px; padding:0px 3px 0px 50px;height:32px; line-height:32px; margin-left:5px;}
 .submit{border:none; background:none; height:28px; line-height:28px;  border-radius:0px; text-align:center;
 color:#fff; letter-spacing:1px; border-radius:2px; display:block; width:70px; cursor:pointer;

@@ -30,7 +30,7 @@
   </div>-->
   <div class="delu2 clear">
       <div class="self ease">
-      <a href="login.html" class="clear">未登录<span class="icon ease"></span></a>
+      <a href="${loginedUser == null ? 'tologin' : ''}" class="clear">${loginedUser == null ? 'Hi,请登录'  :   '欢迎：'.concat(loginedUser.uName)}<span class="icon ease"></span></a>
       <div class="clear"></div>
        <ul  class="clear">
          <li><a href="self.html">个人中心</a></li>
@@ -52,7 +52,7 @@
 <nav class="clear">
     <ul class="nav_1 clear">
     <div class="active"></div>
-    <li><a href="javascript:;">首页</a></li>
+    <li><a href="toindex">首页</a></li>
     <c:forEach items="${cList}" var="c">
     	<li><a href="artCategory?id=${c.id }">${c.caName}</a></li>
     </c:forEach>  
