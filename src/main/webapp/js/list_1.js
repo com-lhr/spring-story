@@ -28,9 +28,9 @@ window.onload=function()
 				addClass(aA[2],'icon_down2');
 				this.getElementsByTagName('span')[0].innerHTML='';
 			}}
-			)()
+			)
 		}
-	})();//小图标切换
+	});//小图标切换
 	
 	(function(){
 		var list_r=getClass(document,'div','list2')[0];
