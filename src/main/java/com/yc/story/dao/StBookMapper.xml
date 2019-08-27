@@ -15,7 +15,8 @@
     <result column="b_name" jdbcType="VARCHAR" property="bName" />
     <result column="b_author" jdbcType="VARCHAR" property="bAuthor" />
     <result column="b_readCnt" jdbcType="INTEGER" property="bReadcnt" />
-    <association property="stCategory" column="id" fetchType="lazy"
+    <result column="b_commCount" jdbcType="INTEGER" property="bCommcount" />
+  <association property="stCategory" column="id" fetchType="lazy"
     select="com.yc.story.dao.StCategoryMapper.selectByPrimaryKey"></association>
     
    <!--  <association property="">
@@ -23,7 +24,7 @@
     </association> -->
     
   </resultMap>
-  <select id="findByCateforyAndTime" resultMap="BaseResultMap">
+  <select id="findByCategoryAndTime" resultMap="BaseResultMap">
 	select * FROM st_book b JOIN st_category c ON  b.b_category = c.id WHERE c.ca_name = #{caName}
  	ORDER BY b.b_time DESC
   </select>
@@ -87,7 +88,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, b_face, b_time, b_category, b_position, b_introduce, b_num, b_count, b_status, 
-    b_price, b_name, b_author, b_readCnt
+    b_price, b_name, b_author, b_readCnt, b_commCount
   </sql>
   <select id="selectByExample" parameterType="com.yc.story.bean.StBookExample" resultMap="BaseResultMap">
     select
@@ -126,13 +127,13 @@
     insert into st_book (b_face, b_time, b_category, 
       b_position, b_introduce, b_num, 
       b_count, b_status, b_price, 
-      b_name, b_author, b_readCnt
-      )
+      b_name, b_author, b_readCnt, 
+      b_commCount)
     values (#{bFace,jdbcType=VARCHAR}, #{bTime,jdbcType=TIMESTAMP}, #{bCategory,jdbcType=INTEGER}, 
       #{bPosition,jdbcType=VARCHAR}, #{bIntroduce,jdbcType=VARCHAR}, #{bNum,jdbcType=INTEGER}, 
       #{bCount,jdbcType=INTEGER}, #{bStatus,jdbcType=INTEGER}, #{bPrice,jdbcType=REAL}, 
-      #{bName,jdbcType=VARCHAR}, #{bAuthor,jdbcType=VARCHAR}, #{bReadcnt,jdbcType=INTEGER}
-      )
+      #{bName,jdbcType=VARCHAR}, #{bAuthor,jdbcType=VARCHAR}, #{bReadcnt,jdbcType=INTEGER}, 
+      #{bCommcount,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.yc.story.bean.StBook">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -176,6 +177,9 @@
       <if test="bReadcnt != null">
         b_readCnt,
       </if>
+      <if test="bCommcount != null">
+        b_commCount,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="bFace != null">
@@ -213,6 +217,9 @@
       </if>
       <if test="bReadcnt != null">
         #{bReadcnt,jdbcType=INTEGER},
+      </if>
+      <if test="bCommcount != null">
+        #{bCommcount,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -264,6 +271,9 @@
       <if test="record.bReadcnt != null">
         b_readCnt = #{record.bReadcnt,jdbcType=INTEGER},
       </if>
+      <if test="record.bCommcount != null">
+        b_commCount = #{record.bCommcount,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -283,7 +293,8 @@
       b_price = #{record.bPrice,jdbcType=REAL},
       b_name = #{record.bName,jdbcType=VARCHAR},
       b_author = #{record.bAuthor,jdbcType=VARCHAR},
-      b_readCnt = #{record.bReadcnt,jdbcType=INTEGER}
+      b_readCnt = #{record.bReadcnt,jdbcType=INTEGER},
+      b_commCount = #{record.bCommcount,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -327,6 +338,9 @@
       <if test="bReadcnt != null">
         b_readCnt = #{bReadcnt,jdbcType=INTEGER},
       </if>
+      <if test="bCommcount != null">
+        b_commCount = #{bCommcount,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -343,7 +357,8 @@
       b_price = #{bPrice,jdbcType=REAL},
       b_name = #{bName,jdbcType=VARCHAR},
       b_author = #{bAuthor,jdbcType=VARCHAR},
-      b_readCnt = #{bReadcnt,jdbcType=INTEGER}
+      b_readCnt = #{bReadcnt,jdbcType=INTEGER},
+      b_commCount = #{bCommcount,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

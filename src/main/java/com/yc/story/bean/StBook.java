@@ -27,10 +27,10 @@ public class StBook implements Serializable {
     private String bName;
 
     private String bAuthor;
-    
-    private StCategory stCategory;
 
     private Integer bReadcnt;
+
+    private Integer bCommcount;
 
     private static final long serialVersionUID = 1L;
 
@@ -130,7 +130,6 @@ public class StBook implements Serializable {
         this.bAuthor = bAuthor == null ? null : bAuthor.trim();
     }
 
-
     public Integer getbReadcnt() {
         return bReadcnt;
     }
@@ -139,12 +138,11 @@ public class StBook implements Serializable {
         this.bReadcnt = bReadcnt;
     }
 
-	public StCategory getStCategory() {
-		return stCategory;
-	}
+    public Integer getbCommcount() {
+        return bCommcount;
+    }
 
-	public void setStCategory(StCategory stCategory) {
-		this.stCategory = stCategory;
-	}
-
+    public void setbCommcount(Integer bCommcount) {
+        this.bCommcount = bCommcount;
+    }
 }

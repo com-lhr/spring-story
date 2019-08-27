@@ -26,11 +26,16 @@ public class BookBiz {
 	}
 	
 	//根据类别和时间排序找出十本小说
-	public List<StBook> findByCateforyAndTime(Integer bCategory){
+	public List<StBook> findByCategoryAndTime(Integer bCategory){
 		StBookExample bookExample = new StBookExample();
 		bookExample.createCriteria().andBCategoryEqualTo(bCategory);
 		bookExample.setOrderByClause("b_time desc");
 		PageHelper.startPage(1,10);
 		return bookMapper.selectByExample(bookExample);
 	}
+	
+	/*public List<StBook> findByCateforyAndOrderbReadCnt(Integer bCategory){
+		StBookExample bookExample = new StBookExample();
+		
+	}*/
 }

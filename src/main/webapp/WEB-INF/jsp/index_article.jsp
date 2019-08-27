@@ -11,6 +11,7 @@
 <link  href="css/index_article.css" rel="stylesheet" type="text/css">
 <script src="js/jquery.js"></script>
 <script src="js/js.js"></script>
+
 <script src="js/list.js"></script>
 <script src="js/list_1.js"></script>
 
