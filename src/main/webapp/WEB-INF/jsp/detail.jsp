@@ -187,6 +187,7 @@
 
 				<ul class="com_con clear">
 					<!-- 第一条评论 -->
+					
 					<div class="com_bor">
 						<!--评论内容-->
 						<li class="go">
@@ -232,6 +233,7 @@
 							</div>
 						</li>
 					</div>
+					
 					<!--      -第一条评论结束  -->
 
 					<!-- 第二条评论 -->
