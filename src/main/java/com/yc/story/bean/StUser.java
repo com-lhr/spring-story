@@ -34,8 +34,19 @@ public class StUser implements Serializable {
     private Integer level;
 
     private String uIntroduction;
+    
+    private String uImage;
+    
 
-    private static final long serialVersionUID = 1L;
+    public String getuImage() {
+		return uImage;
+	}
+
+	public void setuImage(String uImage) {
+		this.uImage = uImage;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -109,6 +120,13 @@ public class StUser implements Serializable {
     public void setuIntroduction(String uIntroduction) {
         this.uIntroduction = uIntroduction == null ? null : uIntroduction.trim();
     }
+
+	@Override
+	public String toString() {
+		return "StUser [id=" + id + ", uName=" + uName + ", uTel=" + uTel + ", uEmail=" + uEmail + ", tickets="
+				+ tickets + ", uPwd=" + uPwd + ", integral=" + integral + ", level=" + level + ", uIntroduction="
+				+ uIntroduction + ", uImage=" + uImage + "]";
+	}
 
 
 }

@@ -33,5 +33,10 @@ public class BookServlet {
 		model.addAttribute("category_newbooks", bbiz.findByCateforyAndTime(aid));
 		return "index_article";
 	}
+	
+	@RequestMapping("todetail")
+	public String Detail() {
+		return "detail";
+	}
 
 }

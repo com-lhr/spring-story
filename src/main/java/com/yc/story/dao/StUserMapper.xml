@@ -11,6 +11,7 @@
     <result column="integral" jdbcType="INTEGER" property="integral" />
     <result column="level" jdbcType="INTEGER" property="level" />
     <result column="u_introduction" jdbcType="VARCHAR" property="uIntroduction" />
+    <result column="u_image" jdbcType="VARCHAR" property="uImage" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, u_name, u_tel, u_email, tickets, u_pwd, integral, level, u_introduction
+    id, u_name, u_tel, u_email, tickets, u_pwd, integral, level, u_introduction, u_image
   </sql>
   <select id="selectByExample" parameterType="com.yc.story.bean.StUserExample" resultMap="BaseResultMap">
     select
@@ -109,10 +110,12 @@
     </selectKey>
     insert into st_user (u_name, u_tel, u_email, 
       tickets, u_pwd, integral, 
-      level, u_introduction)
+      level, u_introduction, u_image
+      )
     values (#{uName,jdbcType=VARCHAR}, #{uTel,jdbcType=VARCHAR}, #{uEmail,jdbcType=VARCHAR}, 
       #{tickets,jdbcType=INTEGER}, #{uPwd,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER}, 
-      #{level,jdbcType=INTEGER}, #{uIntroduction,jdbcType=VARCHAR})
+      #{level,jdbcType=INTEGER}, #{uIntroduction,jdbcType=VARCHAR}, #{uImage,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.yc.story.bean.StUser">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -144,6 +147,9 @@
       <if test="uIntroduction != null">
         u_introduction,
       </if>
+      <if test="uImage != null">
+        u_image,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uName != null">
@@ -169,6 +175,9 @@
       </if>
       <if test="uIntroduction != null">
         #{uIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="uImage != null">
+        #{uImage,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -208,6 +217,9 @@
       <if test="record.uIntroduction != null">
         u_introduction = #{record.uIntroduction,jdbcType=VARCHAR},
       </if>
+      <if test="record.uImage != null">
+        u_image = #{record.uImage,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -223,7 +235,8 @@
       u_pwd = #{record.uPwd,jdbcType=VARCHAR},
       integral = #{record.integral,jdbcType=INTEGER},
       level = #{record.level,jdbcType=INTEGER},
-      u_introduction = #{record.uIntroduction,jdbcType=VARCHAR}
+      u_introduction = #{record.uIntroduction,jdbcType=VARCHAR},
+      u_image = #{record.uImage,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -255,6 +268,9 @@
       <if test="uIntroduction != null">
         u_introduction = #{uIntroduction,jdbcType=VARCHAR},
       </if>
+      <if test="uImage != null">
+        u_image = #{uImage,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -267,7 +283,8 @@
       u_pwd = #{uPwd,jdbcType=VARCHAR},
       integral = #{integral,jdbcType=INTEGER},
       level = #{level,jdbcType=INTEGER},
-      u_introduction = #{uIntroduction,jdbcType=VARCHAR}
+      u_introduction = #{uIntroduction,jdbcType=VARCHAR},
+      u_image = #{uImage,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

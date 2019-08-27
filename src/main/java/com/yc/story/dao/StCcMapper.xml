@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yc.story.dao.StCommentMapper">
-  <resultMap id="BaseResultMap" type="com.yc.story.bean.StComment">
+<mapper namespace="com.yc.story.dao.StCcMapper">
+  <resultMap id="BaseResultMap" type="com.yc.story.bean.StCc">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="b_id" jdbcType="INTEGER" property="bId" />
-    <result column="u_id" jdbcType="INTEGER" property="uId" />
-    <result column="cm_content" jdbcType="VARCHAR" property="cmContent" />
-    <result column="cm_createtime" jdbcType="TIMESTAMP" property="cmCreatetime" />
-    
-    <collection property="sList" column="id" fetchType="lazy"
-    	select="com.yc.story.dao.StCommentMapper.selectCommentByid"
-    ></collection>
+    <result column="my_commid" jdbcType="INTEGER" property="myCommid" />
+    <result column="other_commid" jdbcType="INTEGER" property="otherCommid" />
   </resultMap>
-  
-  <select id="selectCommentByid" resultMap="com.yc.story.dao.StCommentMapper.BaseResultMap">
-  	select a.* from st_comment a join st_cc b on a.id = b.other_commid where b.my_commid  = #{id}
-  </select>
-  
-  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -77,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, b_id, u_id, cm_content, cm_createtime
+    id, my_commid, other_commid
   </sql>
-  <select id="selectByExample" parameterType="com.yc.story.bean.StCommentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.yc.story.bean.StCcExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from st_comment
+    from st_cc
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,85 +84,65 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from st_comment
+    from st_cc
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from st_comment
+    delete from st_cc
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.yc.story.bean.StCommentExample">
-    delete from st_comment
+  <delete id="deleteByExample" parameterType="com.yc.story.bean.StCcExample">
+    delete from st_cc
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.yc.story.bean.StComment">
+  <insert id="insert" parameterType="com.yc.story.bean.StCc">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into st_comment (b_id, u_id, cm_content, 
-      cm_createtime)
-    values (#{bId,jdbcType=INTEGER}, #{uId,jdbcType=INTEGER}, #{cmContent,jdbcType=VARCHAR}, 
-      #{cmCreatetime,jdbcType=TIMESTAMP})
+    insert into st_cc (my_commid, other_commid)
+    values (#{myCommid,jdbcType=INTEGER}, #{otherCommid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.yc.story.bean.StComment">
+  <insert id="insertSelective" parameterType="com.yc.story.bean.StCc">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into st_comment
+    insert into st_cc
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="bId != null">
-        b_id,
+      <if test="myCommid != null">
+        my_commid,
       </if>
-      <if test="uId != null">
-        u_id,
-      </if>
-      <if test="cmContent != null">
-        cm_content,
-      </if>
-      <if test="cmCreatetime != null">
-        cm_createtime,
+      <if test="otherCommid != null">
+        other_commid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="bId != null">
-        #{bId,jdbcType=INTEGER},
+      <if test="myCommid != null">
+        #{myCommid,jdbcType=INTEGER},
       </if>
-      <if test="uId != null">
-        #{uId,jdbcType=INTEGER},
-      </if>
-      <if test="cmContent != null">
-        #{cmContent,jdbcType=VARCHAR},
-      </if>
-      <if test="cmCreatetime != null">
-        #{cmCreatetime,jdbcType=TIMESTAMP},
+      <if test="otherCommid != null">
+        #{otherCommid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.yc.story.bean.StCommentExample" resultType="java.lang.Long">
-    select count(*) from st_comment
+  <select id="countByExample" parameterType="com.yc.story.bean.StCcExample" resultType="java.lang.Long">
+    select count(*) from st_cc
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update st_comment
+    update st_cc
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.bId != null">
-        b_id = #{record.bId,jdbcType=INTEGER},
+      <if test="record.myCommid != null">
+        my_commid = #{record.myCommid,jdbcType=INTEGER},
       </if>
-      <if test="record.uId != null">
-        u_id = #{record.uId,jdbcType=INTEGER},
-      </if>
-      <if test="record.cmContent != null">
-        cm_content = #{record.cmContent,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cmCreatetime != null">
-        cm_createtime = #{record.cmCreatetime,jdbcType=TIMESTAMP},
+      <if test="record.otherCommid != null">
+        other_commid = #{record.otherCommid,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -182,40 +150,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update st_comment
+    update st_cc
     set id = #{record.id,jdbcType=INTEGER},
-      b_id = #{record.bId,jdbcType=INTEGER},
-      u_id = #{record.uId,jdbcType=INTEGER},
-      cm_content = #{record.cmContent,jdbcType=VARCHAR},
-      cm_createtime = #{record.cmCreatetime,jdbcType=TIMESTAMP}
+      my_commid = #{record.myCommid,jdbcType=INTEGER},
+      other_commid = #{record.otherCommid,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yc.story.bean.StComment">
-    update st_comment
+  <update id="updateByPrimaryKeySelective" parameterType="com.yc.story.bean.StCc">
+    update st_cc
     <set>
-      <if test="bId != null">
-        b_id = #{bId,jdbcType=INTEGER},
+      <if test="myCommid != null">
+        my_commid = #{myCommid,jdbcType=INTEGER},
       </if>
-      <if test="uId != null">
-        u_id = #{uId,jdbcType=INTEGER},
-      </if>
-      <if test="cmContent != null">
-        cm_content = #{cmContent,jdbcType=VARCHAR},
-      </if>
-      <if test="cmCreatetime != null">
-        cm_createtime = #{cmCreatetime,jdbcType=TIMESTAMP},
+      <if test="otherCommid != null">
+        other_commid = #{otherCommid,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yc.story.bean.StComment">
-    update st_comment
-    set b_id = #{bId,jdbcType=INTEGER},
-      u_id = #{uId,jdbcType=INTEGER},
-      cm_content = #{cmContent,jdbcType=VARCHAR},
-      cm_createtime = #{cmCreatetime,jdbcType=TIMESTAMP}
+  <update id="updateByPrimaryKey" parameterType="com.yc.story.bean.StCc">
+    update st_cc
+    set my_commid = #{myCommid,jdbcType=INTEGER},
+      other_commid = #{otherCommid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

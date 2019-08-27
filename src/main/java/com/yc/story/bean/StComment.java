@@ -2,6 +2,7 @@ package com.yc.story.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class StComment implements Serializable {
     private Integer id;
@@ -13,8 +14,20 @@ public class StComment implements Serializable {
     private String cmContent;
 
     private Date cmCreatetime;
+    
+    private List<StComment> sList;
+    
+    
 
-    private static final long serialVersionUID = 1L;
+    public List<StComment> getsList() {
+		return sList;
+	}
+
+	public void setsList(List<StComment> sList) {
+		this.sList = sList;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -55,4 +68,12 @@ public class StComment implements Serializable {
     public void setCmCreatetime(Date cmCreatetime) {
         this.cmCreatetime = cmCreatetime;
     }
+
+	@Override
+	public String toString() {
+		return "StComment [id=" + id + ", bId=" + bId + ", uId=" + uId + ", cmContent=" + cmContent + ", cmCreatetime="
+				+ cmCreatetime + ", sList=" + sList + "]";
+	}
+    
+    
 }

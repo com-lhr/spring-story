@@ -1,4 +1,3 @@
-
 package com.yc.story.bean;
 
 import java.io.Serializable;
@@ -66,5 +65,4 @@ public class StCollection implements Serializable {
     public void setcRecord(Integer cRecord) {
         this.cRecord = cRecord;
     }
-
 }
