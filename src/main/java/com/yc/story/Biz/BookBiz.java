@@ -38,4 +38,9 @@ public class BookBiz {
 		StBookExample bookExample = new StBookExample();
 		
 	}*/
+	
+	//根据id一本书的详情
+	public StBook findDetail(Integer id){	
+		return bookMapper.selectByPrimaryKey(id);		
+	}
 }

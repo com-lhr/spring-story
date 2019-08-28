@@ -18,6 +18,10 @@
     <result column="b_commCount" jdbcType="INTEGER" property="bCommcount" />
   <association property="stCategory" column="id" fetchType="lazy"
     select="com.yc.story.dao.StCategoryMapper.selectByPrimaryKey"></association>
+    <!-- 评论表关联 -->
+    <collection property="comments" column="id" fetchType="lazy"
+    	select="com.yc.story.dao.StCommentMapper.selectByPrimaryKey"
+    ></collection>
     
    <!--  <association property="">
     

@@ -34,8 +34,10 @@ public class BookServlet {
 		return "index_article";
 	}
 	
-	@RequestMapping("todetail")
-	public String Detail() {
+	
+	@RequestMapping("detail")
+	public String Detail(Integer id,Model model) {
+		model.addAttribute("detailBook", bbiz.findDetail(id));
 		return "detail";
 	}
 

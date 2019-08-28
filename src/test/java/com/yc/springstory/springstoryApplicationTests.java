@@ -57,4 +57,9 @@ public class springstoryApplicationTests {
 		}
 			
 	}
+	
+	@Test
+	public void findBookByid() {
+		System.out.println(biz.findDetail(1));
+	}
 }

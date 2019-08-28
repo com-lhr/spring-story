@@ -2,6 +2,7 @@ package com.yc.story.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class StBook implements Serializable {
     private Integer id;
@@ -31,8 +32,31 @@ public class StBook implements Serializable {
     private Integer bReadcnt;
 
     private Integer bCommcount;
+    
+    private StCategory stCategory;
+    
+    private List<StComment> comments;
+      
+    public List<StComment> getComments() {
+		return comments;
+	}
 
-    private static final long serialVersionUID = 1L;
+	public void setComments(List<StComment> comments) {
+		this.comments = comments;
+	}
+		
+
+	public StCategory getStCategory() {
+		return stCategory;
+	}
+
+	public void setStCategory(StCategory stCategory) {
+		this.stCategory = stCategory;
+	}
+
+
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -145,4 +169,16 @@ public class StBook implements Serializable {
     public void setbCommcount(Integer bCommcount) {
         this.bCommcount = bCommcount;
     }
+
+	@Override
+	public String toString() {
+		return "StBook [id=" + id + ", bFace=" + bFace + ", bTime=" + bTime + ", bCategory=" + bCategory
+				+ ", bPosition=" + bPosition + ", bIntroduce=" + bIntroduce + ", bNum=" + bNum + ", bCount=" + bCount
+				+ ", bStatus=" + bStatus + ", bPrice=" + bPrice + ", bName=" + bName + ", bAuthor=" + bAuthor
+				+ ", bReadcnt=" + bReadcnt + ", bCommcount=" + bCommcount + ", stCategory=" + stCategory + ", comments="
+				+ comments + "]";
+	}
+
+	
+    
 }

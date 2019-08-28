@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-<title>听书列表---内容页</title>
+<title>小说详情页</title>
 <link  href="css/css.css" rel="stylesheet" type="text/css">
 <link  href="css/arcticle2.css" rel="stylesheet" type="text/css">
 <script src="js/jquery.js"></script>
@@ -23,33 +25,29 @@
 <div class="box clear">
  <div class="list">
   <div class="pos">
-     当前位置：<a href="javascript:;">首页</a> > <a href="javascript:;">文学</a> > <a href="javascript:;">现代文学</a> > 文化苦旅
+     当前位置：<a href="toindex">首页</a> ><a href="javascript:;">${detailBook.stCategory.caName}</a> > ${detailBook.bName}
   </div>
-  <h3>文化苦旅</h3>
+  <h3>${detailBook.bName}</h3>
 
  <ul class="tab clear">
      <li class="active"><a href="#">简介</a></li>
-     <li><a href="#">章节目录<b>(20)</b></a></li>
-     <li><a href="#">评论<b>(345)</b></a></li>
+     <li><a href="#">章节目录<b>(${detailBook.bNum})</b></a></li>
+     <li><a class="pl_c" href="#">评论<b>(${detailBook.bCommcount})</b></a></li>
  </ul>
   <div class="tab_1">
     <div class="info clear">
-     <img src="img/album.jpg" class="left" style="margin-right:20px;width:150px;"> <p class="left" style="width:580px; overflow:hidden;">《文化苦旅》一书于1992年首次出版，是余秋雨先生1980年代在海内外讲学和考察途中写下的作品，是他的第一部文化散文集。
-     全书主要包括两部分，一部分为历史、文化散文，另一部分为回忆散文。甫一面世，该书就以文采飞扬、知识丰厚、见解独到而备受万千读者喜爱。
-     由此开创“历史大散文”一代文风，令世人重拾中华文化价值。他的散文别具一格，见常人所未见，思常人所未思，善于在美妙的文字中一
-     步步将读者带入历史文化长河，启迪哲思，引发情致，具有极高的审美价值和史学、文化价值。书中多篇文章后入选中学教材修改篇幅过半！</p>
+     <img src="${detailBook.bFace == null ? 'img/album.jpg':detailBook.bFace }" class="left" style="margin-right:20px;width:150px;"> <p class="left" style="width:580px; overflow:hidden;">${detailBook.bIntroduce}
+    </p>
      </div>
      <ul class="clear info_1">
      <p>基本信息</p>
-     <li><span>作 &nbsp; &nbsp; &nbsp; 者：</span>余秋雨</li>
-     <li><span>出 &nbsp;版 &nbsp;社：</span>长江文艺出版社</li>
-     <li><span>版 &nbsp;权 &nbsp;方：</span>北京时代华语图书股份有限公司</li>
-     <li><span>出版时间：</span>2014-04-01</li>
-     <li><span>分 &nbsp; &nbsp; &nbsp; 类：</span>文学艺术 散文随笔</li>
-     <li><span>评 &nbsp; &nbsp; &nbsp; 价：</span>956人评论 <samp>|</samp> 138888人在读</li>
+     <li><span>作 &nbsp; &nbsp; &nbsp; 者：</span>${detailBook.bAuthor}</li>
+     <li><span>出版时间：</span><fmt:formatDate value="${detailBook.bTime}" pattern="yyyy-MM-dd HH:mm:ss"/></li>
+     <li><span>分 &nbsp; &nbsp; &nbsp; 类：</span>${detailBook.stCategory.caName}</li>
+     <li><span>评 &nbsp; &nbsp; &nbsp; 价：</span>${detailBook.bCommcount}人评论 <samp>|</samp> ${detailBook.bReadcnt}人在读</li>
      </ul>
   </div><!--简介介绍-->
-  
+ 
   <div class="tab_1">
      <div class="play">
           <p class="play_t"><a href="#">新版小叙</a><time>00:01/14:00</time></p>
@@ -80,7 +78,7 @@
      </div>
      </div><!--有声播放-->
      
-     <div class="tit">章节目录<b>(20)</b><a href="javascript:;" class="right f_s_12">更新排序</a></div>
+     <div class="tit">章节目录<b>(${detailBook.bNum})</b><a href="javascript:;" class="right f_s_12">更新排序</a></div>
      <div class="mu">
          <ul class="clear">
          <p>第一部分</p>
@@ -169,7 +167,7 @@
   </div><!--章节目录-->
   
  <div class="tab_1 ">
-   <div class="tit">评论<b>(345)</b></div>
+   <div class="tit">评论<b>(${detailBook.bCommcount})</b></div>
   </div>  
   <div class="comment">
   
@@ -187,53 +185,54 @@
 
 				<ul class="com_con clear">
 					<!-- 第一条评论 -->
-					
-					<div class="com_bor">
-						<!--评论内容-->
-						<li class="go">
-							<div class="com_1 clear">
-								<div class="portrait left">
-									<img src="img/avatar.jpg"><br /> <span>11111</span>
-								</div>
-								<div class="word left kdit_w">
-									<p class="time">在 23:34 评论：</p>
-									<p>评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容
-										111111111111111111111111111 评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容</p>
-									<p class="right">
-										<a href="javascript:;">回复</a> <a href="javascript:;"
-											class="red">展开回复</a>
-										<time>2001-3-4</time>
-									</p>
-								</div>
-							</div>
-							 
-							<!--回复框--> <%@ include file="common/reply.jsp"%>
-						</li>
-
-						<!--第一条评论的回复-->
-						<li class="go2">
-							<div class="come">
-								<!--回复内容-->
-								<div class="com_con clear hui2">
+					<c:forEach items="${detailBook.comments}" var="c">
+						<div class="com_bor">
+							<!--评论内容-->
+							<li class="go">
+								<div class="com_1 clear">
 									<div class="portrait left">
-										<img src="img/avatar.jpg"><br /> <span>2222222</span>
+										<img src="img/avatar.jpg"><br /> <span>11111</span>
 									</div>
-									<div class="word left">
-										<p>
-											<span class="user">222 回复 1111：</span>1111111111111内容回复内容回复内容
-										</p>
+									<div class="word left kdit_w">
+										<p class="time">在 23:34 评论：</p>
+										<p>评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容
+											111111111111111111111111111 评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容</p>
 										<p class="right">
-											<a href="javascript:;">回复</a>
+											<a href="javascript:;">回复</a> <a href="javascript:;"
+												class="red">展开回复</a>
 											<time>2001-3-4</time>
 										</p>
 									</div>
 								</div>
-								<!--回复框-->
-								<%@ include file="common/reply.jsp"%>
-							</div>
-						</li>
-					</div>
-					
+								 
+								<!--回复框--> <%@ include file="common/reply.jsp"%>
+							</li>
+							
+	
+							<!--第一条评论的回复-->
+							<li class="go2">
+								<div class="come">
+									<!--回复内容-->
+									<div class="com_con clear hui2">
+										<div class="portrait left">
+											<img src="img/avatar.jpg"><br /> <span>2222222</span>
+										</div>
+										<div class="word left">
+											<p>
+												<span class="user">222 回复 1111：</span>1111111111111内容回复内容回复内容
+											</p>
+											<p class="right">
+												<a href="javascript:;">回复</a>
+												<time>2001-3-4</time>
+											</p>
+										</div>
+									</div>
+									<!--回复框-->
+									<%@ include file="common/reply.jsp"%>
+								</div>
+							</li>
+						</div>
+					</c:forEach>
 					<!--      -第一条评论结束  -->
 
 					<!-- 第二条评论 -->
