@@ -5,6 +5,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="b_id" jdbcType="INTEGER" property="bId" />
     <result column="recomTime" jdbcType="TIMESTAMP" property="recomtime" />
+ 	 <association property="stBook" column="b_id" fetchType="lazy"
+    select="com.yc.story.dao.StBookMapper.selectByPrimaryKey"></association> 
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>

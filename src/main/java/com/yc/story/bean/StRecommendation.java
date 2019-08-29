@@ -7,6 +7,8 @@ public class StRecommendation implements Serializable {
     private Integer id;
 
     private Integer bId;
+    
+    private StBook stBook;
 
     private Date recomtime;
 
@@ -35,4 +37,12 @@ public class StRecommendation implements Serializable {
     public void setRecomtime(Date recomtime) {
         this.recomtime = recomtime;
     }
+
+	public StBook getStBook() {
+		return stBook;
+	}
+
+	public void setStBook(StBook stBook) {
+		this.stBook = stBook;
+	}
 }

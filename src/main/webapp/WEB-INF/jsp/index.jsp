@@ -43,36 +43,11 @@
   <div class="box_1 box_con">
     <h3>编者推荐</h3>
     <ul class="clear">
+    <c:forEach items="${recommendationList }" var="recomList">
     <li><a href="javascript:;"><img src="img/article.jpg"></a>
-    <p><a href="javascript:;">新西兰岛屿湾旅行攻略</a></p>
+    <p><a href="javascript:;">${recomList.stBook.bName }</a></p>
     </li>
-    <li><a href="javascript:;"><img src="img/article.jpg"></a>
-    <p><a href="javascript:;">新西兰岛屿湾旅行攻略</a></p>
-    </li>
-    <li><a href="javascript:;"><img src="img/article.jpg"></a>
-    <p><a href="javascript:;">新西兰岛屿湾旅行攻略</a></p>
-    </li>
-    <li><a href="javascript:;"><img src="img/article.jpg"></a>
-    <p><a href="javascript:;">新西兰岛屿湾旅行攻略</a></p>
-    </li>
-    <li><a href="javascript:;"><img src="img/article.jpg"></a>
-    <p><a href="javascript:;">新西兰岛屿湾旅行攻略</a></p>
-    </li>
-    <li><a href="javascript:;"><img src="img/article.jpg"></a>
-    <p><a href="javascript:;">新西兰岛屿湾旅行攻略</a></p>
-    </li>
-    <li><a href="javascript:;"><img src="img/article.jpg"></a>
-    <p><a href="javascript:;">新西兰岛屿湾旅行攻略</a></p>
-    </li>
-    <li><a href="javascript:;"><img src="img/article.jpg"></a>
-    <p><a href="javascript:;">新西兰岛屿湾旅行攻略</a></p>
-    </li>
-    <li><a href="javascript:;"><img src="img/article.jpg"></a>
-    <p><a href="javascript:;">新西兰岛屿湾旅行攻略</a></p>
-    </li>
-    <li><a href="javascript:;"><img src="img/article.jpg"></a>
-    <p><a href="javascript:;">新西兰岛屿湾旅行攻略</a></p>
-    </li>
+    </c:forEach>
     </ul>
   </div>
   
