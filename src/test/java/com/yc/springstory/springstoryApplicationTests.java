@@ -71,4 +71,8 @@ public class springstoryApplicationTests {
 		List<StRecommendation> list = sram.selectByExample(null);
 		System.out.println(list.get(0).getStBook().getbName());
 	}
+	@Test
+	public void searchbooklikenameTest() {
+		System.out.println(biz.findPageBookLikeName("道").get(0).getbName());
+	}
 }

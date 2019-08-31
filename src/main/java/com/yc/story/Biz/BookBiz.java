@@ -1,7 +1,6 @@
 package com.yc.story.Biz;
 
 import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -29,6 +28,12 @@ public class BookBiz {
 		PageHelper.startPage(1, 10);
 		return bookMapper.selectByExample(bookExample);
 	}
+	public List<StBook> findByCategory(int bCategory,int page){
+		StBookExample bookExample = new StBookExample();
+		bookExample.createCriteria().andBCategoryEqualTo(bCategory);
+		PageHelper.startPage(page,5);
+		return bookMapper.selectByExample(bookExample);
+	}
 	
 	//根据类别和时间排序找出十本小说
 	public List<StBook> findByCategoryAndTime(Integer bCategory){
@@ -44,6 +49,12 @@ public class BookBiz {
 		
 	}*/
 	
+	public int bookcount(Integer bCategory) {
+		StBookExample example = new StBookExample();
+		example.createCriteria().andBCategoryEqualTo(bCategory);
+		return (int) bookMapper.countByExample(example);
+	}
+	
 	//根据id一本书的详情
 	public StBook findDetail(Integer id){	
 		return bookMapper.selectByPrimaryKey(id);		
@@ -56,4 +67,12 @@ public class BookBiz {
 		PageHelper.startPage(1,10);
 		return recommendationMapper.selectByExample(example);
 	}
+	
+	public List<StBook> findPageBookLikeName(String name){
+		StBookExample example = new StBookExample();
+		example.createCriteria().andBNameLike("%"+name+"%");
+		PageHelper.startPage(1,5);
+		return bookMapper.selectByExample(example);
+	}
+
 }

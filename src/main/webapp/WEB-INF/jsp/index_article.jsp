@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,7 @@
  <div class="con left">
    <div class="position"><a href="javascript:;">首页</a> > <a href="javascript:;">文学类</a> > <a href="javascript:;"  class="acative">现代文学</a></div>
    <ul class="con_list clear">
+   	   <c:forEach items="${category_pagebooks }" var="cpb">
        <li class="ease">
        <a href="javascript:;"><img src="img/article2.jpg"></a>
        <div class="sm">
@@ -33,81 +35,24 @@
        <p> <a href="#"><span class="icon down"></span>下载</a> 
         <a href="#"><span class="icon sc"></span>收藏</a></p>
        </div>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
+       <p class="s_n"><a href="javascript:;">${cpb.bName }</a></p>
        </li>
-       <li  class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>
-       <li  class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>
-       <li  class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>
-       <li  class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>
-       <li  class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>
-       <li  class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>
-       <li class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>
-       <li class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>
-       <li class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>
-       <li  class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>
-       <li class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>
-       <li class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>
-       <li class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>
-       <li class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
-       <p class="s_n"><a href="javascript:;">世界简史</a></p>
-       </li>      
+       </c:forEach>
    </ul>
    <!--列表内容-->
-   
+   <input id="id" type="hidden"  value="${param.id }">
    <ul class="page clear">
         <li>首页</li>
         <li>上一页</li>
-        <li><a href="javascript:;" class="thispage">1</a></li>
-        <li><a href="javascript:;">2</a></li>
-        <li><a href="javascript:;">3</a></li>
-        <li><a href="javascript:;">4</a></li>
-        <li><a href="javascript:;">5</a></li>
-        <li><a href="javascript:;">下一页</a></li>
+        <li><a id="p1" href="javascript:;" class="thispage">1</a></li>
+        <li><a id="p2" href="javascript:;">2</a></li>
+        <li><a id="p3" href="javascript:;">3</a></li>
+        <li><a id="p4" href="javascript:;">4</a></li>
+        <li><a id="p5" href="javascript:;">5</a></li>
+        <li><a href="javascript:nextpage();">下一页</a></li>
        <li><a href="javascript:;">尾页</a></li>
-       <li class="tz"><select>
-       <option value="1">1</option>
-       <option value="1">1</option>
-       <option value="1">1</option>
+       <li class="tz"><select id = "select">
+       
        </select><a href="javascript:;">跳转</a>
        </li>
        <li>共 1/3 页</li>
@@ -118,6 +63,35 @@
 </div><!--中间内容区-->
 
 <%@ include file="common/footer.jsp" %>
+<script type="text/javascript">
+var id = $('#id').val();
+/* alert(id); */
+$.get(
+	"pagecount",
+	{id:id},
+	function(data){
+		var count = parseInt(data);
+		var str='';
+		for(var i=1;i<=count;i++){
+			str+='<option value="'+count+'">'+count+'</option>';
+		}
+		$("#select").html(str);
+	}
+	)
 
+
+function nextpage(){
+	/* alert($(".thispage").text());
+	alert($(".thispage").attr("id")); */
+	if($(".thispage").attr("id")!='p5'){
+		var page = parseInt($(".thispage").text())+1;
+		/* alert(page); */
+		$(".thispage").removeAttr("class");
+		var id = '#p'+page;
+		$(id).attr('class','thispage');		
+	}
+}
+
+</script>
 </body>
 </html>
