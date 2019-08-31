@@ -267,12 +267,3 @@
     </ul><!--分页--> 
 
 </div><!--评论结束-->
-
-</div><!--右边结束-->
- 	<%@ include file="common/list.jsp" %>
-</div><!--中间box 结束-->
-
-
-<%@ include file="common/footer.jsp" %>
-</body>
-</html>

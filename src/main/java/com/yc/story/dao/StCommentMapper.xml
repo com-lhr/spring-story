@@ -8,9 +8,10 @@
     <result column="cm_content" jdbcType="VARCHAR" property="cmContent" />
     <result column="cm_createtime" jdbcType="TIMESTAMP" property="cmCreatetime" />
     
+
     <association property="user" column="u_id" fetchType="lazy" select="com.yc.story.dao.StUserMapper.selectByPrimaryKey">          
     </association>
-    
+   
     <collection property="sList" column="id" fetchType="lazy"
     	select="com.yc.story.dao.StCommentMapper.selectCommentByid"
     ></collection>

@@ -165,4 +165,5 @@ public class StGoods {
     public void setgCost(Double gCost) {
         this.gCost = gCost;
     }
+
 }

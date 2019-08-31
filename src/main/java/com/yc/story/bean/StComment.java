@@ -5,14 +5,16 @@ import java.util.Date;
 import java.util.List;
 
 
+
 import javax.validation.constraints.NotEmpty;
+
+
 
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(value = {"handler"})
-
 public class StComment implements Serializable {
     private Integer id;
 
@@ -27,6 +29,7 @@ public class StComment implements Serializable {
     
     private List<StComment> sList;
     
+
     private StUser user;
                	
 
@@ -38,7 +41,10 @@ public class StComment implements Serializable {
 		this.user = user;
 	}
 
-	public List<StComment> getsList() {
+
+
+    public List<StComment> getsList() {
+
 		return sList;
 	}
 
@@ -91,8 +97,10 @@ public class StComment implements Serializable {
 	@Override
 	public String toString() {
 		return "StComment [id=" + id + ", bId=" + bId + ", uId=" + uId + ", cmContent=" + cmContent + ", cmCreatetime="
+
 				+ cmCreatetime + ", sList=" + sList + ", user=" + user + "]";
 	}
-		    
+
+   
     
 }

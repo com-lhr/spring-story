@@ -21,9 +21,11 @@ public class BookServlet {
 	private CategoryBiz cbiz;
 	@Resource
 	private BookBiz bbiz;
+
 	
 	@Resource
 	private CommentBiz cobiz;
+
 	
 	@ModelAttribute("cList")
 	public List<StCategory> init(){
@@ -42,8 +44,10 @@ public class BookServlet {
 	@RequestMapping("detail")
 	public String Detail(Integer id,Model model) {
 		model.addAttribute("detailBook", bbiz.findDetail(id));
+
 		model.addAttribute("comments", cobiz.findCommentByBid(id));
 		
+
 		return "detail";
 	}
 

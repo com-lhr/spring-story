@@ -149,6 +149,50 @@
       </if>
     </trim>
   </insert>
+  <!-- 添加订单 -->
+  <insert id="insertMyOrder" parameterType="com.yc.story.bean.StOrder">
+    insert into st_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="oTime != null">
+        o_time,
+      </if>
+      <if test="bId != null">
+        b_id,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="oStatus != null">
+        o_status,
+      </if>
+      <if test="oAmount != null">
+        o_amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="oTime != null">
+        #{oTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bId != null">
+        #{bId,jdbcType=INTEGER},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="oStatus != null">
+        #{oStatus,jdbcType=INTEGER},
+      </if>
+      <if test="oAmount != null">
+        #{oAmount,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
   <select id="countByExample" parameterType="com.yc.story.bean.StOrderExample" resultType="java.lang.Long">
     select count(*) from st_order
     <if test="_parameter != null">

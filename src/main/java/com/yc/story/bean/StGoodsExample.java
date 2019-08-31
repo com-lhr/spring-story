@@ -1,3 +1,4 @@
+
 package com.yc.story.bean;
 
 import java.util.ArrayList;

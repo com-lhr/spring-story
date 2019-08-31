@@ -26,7 +26,7 @@ public class OrderBiz {
 	public int addOrder(StOrder so,StUser su){
 		so.setuId(su.getId());
 		so.setoStatus(0); // 未支付状态 0
-		return  som.insertMyOrder(so);
+		return som.insertMyOrder(so);
 	}
 	
 	@Transactional
@@ -48,3 +48,4 @@ public class OrderBiz {
 		return sum.updateByPrimaryKeySelective(su);
 	}
 }
+

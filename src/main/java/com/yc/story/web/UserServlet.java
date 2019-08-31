@@ -46,7 +46,9 @@ public class UserServlet {
 		try {
 			StUser u = ubiz.findUser(user);
 			if( u!= null) {
-				if(u.getLevel() == 2 || u.getLevel() == 1) {
+
+				if(u.getLevel() == 2 || u.getLevel() == 1) {				
+
 					model.addAttribute("loginedUser",u);
 					System.out.println(u);
 					return new Result(1,"登录成功");

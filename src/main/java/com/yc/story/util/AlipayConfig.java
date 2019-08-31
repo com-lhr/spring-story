@@ -1,4 +1,4 @@
-﻿package com.yc.story.util;
+package com.yc.story.util;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -68,4 +68,5 @@ public class AlipayConfig {
         }
     }
 }
+
 

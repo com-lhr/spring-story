@@ -38,6 +38,17 @@ public class StBook implements Serializable {
     
     private StCategory stCategory;
     
+
+    private List<StComment> comments;
+      
+    public List<StComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<StComment> comments) {
+		this.comments = comments;
+	}
+
 		
 
 	public StCategory getStCategory() {
@@ -164,9 +175,16 @@ public class StBook implements Serializable {
         this.bCommcount = bCommcount;
     }
 
-	
 
-	
+	@Override
+	public String toString() {
+		return "StBook [id=" + id + ", bFace=" + bFace + ", bTime=" + bTime + ", bCategory=" + bCategory
+				+ ", bPosition=" + bPosition + ", bIntroduce=" + bIntroduce + ", bNum=" + bNum + ", bCount=" + bCount
+				+ ", bStatus=" + bStatus + ", bPrice=" + bPrice + ", bName=" + bName + ", bAuthor=" + bAuthor
+				+ ", bReadcnt=" + bReadcnt + ", bCommcount=" + bCommcount + ", stCategory=" + stCategory + ", comments="
+				+ comments + "]";
+	}
+
 
 	
     
