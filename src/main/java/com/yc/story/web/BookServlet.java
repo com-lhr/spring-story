@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yc.story.Biz.BookBiz;
 import com.yc.story.Biz.CategoryBiz;
+import com.yc.story.Biz.CommentBiz;
 import com.yc.story.bean.StCategory;
 
 @Controller
@@ -23,6 +24,11 @@ public class BookServlet {
 	private CategoryBiz cbiz;
 	@Resource
 	private BookBiz bbiz;
+
+	
+	@Resource
+	private CommentBiz cobiz;
+
 	
 	@ModelAttribute("cList")
 	public List<StCategory> init(){
@@ -42,6 +48,10 @@ public class BookServlet {
 	@RequestMapping("detail")
 	public String Detail(Integer id,Model model) {
 		model.addAttribute("detailBook", bbiz.findDetail(id));
+
+		model.addAttribute("comments", cobiz.findCommentByBid(id));
+		
+
 		return "detail";
 	}
 	

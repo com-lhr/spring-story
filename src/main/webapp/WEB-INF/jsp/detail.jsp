@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
@@ -173,34 +174,36 @@
   
   <div class="com_con clear zong">
       <div class="portrait left mar_top">
-      <img src="${loginedUser == null ? 'img/avatar.jpg' : loginedUser.uImage }"><br/>
+      <img src="${loginedUser == null ? 'img/avatar.jpg' : loginedUser.uImage}"><br/>
       <span>${loginedUser.uName}</span>
       </div>
       <form action="" method="post" class="right kdit_w">
-      <textarea name="content" >发表评论</textarea>
+      <textarea id="cmContent" name="content" ></textarea>
       <p></p>
-      <input type="bottom" value="提交" class="ease"  disabled>
+      <input name="bId" type="hidden" value="${detailBook.id}">
+      <input type="button" value="提交" class="onSubmit" />
       </form>
   </div><!--当前用户评论-->
-
+ 
 				<ul class="com_con clear">
 					<!-- 第一条评论 -->
-					<c:forEach items="${detailBook.comments}" var="c">
+					<c:forEach items="${comments}" var="c">
 						<div class="com_bor">
 							<!--评论内容-->
 							<li class="go">
 								<div class="com_1 clear">
 									<div class="portrait left">
-										<img src="img/avatar.jpg"><br /> <span>11111</span>
+									<!-- img/avatar.jpg -->
+										<img src="${c.user.uImage}"><br /> <span>${c.user.uName}</span>
 									</div>
 									<div class="word left kdit_w">
-										<p class="time">在 23:34 评论：</p>
-										<p>评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容
-											111111111111111111111111111 评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容</p>
+										<p class="time">在 <fmt:formatDate value="${c.cmCreatetime}" pattern="HH:mm:ss"/>评论：</p>
+										<br>
+										<p>${c.cmContent}</p>
 										<p class="right">
 											<a href="javascript:;">回复</a> <a href="javascript:;"
-												class="red">展开回复</a>
-											<time>2001-3-4</time>
+												class="red">${fn:length(c.sList) > 0 ? '展开回复' : '' }</a>
+											<time><fmt:formatDate value="${c.cmCreatetime}" pattern="yyyy-MM-dd"/></time>
 										</p>
 									</div>
 								</div>
@@ -210,99 +213,39 @@
 							
 	
 							<!--第一条评论的回复-->
-							<li class="go2">
-								<div class="come">
-									<!--回复内容-->
-									<div class="com_con clear hui2">
-										<div class="portrait left">
-											<img src="img/avatar.jpg"><br /> <span>2222222</span>
-										</div>
-										<div class="word left">
-											<p>
-												<span class="user">222 回复 1111：</span>1111111111111内容回复内容回复内容
-											</p>
-											<p class="right">
-												<a href="javascript:;">回复</a>
-												<time>2001-3-4</time>
-											</p>
-										</div>
-									</div>
-									<!--回复框-->
-									<%@ include file="common/reply.jsp"%>
-								</div>
-							</li>
+							
+														
+									<li class="go2">
+										<c:if test="${c.sList != null && fn:length(c.sList) > 0}">
+										<c:forEach items="${c.sList}" var = "s">																			
+											<div class="come">
+												<!--回复内容-->
+												<div class="com_con clear hui2">
+													<div class="portrait left">
+														<img src="${s.user.uImage}"><br /> <span>${s.user.uName}</span>
+													</div>
+													<div class="word left">
+														<p>
+															<span class="user">${s.user.uName}&nbsp回复 ${c.user.uName}：</span><br>${s.cmContent}
+														</p>
+														<p class="right">
+															<a href="javascript:;">回复</a>
+															<time><fmt:formatDate value="${s.cmCreatetime}" pattern="yyyy-MM-dd HH:mm:ss"/></time>
+														</p>
+													</div>
+												</div>
+												<!--回复框-->
+												<%@ include file="common/reply.jsp"%>
+											</div>
+										
+										</c:forEach>
+										</c:if>
+									</li>								
+							
 						</div>
-					</c:forEach>
+					</c:forEach>					
 					<!--      -第一条评论结束  -->
-
-					<!-- 第二条评论 -->
-					<div class="com_bor">
-						<li class="go">
-							<div class="com_1 clear">
-								<div class="portrait left">
-									<img src="img/avatar.jpg"><br /> <span>1922527784</span>
-								</div>
-								<div class="word left kdit_w">
-									<p class="time">在 23:34 评论：</p>
-									<p>评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容
-										评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容
-										评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容</p>
-									<p class="right">
-										<a href="javascript:;">回复</a> <a href="javascript:;"
-											class="red">展开回复</a>
-										<time>2001-3-4</time>
-									</p>
-								</div>
-							</div>
-							<!--评论内容--> <%@ include file="common/reply.jsp"%>
-						</li>
-						<!--一级评论和回复框-->
-
-						<li class="go2">
-							<div class="come">
-								<div class="com_con clear hui2">
-									<div class="portrait left">
-										<img src="img/avatar.jpg"><br /> <span>1922527784</span>
-									</div>
-									<div class="word left">
-										<p>
-											<span class="user">222 回复 1111：</span>
-											回复内容容回复内容回复内容回复内容回复内容内容回复内容回复内容
-										</p>
-										<p class="right">
-											<a href="javascript:;">回复</a>
-											<time>2001-3-4</time>
-										</p>
-									</div>
-								</div>
-								<!--回复内容-->
-								<%@ include file="common/reply.jsp"%><!--回复框-->
-							</div>
-							<!--第一条回复-->
-
-							<div class="come">
-								<div class="com_con clear hui2">
-									<div class="portrait left">
-										<img src="img/avatar.jpg"><br /> <span>1922527784</span>
-									</div>
-									<div class="word left">
-										<p>
-											<span class="user">222 回复 1111：</span>回复内容容回复内容回复内容回复内容回复内容内容回复内容回复内容
-										</p>
-										<p class="right">
-											<a href="javascript:;">回复</a>
-											<time>2001-3-4</time>
-										</p>
-									</div>
-								</div>
-								<!--回复内容-->
-								<%@ include file="common/reply.jsp"%><!--回复框-->
-							</div>
-							<!--第2条回复-->
-
-						</li>
-						<!--第二条评论的所有回复-->
-					</div>
+			
 				</ul>
 				<ul class="page clear">
         <li>首页</li>
@@ -324,13 +267,3 @@
     </ul><!--分页--> 
 
 </div><!--评论结束-->
-
- 
-</div><!--右边结束-->
- 	<%@ include file="common/list.jsp" %>
-</div><!--中间box 结束-->
-
-
-<%@ include file="common/footer.jsp" %>
-</body>
-</html>

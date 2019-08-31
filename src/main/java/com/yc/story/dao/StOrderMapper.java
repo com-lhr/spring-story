@@ -1,3 +1,4 @@
+
 package com.yc.story.dao;
 
 import com.yc.story.bean.StOrder;
@@ -16,6 +17,8 @@ public interface StOrderMapper {
 
     int insertSelective(StOrder record);
 
+    int insertMyOrder(StOrder record);
+    
     List<StOrder> selectByExample(StOrderExample example);
 
     StOrder selectByPrimaryKey(Integer id);
@@ -27,4 +30,5 @@ public interface StOrderMapper {
     int updateByPrimaryKeySelective(StOrder record);
 
     int updateByPrimaryKey(StOrder record);
+
 }

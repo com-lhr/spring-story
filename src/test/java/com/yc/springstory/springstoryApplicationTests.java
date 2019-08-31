@@ -53,10 +53,12 @@ public class springstoryApplicationTests {
 	
 	@Test
 	public void findCommentByBidTest() {
-		List<StComment> sList = cbiz.findCommentByBid(1);
-		
+		List<StComment> sList = cbiz.findCommentByBid(1);		
 		for(StComment s : sList) {
-			System.out.println(s);
+
+			System.out.println("评论"+s);
+
+
 		}
 			
 	}
