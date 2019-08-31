@@ -16,6 +16,8 @@ public interface StOrderMapper {
 
     int insertSelective(StOrder record);
 
+    int insertMyOrder(StOrder record);
+    
     List<StOrder> selectByExample(StOrderExample example);
 
     StOrder selectByPrimaryKey(Integer id);
