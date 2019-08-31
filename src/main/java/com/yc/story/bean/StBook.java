@@ -2,7 +2,11 @@ package com.yc.story.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value = {"handler"})
 public class StBook implements Serializable {
     private Integer id;
 
@@ -30,7 +34,23 @@ public class StBook implements Serializable {
 
     private Integer bReadcnt;
 
-    private static final long serialVersionUID = 1L;
+    private Integer bCommcount;
+    
+    private StCategory stCategory;
+    
+		
+
+	public StCategory getStCategory() {
+		return stCategory;
+	}
+
+	public void setStCategory(StCategory stCategory) {
+		this.stCategory = stCategory;
+	}
+
+
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -135,4 +155,19 @@ public class StBook implements Serializable {
     public void setbReadcnt(Integer bReadcnt) {
         this.bReadcnt = bReadcnt;
     }
+
+    public Integer getbCommcount() {
+        return bCommcount;
+    }
+
+    public void setbCommcount(Integer bCommcount) {
+        this.bCommcount = bCommcount;
+    }
+
+	
+
+	
+
+	
+    
 }

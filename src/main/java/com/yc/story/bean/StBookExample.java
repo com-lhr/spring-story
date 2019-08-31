@@ -934,6 +934,66 @@ public class StBookExample {
             addCriterion("b_readCnt not between", value1, value2, "bReadcnt");
             return (Criteria) this;
         }
+
+        public Criteria andBCommcountIsNull() {
+            addCriterion("b_commCount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBCommcountIsNotNull() {
+            addCriterion("b_commCount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBCommcountEqualTo(Integer value) {
+            addCriterion("b_commCount =", value, "bCommcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBCommcountNotEqualTo(Integer value) {
+            addCriterion("b_commCount <>", value, "bCommcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBCommcountGreaterThan(Integer value) {
+            addCriterion("b_commCount >", value, "bCommcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBCommcountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("b_commCount >=", value, "bCommcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBCommcountLessThan(Integer value) {
+            addCriterion("b_commCount <", value, "bCommcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBCommcountLessThanOrEqualTo(Integer value) {
+            addCriterion("b_commCount <=", value, "bCommcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBCommcountIn(List<Integer> values) {
+            addCriterion("b_commCount in", values, "bCommcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBCommcountNotIn(List<Integer> values) {
+            addCriterion("b_commCount not in", values, "bCommcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBCommcountBetween(Integer value1, Integer value2) {
+            addCriterion("b_commCount between", value1, value2, "bCommcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andBCommcountNotBetween(Integer value1, Integer value2) {
+            addCriterion("b_commCount not between", value1, value2, "bCommcount");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

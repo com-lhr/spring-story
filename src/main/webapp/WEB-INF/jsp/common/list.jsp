@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
  <div class="list2">
@@ -7,16 +8,9 @@
                 <p>新书上架</p>
                 <div class="notice">
                     <ul>
-                    <li><a href="list_info.html">文化苦旅</a></li>
-                    <li><a href="javascrip:;">谢谢你曾来过我的世界</a></li>
-                    <li><a href="javascrip:;">文化苦旅</a></li>
-                    <li><a href="javascrip:;">文化苦旅</a></li>
-                    <li><a href="javascrip:;">文化苦旅</a></li>
-                    <li><a href="javascrip:;">文化苦旅</a></li>
-                    <li><a href="javascrip:;">文化苦旅</a></li>
-               <!-- <li><a href="javascrip:;">文化苦旅</a></li>
-                    <li><a href="javascrip:;">文化苦旅</a></li>
-                    <li><a href="javascrip:;">文化苦旅</a></li>-->
+                    <c:forEach items="${category_newbooks }" var="cb">
+                    <li><a href="list_info.html">${cb.bName }</a></li>
+                    </c:forEach>
                    </ul>
                 </div>
             </div><!--新书上架结束-->

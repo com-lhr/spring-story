@@ -693,6 +693,76 @@ public class StUserExample {
             addCriterion("u_introduction not between", value1, value2, "uIntroduction");
             return (Criteria) this;
         }
+
+        public Criteria andUImageIsNull() {
+            addCriterion("u_image is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUImageIsNotNull() {
+            addCriterion("u_image is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUImageEqualTo(String value) {
+            addCriterion("u_image =", value, "uImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUImageNotEqualTo(String value) {
+            addCriterion("u_image <>", value, "uImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUImageGreaterThan(String value) {
+            addCriterion("u_image >", value, "uImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUImageGreaterThanOrEqualTo(String value) {
+            addCriterion("u_image >=", value, "uImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUImageLessThan(String value) {
+            addCriterion("u_image <", value, "uImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUImageLessThanOrEqualTo(String value) {
+            addCriterion("u_image <=", value, "uImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUImageLike(String value) {
+            addCriterion("u_image like", value, "uImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUImageNotLike(String value) {
+            addCriterion("u_image not like", value, "uImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUImageIn(List<String> values) {
+            addCriterion("u_image in", values, "uImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUImageNotIn(List<String> values) {
+            addCriterion("u_image not in", values, "uImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUImageBetween(String value1, String value2) {
+            addCriterion("u_image between", value1, value2, "uImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUImageNotBetween(String value1, String value2) {
+            addCriterion("u_image not between", value1, value2, "uImage");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

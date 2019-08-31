@@ -27,4 +27,6 @@ public interface StOrderMapper {
     int updateByPrimaryKeySelective(StOrder record);
 
     int updateByPrimaryKey(StOrder record);
+
+	int insertMyOrder(StOrder so);
 }

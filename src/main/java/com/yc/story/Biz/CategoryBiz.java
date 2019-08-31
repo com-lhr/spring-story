@@ -18,5 +18,7 @@ public class CategoryBiz {
 	public List<StCategory> allCategory(){
 		return scm.selectByExample(null);
 	}
+	
+	
 
 }

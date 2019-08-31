@@ -2,6 +2,16 @@ package com.yc.story.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+
+import javax.validation.constraints.NotEmpty;
+
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value = {"handler"})
 
 public class StComment implements Serializable {
     private Integer id;
@@ -9,12 +19,34 @@ public class StComment implements Serializable {
     private Integer bId;
 
     private Integer uId;
-
+    
+    @NotEmpty(message= "评论不能为空")
     private String cmContent;
 
     private Date cmCreatetime;
+    
+    private List<StComment> sList;
+    
+    private StUser user;
+               	
 
-    private static final long serialVersionUID = 1L;
+	public StUser getUser() {
+		return user;
+	}
+
+	public void setUser(StUser user) {
+		this.user = user;
+	}
+
+	public List<StComment> getsList() {
+		return sList;
+	}
+
+	public void setsList(List<StComment> sList) {
+		this.sList = sList;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -55,4 +87,12 @@ public class StComment implements Serializable {
     public void setCmCreatetime(Date cmCreatetime) {
         this.cmCreatetime = cmCreatetime;
     }
+
+	@Override
+	public String toString() {
+		return "StComment [id=" + id + ", bId=" + bId + ", uId=" + uId + ", cmContent=" + cmContent + ", cmCreatetime="
+				+ cmCreatetime + ", sList=" + sList + ", user=" + user + "]";
+	}
+		    
+    
 }

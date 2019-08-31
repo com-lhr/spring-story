@@ -33,7 +33,7 @@
       <a href="${loginedUser == null ? 'tologin' : ''}" class="clear">${loginedUser == null ? 'Hi,请登录'  :   '欢迎：'.concat(loginedUser.uName)}<span class="icon ease"></span></a>
       <div class="clear"></div>
        <ul  class="clear">
-         <li><a href="self.html">个人中心</a></li>
+         <li><a href="collect">个人中心</a></li>
          <li><a href="javascript:;">我的书架</a></li>
          <li><a href="javascript:;">账号设置</a></li>
          <li><a href="javascript:;">上传文件</a></li>
@@ -54,7 +54,7 @@
     <div class="active"></div>
     <li><a href="toindex">首页</a></li>
     <c:forEach items="${cList}" var="c">
-    	<li><a href="javascript:;">${c.caName}</a></li>
+    	<li><a href="artCategory?id=${c.id }">${c.caName}</a></li>
     </c:forEach>  
    
     <div class="submission">

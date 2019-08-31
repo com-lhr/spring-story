@@ -7,7 +7,20 @@
     <result column="u_id" jdbcType="INTEGER" property="uId" />
     <result column="cm_content" jdbcType="VARCHAR" property="cmContent" />
     <result column="cm_createtime" jdbcType="TIMESTAMP" property="cmCreatetime" />
+    
+    <association property="user" column="u_id" fetchType="lazy" select="com.yc.story.dao.StUserMapper.selectByPrimaryKey">          
+    </association>
+    
+    <collection property="sList" column="id" fetchType="lazy"
+    	select="com.yc.story.dao.StCommentMapper.selectCommentByid"
+    ></collection>
   </resultMap>
+  
+  <select id="selectCommentByid" resultMap="com.yc.story.dao.StCommentMapper.BaseResultMap">
+  	select a.* from st_comment a join st_cc b on a.id = b.other_commid where b.my_commid  = #{id}
+  </select>
+  
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

@@ -1,32 +1,33 @@
 // JavaScript Document
 $(document).ready(function(e) {
-	/*(function(){
-		var but=$('.comment .com_con form').find('input');
-        but.each(function(i) {
-			$(this).click(function()
-			{
-				//$(this).parent('form').find();
-				var T=editor.text();
-				if(T=='' || T=='发表评论')
-				{ 
-				 $(this).siblings('p').text('您没有评论');
-				 $(this).siblings('p').fadeIn('slow','linear');
-				 return false;
-				}
-				else if(T.length<10)
-				{
-				 $(this).siblings('p').text('评论内容不得小于10个字符');
-				 $(this).siblings('p').fadeIn('slow','linear');
-				 return false;
-				}
-				else
-				{
-					$(this).siblings('p').fadeOut('slow','linear');
-					return true;
-				}
-			});
-		 });
-		})();*///KindEditor-----------------评论框
+//	(function(){
+//		var but=$('.comment .com_con form').find('input');
+//        but.each(function(i) {
+//			$(this).click(function()
+//			{
+//				//$(this).parent('form').find();
+//				var T=editor.text();
+//				if(T=='' || T=='发表评论')
+//				{ 
+//				 $(this).siblings('p').text('您没有评论');
+//				 $(this).siblings('p').fadeIn('slow','linear');
+//				 return false;
+//				}
+//				else if(T.length<10)
+//				{
+//				 $(this).siblings('p').text('评论内容不得小于10个字符');
+//				 $(this).siblings('p').fadeIn('slow','linear');
+//				 return false;
+//				}
+//				else
+//				{
+//					$(this).siblings('p').fadeOut('slow','linear');
+//					return true;
+//				}
+//			});
+//		 });
+//		})();
+//KindEditor-----------------评论框
 		
 	var kg=/^[\s]*$/,val=null,prom=null;	
 	
@@ -237,11 +238,39 @@ function reg_Exp(objParent,i,obj)
 			 }); 
         });//循环结束--------------------一级评论回复
 		
+		 function Format(datetime,fmt) {
+		        if (parseInt(datetime)==datetime) {
+		            if (datetime.length==10) {
+		                datetime=parseInt(datetime)*1000;
+		            } else if(datetime.length==13) {
+		                datetime=parseInt(datetime);
+		            }
+		        }
+		        datetime=new Date(datetime);
+		        var o = {
+		            "M+" : datetime.getMonth()+1,                 //月份
+		            "d+" : datetime.getDate(),                    //日
+		            "h+" : datetime.getHours(),                   //小时
+		            "m+" : datetime.getMinutes(),                 //分
+		            "s+" : datetime.getSeconds(),                 //秒
+		            "q+" : Math.floor((datetime.getMonth()+3)/3), //季度
+		            "S"  : datetime.getMilliseconds()             //毫秒
+		        };
+		        if(/(y+)/.test(fmt))
+		            fmt=fmt.replace(RegExp.$1, (datetime.getFullYear()+"").substr(4 - RegExp.$1.length));
+		        for(var k in o)
+		            if(new RegExp("("+ k +")").test(fmt))
+		                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+		        return fmt;
+		    }		
+		
 		var z_p=$('.comment .zong');
 		var z_c=$('.comment ul.com_con');
-		z_p.find('input').click(function()
+		var bId = $('input[name="bId"]').val();
+		z_p.find('.onSubmit').click(function()				
 		{
-			 var reg=reg_Exp(z_p,0,z_p.find('input'));
+			
+			 var reg=reg_Exp(z_p,0,z_p.find('.button'));
 			if(reg)
 			{ if(!reg.p.is(':hidden'))
 				{
@@ -252,32 +281,50 @@ function reg_Exp(objParent,i,obj)
 		        ajax提交如果成功插入内容
 		   
 		   */
-			var h='<div class="com_bor"></div>';
-			z_c.prepend(h);
-			z_c.find('.com_bor').eq(0).css('display','none');
-			
-		   var html='<li class="go">'+
-			 '<div class="com_1 clear">'+
-				  '<div class="portrait left">'+
-					  '<img src="img/avatar.jpg"><br/>'+
-					 '<span>1922527784</span></div>'+
-				 '<div class="word left kdit_w">'+
-					 '<p>'+reg.t+'</p>'+
-					  '<p class="right"><time>2001-3-4</time></p>'+
-			  '</div></div>'+
-			  '<div class="com_con clear hui">'+
-					  '<div class="portrait left mar_top">'+
-					  '<img src="img/avatar.jpg"><br/>'+
-					  '<span>1922527784</span></div>'+
-					  '<form action="" method="get" class="right kdit_w_550">'+
-					  '<textarea name="content"  >发表评论</textarea>'+
-					  '<p></p>'+
-					  '<input type="bottom" value="提交" class="ease">'+
-					  '</form></div><!--回复框--></li></div>';
+			console.log(bId+reg.t);
+			$.post("comment",{bId:bId,cmContent:reg.t},
+					function(data){
+				if(data.code == 1){					
+						alert('评论成功');						
+						var time1 = Format(data.data.cmCreatetime,"hh-mm-ss");
+						var time2 = Format(data.data.cmCreatetime,"yyyy-MM-dd");
+						var h='<div class="com_bor"></div>';
+						z_c.prepend(h);
+						z_c.find('.com_bor').eq(0).css('display','none');
+						
+					   var html='<li class="go">'+
+						 '<div class="com_1 clear">'+
+							  '<div class="portrait left">'+
+								  '<img src="'+data.data.user.uImage+'"><br/>'+
+								 '<span>'+data.data.user.uName+'</span></div>'+
+							 '<div class="word left kdit_w">'+
+							 '<p class="time">在'+time1+'评论：</p><br>'+
+								 '<p>'+reg.t+'</p>'+
+								  '<p class="right"><time>'+time2+'</time></p>'+
+						  '</div></div>'+
+						  '<div class="com_con clear hui">'+
+								  '<div class="portrait left mar_top">'+
+								  '<img src="img/avatar.jpg"><br/>'+
+								  '<span>1922527784</span></div>'+
+								  '<form action="" method="get" class="right kdit_w_550">'+
+								  '<textarea name="content"  >发表评论</textarea>'+
+								  '<p></p>'+
+								  '<input type="bottom" value="提交" class="ease">'+
+								  '</form></div><!--回复框--></li></div>';
+							
+							z_c.find('.com_bor').eq(0).prepend(html);
+							z_c.find('.com_bor').eq(0).slideDown('slow','linear');
+						
+					}else if(data.code == -2){
+						alert('请先进行登录');
+						window.location.href="tologin";
+					}
 				
-				z_c.find('.com_bor').eq(0).prepend(html);
-				z_c.find('.com_bor').eq(0).slideDown('slow','linear');
+				});
+			
 			 }
+			
+			
 		});//第一次评论
 		
 		$('.comment .tit .right').click(function()
