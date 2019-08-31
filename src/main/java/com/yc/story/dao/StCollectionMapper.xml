@@ -8,6 +8,9 @@
     <result column="c_status" jdbcType="INTEGER" property="cStatus" />
     <result column="c_time" jdbcType="TIMESTAMP" property="cTime" />
     <result column="c_record" jdbcType="INTEGER" property="cRecord" />
+    
+     <association property="stBook" column="b_id" fetchType="lazy"
+       select="com.yc.story.dao.StBookMapper.selectByPrimaryKey"></association>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>

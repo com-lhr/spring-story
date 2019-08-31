@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!doctype html>
 <html>
 <head>
@@ -108,14 +109,14 @@
       <ul class="list_1">
         <li class="active"><a href="#"><span class="icon"></span>个人资料修改</a></li>
         <li><div  class="clear"><a href="#" class="left"><span class="icon"></span>我的消息</a><b>4</b></div></li>
-        <li><a href="#"><span class="icon"></span>我的收藏</a></li>  
-        <li><a href="javascript:;"><span class="icon"></span>我的上传记录</a></li>  
+        <li><a href="javascript:tocollect();"><span class="icon"></span>我的收藏</a></li>  
+        <li><a href=";"><span class="icon"></span>我的上传记录</a></li>  
         <li><a href="javascript:;"><span class="icon"></span>上传普通文档</a></li>  
-        <li><a href="javascript:;"><span class="icon"></span>上传声音文档</a></li>  
-        <li><a href="javascript:;"><span class="icon"></span>我的专辑</a></li>  
+        <li><a href="javascript:;"><span class="icon"></span>购买记录</a></li>  
+        <li><a href="javascript:;"><span class="icon"></span>购买积分</a></li>  
       </ul>
     </div><!--左边-->
-   
+  
    <div class="center_r">
     <div class="c_1" style="display:block;">
         <p class="tit">个人资料修改</p>
@@ -227,34 +228,110 @@
      </div><!--我的消息-->
      
     <div class="c_3">
-        <p class="tit">我的收藏<span><a href="self" class="del">[取消全部收藏]</a></span></p>
+        <p class="tit">我的收藏<span><a class="del" href="#" onclick="javascript:cancel(0);">[取消全部收藏]</a></span></p>
         <p class="border_b"></p>
-        <ul class="list li">
-            <c:forEach items="cList" var="c">
-            <li><span class="icon_span pos_book"></span><a href="javascript:;">${c.bid }</a>
-            <span class="right"><time>2012-04-04</time><a href="javascript:;">取消收藏</a></span></li>
+        <ul class="list li" id="collect">
+            <c:forEach items="${coList }" var="c">
+            <li id="li${c.bId }"><span class="icon_span pos_book"></span><a href="javascript:;">${c.stBook.bName }</a>
+            <span><c:if test="${c.stBook.bStatus == 0}" >更新中</c:if>
+            <c:if test="${c.stBook.bStatus == 1}" >已完结</c:if></span>
+            <span class="right">
+            <time>
+            <%-- <fmt:formatDate value="${c.stBook.bTime}" pattern="yyyy-MM-dd"/> 
+            	    /*  '<time><fmt:formatDate value="${c.stBook.bTime }" pattern="yyyy-MM-dd"/></time>'+ */
+            	     /*  '<time><fmt:formatDate value="${'+data[i].stBook.bTime+'}" pattern="yyyy-MM-dd"/></time>'+ */
+            --%>
+            <fmt:formatDate value="${c.stBook.bTime}" pattern="yyyy-MM-dd"/>
+            </time>
+              <a href="#" onclick="javascript:cancel(${c.bId });">取消收藏</a></span></li>
             </c:forEach>
         </ul>
         <ul class="page clear">
             <li>首页</li>
             <li>上一页</li>
-            <li><a href="javascript:;" class="thispage">1</a></li>
-            <li><a href="javascript:;">2</a></li>
-            <li><a href="javascript:;">3</a></li>
-            <li><a href="javascript:;">4</a></li>
-            <li><a href="javascript:;">5</a></li>
-            <li><a href="javascript:;">下一页</a></li>
+            <!-- href="collect?page=1"   href="collect?page=2"-->
+            <c:forEach var="i" begin="1" end="${count}">
+            <li><a href="javascript:void(0)" class="thispage" onclick="page(${i })">${i }</a></li>
+            </c:forEach>
+            <li><a href="javascript:page()">下一页</a></li>
            <li><a href="javascript:;">尾页</a></li>
-           <li class="tz"><select>
-           <option value="1">1</option>
-           <option value="1">1</option>
-           <option value="1">1</option>
-           </select><a href="javascript:;">跳转</a>
+           <li class="tz"><select id="page">
+           
+           <option value=1>1</option>
+           <option value=2>2</option>
+           </select><a href="javascript:page()">跳转</a>
            </li>
            <li>共 1/3 页</li>
       </ul><!--分页--> 
-    </div><!--我的收藏-->
+    </div>
+    <!--我的收藏-->
+	<script type="text/javascript">
+    function page(page){
+    	$.get("collectPage",{
+    		page:page
+    	},
+    	function(data){
+    		console.info(data);
+    		$("#collect").empty();
+    		for(var i=0;i<data.length;i++){
+    			$("#collect").append(
+        				'<li>'+
+        				'<span class="icon_span pos_book"></span>'+
+        				'<a href="javascript:;">'+data[i].stBook.bName+'</a>'+
+        	            '<span>&nbsp;'+(data[i].stBook.bStatus=="0"?"未完结":"已完结")+'</span>'+
+        	            '<span class="right">'+
+        	            '<time>'+(data[i].stBook.bTime).substring(0,10)+'</time>'+
+        	            '<a href="javascript:cancel('+data[i].bId+');">取消收藏</a>'+
+        	            '</span>'+
+        	            '</li>'
+        		);
+    		}
+    		
+    	});
+    }
+    //获取收藏夹
+    function tocollect(){
+    	var url = "collect";
+	   	var page= document.getElementById(page);
+	   	var param = {page:page};
+	   	var callback = function(data){
+	   		
+	   	};
+	   	$.get(url,param,callback);
+    }
+    //取消收藏
+    function cancel(bid){
+    	 var url = "cancel";
+	   	 var param= {bid:bid};
+	   	 var callback = function(data){
+	   		 console.info(data.length)
+	   		if(data.length==0){
+	   			$("#collect").empty();
+    			$("#collect").append('您的书架上没有书哦，请去书城找找看吧。。。');		
+    		}else{
+    			console.info(data.length)
+	    		$("#collect").empty();
+	    		for(var i=0;i<data.length;i++){
+	    			$("#collect").append(
+	        				'<li>'+
+	        				'<span class="icon_span pos_book"></span>'+
+	        				'<a href="javascript:;">'+data[i].stBook.bName+'</a>'+
+	        	            '<span>&nbsp;'+(data[i].stBook.bStatus=="0"?"更新中":"已完结")+'</span>'+
+	        	            '<span class="right">'+
+	        	            '<time>'+(data[i].stBook.bTime).substring(0,10)+'</time>'+
+	        	            '<a href="javascript:cancel('+data[i].bId+');">取消收藏</a>'+
+	        	            '</span>'+
+	        	            '</li>'
+	        		);
+	    		}
+        		
+    		}
+	    		
+	     };
+	   	 $.get(url,param,callback);
+    }
     
+    </script>
     <div class="c_3">
         <p class="tit">我的上传记录<span><a href="javascript:;" class="del">[删除全部记录]</a></span></p>
         <p class="border_b"></p>
@@ -289,162 +366,41 @@
        </div> <!--我的上传-->
 
     <div class="c_4">
-        <p class="tit">上传普通文档</p>
-        <p class="border_b"></p>
-        <form class="up_file"  enctype="multipart/form-data">
-         <input type="text" class="up_text">
-         <input type="file"  class="up_text2" name="text1">
-        </form> <!--点击上传文件-->
-       <div class="banqu">
-            我们支持text,pdf,word等文件格式，文件≤200M，请上传合格文档。
-           <p class="red"> 如上传盗版内容，将会导致下架、封号、索赔，甚至被追究刑事责任。</p>
-       </div> 
-       <div class="up_tit">
-        <div class="up_1 clear">
-            <b class="blur">上传文件名称：</b> 
-            <span class="input left"></span><!--上传文件名称-->
-             <p class="right">
-                <span class="icon up"></span>
-                <span class="left f_s_12">正在上传(0%)</span>
-                <span class="icon del"></span>
-            </p>
-       </div><!--上传文件信息--> 
-       <div class="up_2">
-             <span></span>
-             <span></span>
-             <p class="bg">
-                <b></b>
-             </p>
-       </div><!--进度条-->
-     </div><!--文件上传-->
-     <form  class="up_file2" enctype="multipart/form-data" id="word_file">
-           <input  type="hidden" value="" name="up_temp" class="up_temp"><!--上传的文件名称-->
-         <p><label>文档名称：</label><input type="text" value="" name="up_tit" class="up_input_tit">
-         <em>*</em><i>文档名2----20个字,不包含特殊字符</i>
-         </p>
-         <div class="clear p_t"><label class="left">设置封面：</label>
-               <div class="up_fm">
-               <span class="icon fm_icon"></span>
-               <img src="img/album_100.jpg"  class="fm_img"/> 
-               <span class="icon fm_colse"></span>
-               </div>
-         </div><!--设置封面-->
-         <div class="up_img">
-              <p  class="icon up_img1">上传图片</p>
-              <input type="file" name="up_img" class="up_img2"><i>文件大小<3M,尺寸最好200X200--300X300 </i><!--当改变时，上传图片，ajax提交返回图片地址-->
-          </div>
-          
-         <p><label  style="vertical-align:top">文档描述：</label><textarea name="up_area" class="up_area"></textarea>
-             <br/><i style="margin-left:70px;">文档描述10----200个字</i>
-         </p>
-         
-         <div class="up_tag p_t">
-             <label>标 &nbsp; &nbsp; 签：</label>
-             <input type="text" name="up_tag" class="up_txt" ><i class="nored">标签名称禁止重复</i>
-             <div class="list_tag  clear del_tag"></div>
-             <div class="list_tag clear old_tag">
-                <samp>访谈</samp>
-               <samp>娱乐</samp>
-               <samp>情感</samp>
-                <samp>心理</samp>
-               <samp>心灵</samp>     
-               <i class="nored none">标签名称禁止重复</i> 
-               <input type="hidden" name="up_tag2" class="up_txt2" value="">
-             </div>
-             <p style="margin-left:60px;" class="tag_len"><i>最多5个标签,自定义单个标签最长6个汉字(英文12个),标签之间用,隔开;  建议添加,方便用户搜索</i></p>
-         </div>
-         
-         <p style="margin-left:70px; padding-top:20px"><input type="button" value="保存" class="submit"></p>
-     </form><!--文件信息-->
+        <p class="tit">购买记录</p>
+        
    </div><!--上传普通文档 -->
    
     <div class="c_4">
-        <p class="tit">上传有声文档</p>
+        <p class="tit">购买积分</p>
         <p class="border_b"></p>
-        <form name="up_file2" class="up_file">
-         <input type="text" class="up_text">
-         <input type="file"  class="up_text2" name="text1">
-        </form> <!--点击上传文件-->
-       <div class="banqu">
-           我们支持MP3, WMA，AIFF，AIF, WAV, FLAC, OGG, MP2, AAC, AMR等文件格式，请尽量上传高音质音频。
-          <p> 多个文件请压缩, 压缩为rar , zip格式, 文件≤200M。</p>
-           <p class="red"> 如上传盗版内容，将会导致下架、封号、索赔，甚至被追究刑事责任。</p>
-       </div> 
-       <div class="up_tit">
-        <div class="up_1 clear">
-            <b class="blur">上传文件名称：</b> 
-            <span class="input left"></span><!--上传文件名称-->
-             <p class="right">
-                <span class="icon up"></span>
-                <span class="left f_s_12">正在上传(0%)</span>
-                <span class="icon del"></span>
-            </p>
-       </div><!--上传文件信息--> 
-       <div class="up_2">
-             <span></span>
-             <span></span>
-             <p class="bg">
-                <b>3.4M/5.6M</b>
-             </p>
-       </div><!--进度条-->
-     </div><!--文件上传-->
+
+       
      <form name="up_file2" class="up_file2"  id="soud_file">
         <input  type="hidden" value="" name="up_temp" class="up_temp"><!--上传的文件名称-->
-     <div class="zj">
-          <span class="left">添至专辑：</span>
-          <div class="zj_add clear">
-                   <span id="zj_name">选择所属专辑</span>
-                   <a href="javascript:;" class="sele">◆</a>
-             <ul class="zj_list">
-                <li>11111111111111111111111</li>
-                <li>2222222</li>
-                <li>333333333333333333333333</li>
-                <li class="zj_li zj_c"><p><b class="red">+</b>创建新专辑</p></li>
-             </ul>
-             <input type="hidden" value="" name="up_add_zj" class="up_add_zj">
-          </div>
-          <a href="javascript:;"><b class="red">+</b><span class="f_s_12 zj_c">创建新专辑</span></a>
-        </div>
-       
-         <p><label>文档名称：</label><input type="text" value="" name="up_tit" class="up_input_tit">
-         <em>*</em><i>文档名2----20个字</i>
-         </p>
-        <div class="clear p_t"><label class="left">设置封面：</label>
+        <c:forEach items="${gList }" var="g">
+        <div class="clear p_t">
                <div class="up_fm">
-               <span class="icon fm_icon"></span>
-               <img src="img/album_100.jpg"  class="fm_img"> 
-               <span class="icon fm_colse"></span>
+               <a href="javascript:void(0);" onclick="window.location='../alipay/index.jsp?gid=${g.id}&integ=${g.gPrice }'"><img src="img/album_100.jpg"  class="fm_img"><br/>
+               <label>${g.gName}${g.gDesc }</label><br/>
+               <label>￥${g.gPrice}</label></a>
                </div>
-         </div><!--设置封面-->
-           
-          <div class="up_img">
-              <p  class="icon up_img1">上传图片</p>
-              <input type="file" name="up_img" class="up_img2"><i>文件大小<3M,尺寸最好200X200--300X300 </i><!--当改变时，上传图片，ajax提交返回图片地址-->
-          </div>
-        
-         <p><label  style="vertical-align:top">文件描述：</label><textarea name="up_area"  class="up_area"></textarea>
-             <br/><i style="margin-left:65px;">文件描述20----100个字</i>
-         </p>
-         <div class="up_tag p_t">
-             <label>标 &nbsp; &nbsp; 签：</label>
-             <input type="text" name="up_tag" class="up_txt" ><i class="nored">标签名称禁止重复</i>
-             <div class="list_tag  clear del_tag"></div>
-             <div class="list_tag clear old_tag">
-                <samp>访谈</samp>
-               <samp>娱乐</samp>
-               <samp>情感</samp>
-                <samp>心理</samp>
-               <samp>心灵</samp>     
-                <i class="nored none">标签名称禁止重复</i> 
-               <input type="hidden" name="up_tag2" class="up_txt2" value="">
-             </div>
-             <p style="margin-left:60px;" class="tag_len"><i>最多5个标签,自定义单个标签最长6个汉字(英文12个),标签之间用,隔开; 建议添加,方便用户搜索</i></p>
-         </div>
+         </div><!--设置积分-->
+         </c:forEach>
          
-         <p style="margin-left:70px; padding-top:20px"><input type="submit" value="保存" class="submit"></p>
-     </form><!--文件信息-->
-   </div><!--上传有声文档 -->
-   
+     </form><!--积分-->
+   </div><!--购买积分-->
+   <script type="text/javascript">
+   function pay(money){
+	   $.get('pay',{
+		   money:money
+	   },function(data){
+		   if(data==null){
+			   alert('支付失败');
+		   }
+	   });
+   }
+       
+   </script>
      <div class="c_3">
         <p class="tit">我的专辑<span><a href="javascript:;" class="del">[删除全部专辑]</a></span>
          <a href="javascript:;" class="right" id="zj_c">创建新专辑</a>
@@ -563,7 +519,6 @@
        <p><span class="ease">确定</span><span class="ease">取消</span></p>
        </div>
   </div><!--遮罩层-->
-  
 
 <footer class="clear">
     <p>阅读天地是学习分享平台，如对本站有意见和建议请<a href="javascript:;">留言</a></p>
