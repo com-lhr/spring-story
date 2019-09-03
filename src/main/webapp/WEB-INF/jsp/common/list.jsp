@@ -9,7 +9,7 @@
                 <div class="notice">
                     <ul>
                     <c:forEach items="${category_newbooks }" var="cb">
-                    <li><a href="list_info.html">${cb.bName }</a></li>
+                    <li><a href="detail?id=${cb.id }">${cb.bName }</a></li>
                     </c:forEach>
                    </ul>
                 </div>

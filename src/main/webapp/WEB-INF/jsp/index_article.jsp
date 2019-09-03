@@ -31,7 +31,7 @@
        <a href="javascript:;"><img src="img/article2.jpg"></a>
        <div class="sm">
        <p> <a href="arcticle3.html">有声阅读</a> 
-        <a href="list_info.html">在线阅读</a> </p>
+        <a href="detail?id=${cpb.id }">在线阅读</a> </p>
        <p> <a href="#"><span class="icon down"></span>下载</a> 
         <a href="#"><span class="icon sc"></span>收藏</a></p>
        </div>
