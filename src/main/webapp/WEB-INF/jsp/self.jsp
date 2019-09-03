@@ -7,9 +7,14 @@
 <head>
 <meta charset="utf-8">
 <title>个人主页</title>
+<!-- 引入Bootstrap核心样式文件 -->
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src="js/jquery.js"></script>
+<!-- 引入BootStrap核心js文件 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>	
 <link  href="css/css.css" rel="stylesheet" type="text/css">
 <link  href="css/self.css" rel="stylesheet" type="text/css">
-<script src="js/jquery.js"></script>
+
 <script src="js/js.js"></script>
 <script src="js/self.js"></script>
 </head>
@@ -243,6 +248,11 @@
             --%>
             <fmt:formatDate value="${c.stBook.bTime}" pattern="yyyy-MM-dd"/>
             </time>
+              <a href="#" onclick="javascript:buy(${c.bId });">
+                 <span>
+                    <c:if test="${c.cStatus == 1}" >已购买</c:if>
+                    <c:if test="${c.cStatus == 0}" >未购买</c:if>
+                 </span></a>
               <a href="#" onclick="javascript:cancel(${c.bId });">取消收藏</a></span></li>
             </c:forEach>
         </ul>
@@ -280,8 +290,11 @@
         				'<a href="javascript:;">'+data[i].stBook.bName+'</a>'+
         	            '<span>&nbsp;'+(data[i].stBook.bStatus=="0"?"未完结":"已完结")+'</span>'+
         	            '<span class="right">'+
-        	            '<time>'+(data[i].stBook.bTime).substring(0,10)+'</time>'+
-        	            '<a href="javascript:cancel('+data[i].bId+');">取消收藏</a>'+
+        	            '<time>'+(data[i].stBook.bTime).substring(0,10)+'</time>&nbsp;'+
+        	            '<a href="#" onclick="javascript:buy(${c.bId });"><span>'+
+        	            (data[i].cStatus=="0"?"未购买":"已购买")+
+        	            '</span></a>'+
+        	            '&nbsp;<a href="javascript:cancel('+data[i].bId+');">取消收藏</a>'+
         	            '</span>'+
         	            '</li>'
         		);
@@ -318,7 +331,9 @@
 	        				'<a href="javascript:;">'+data[i].stBook.bName+'</a>'+
 	        	            '<span>&nbsp;'+(data[i].stBook.bStatus=="0"?"更新中":"已完结")+'</span>'+
 	        	            '<span class="right">'+
-	        	            '<time>'+(data[i].stBook.bTime).substring(0,10)+'</time>'+
+	        	            '<time>'+(data[i].stBook.bTime).substring(0,10)+'</time>&nbsp;'+
+	        	            (data[i].cStatus=="0"?"未购买":"已购买")+
+	        	            '&nbsp;</span></a>'+
 	        	            '<a href="javascript:cancel('+data[i].bId+');">取消收藏</a>'+
 	        	            '</span>'+
 	        	            '</li>'
@@ -365,24 +380,61 @@
       </ul><!--分页-->
        </div> <!--我的上传-->
 
-    <div class="c_4">
+    <div class="c_5">
         <p class="tit">购买记录</p>
-        
-   </div><!--上传普通文档 -->
+        <p class="border_b"></p>
+        <div class="showOrder">
+            <table class="table table-hover">
+				<thead>
+					<tr>
+						<th>订单编号</th>
+						<th>商品</th>
+						<th>支付时间</th>
+						<th>状态</th>
+						<th>金额</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id = "ordertable">
+				    <c:forEach items="${taList }" var="ta">
+					<tr class="<c:if test="${ta.oStatus == 1}" >success</c:if><c:if test="${ta.oStatus == 0}" >warning</c:if>">
+						<td>${ta.id }</td>
+						<td>${ta.bId }</td>
+						<td><fmt:formatDate value="${ta.oTime}" pattern="yyyy-MM-dd"/></td>
+						<td><span>
+		                   <c:if test="${ta.oStatus == 1}" >已支付</c:if>
+		                   <c:if test="${ta.oStatus == 0}" >未支付</c:if>
+		                </span></td>
+		                <td>￥${ta.oAmount }</td>
+		                <td><div class="btn-group">
+						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    详情 <span class="caret"></span>
+						  </button><ul class="dropdown-menu">
+						    <li><a href="../alipay/alipay.trade.page.pay.jsp?WIDout_trade_no=${ta.id }&WIDsubject=${ta.bId}&WIDtotal_amount=${ta.oAmount }&WIDbody='无'">支付</a></li>
+						    <li><a href="javascript:deleteOrder(${ta.id });">删除</a></li>
+						  </ul></div></td>
+					</tr>
+					</c:forEach>
+					
+				</tbody>
+			</table>
+        </div>
+   </div><!--查看订单 -->
+ 
    
     <div class="c_4">
         <p class="tit">购买积分</p>
         <p class="border_b"></p>
-
        
      <form name="up_file2" class="up_file2"  id="soud_file">
         <input  type="hidden" value="" name="up_temp" class="up_temp"><!--上传的文件名称-->
         <c:forEach items="${gList }" var="g">
         <div class="clear p_t">
                <div class="up_fm">
-               <a href="javascript:void(0);" onclick="window.location='../alipay/index.jsp?gid=${g.id}&integ=${g.gPrice }'"><img src="img/album_100.jpg"  class="fm_img"><br/>
+               <a href="javascript:void(0);" onclick="window.location='../alipay/index.jsp?gid=${g.id}&integ=${g.gPrice*g.gCost }'"><img src="img/album_100.jpg"  class="fm_img"><br/>
                <label>${g.gName}${g.gDesc }</label><br/>
-               <label>￥${g.gPrice}</label></a>
+               <label>原价：￥${g.gPrice}</label><br/>
+               <label style="color: red;font-weight: bold;">现价：￥${g.gPrice*g.gCost}</label></a>
                </div>
          </div><!--设置积分-->
          </c:forEach>
