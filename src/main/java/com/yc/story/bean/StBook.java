@@ -5,9 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(value = {"handler"})
+@JsonIgnoreProperties(value = {"handler","comments"})
 public class StBook implements Serializable {
+
     private Integer id;
 
     private String bFace;
@@ -38,6 +38,7 @@ public class StBook implements Serializable {
     
     private StCategory stCategory;
     
+
     private List<StComment> comments;
       
     public List<StComment> getComments() {
@@ -47,6 +48,7 @@ public class StBook implements Serializable {
 	public void setComments(List<StComment> comments) {
 		this.comments = comments;
 	}
+
 		
 
 	public StCategory getStCategory() {
@@ -173,6 +175,7 @@ public class StBook implements Serializable {
         this.bCommcount = bCommcount;
     }
 
+
 	@Override
 	public String toString() {
 		return "StBook [id=" + id + ", bFace=" + bFace + ", bTime=" + bTime + ", bCategory=" + bCategory
@@ -181,7 +184,5 @@ public class StBook implements Serializable {
 				+ ", bReadcnt=" + bReadcnt + ", bCommcount=" + bCommcount + ", stCategory=" + stCategory + ", comments="
 				+ comments + "]";
 	}
-
-	
-    
+   
 }

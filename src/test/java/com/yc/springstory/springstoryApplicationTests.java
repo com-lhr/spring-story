@@ -53,10 +53,12 @@ public class springstoryApplicationTests {
 	
 	@Test
 	public void findCommentByBidTest() {
-		List<StComment> sList = cbiz.findCommentByBid(1);
-		
+		List<StComment> sList = cbiz.findCommentByBid(1);		
 		for(StComment s : sList) {
-			System.out.println(s);
+
+			System.out.println("评论"+s);
+
+
 		}
 			
 	}
@@ -70,5 +72,9 @@ public class springstoryApplicationTests {
 	public void findrecommendation() {
 		List<StRecommendation> list = sram.selectByExample(null);
 		System.out.println(list.get(0).getStBook().getbName());
+	}
+	@Test
+	public void searchbooklikenameTest() {
+		System.out.println(biz.findPageBookLikeName("道").get(0).getbName());
 	}
 }

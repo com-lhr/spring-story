@@ -1,3 +1,4 @@
+
 package com.yc.story.dao;
 
 import com.yc.story.bean.StGoods;
@@ -93,4 +94,5 @@ public interface StGoodsMapper {
      * @mbg.generated Thu Aug 29 11:23:15 CST 2019
      */
     int updateByPrimaryKey(StGoods record);
+
 }

@@ -19,8 +19,8 @@ spring:
   resources:
     staticLocations:
       - classpath:/static/
-      - file:/e:/story/
-    
+      - file:/f:/story/
+      - file:/f:/storyserialization/
   mail:
     #邮箱服务器地址
     host: smtp.qq.com

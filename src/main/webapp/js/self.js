@@ -397,23 +397,7 @@ window.onload=function(){
         tab(zi_li,zi_tab,zi_len);
     })();//----------------个人资料修改切换
 	
-	(function(){
-	  var up_text=document.getElementsByClassName('up_text2')[0];
-	  	  up_text.value='';	
-		  
-	  var up_input=document.getElementsByClassName('up_text')[0];
-       
-	   up_text.onmouseover=function()
-	   {
-		 up_input.style.backgroundPosition='0px -188px';  
-	   }
-	   up_text.onmouseout=function()
-	   {
-		 up_input.style.backgroundPosition='0px -96px';  
-		}//--------------上传按钮
 
-	})();//文件上传按钮
-	
 	(function(){
 	   var con_qu=document.getElementsByClassName('center_r')[0];
 	   var con_c=con_qu.children;
