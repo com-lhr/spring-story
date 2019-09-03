@@ -1,11 +1,14 @@
 package com.yc.story.Biz;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yc.story.bean.StOrder;
+import com.yc.story.bean.StOrderExample;
 import com.yc.story.bean.StUser;
 import com.yc.story.dao.StGoodsMapper;
 import com.yc.story.dao.StOrderMapper;
@@ -22,7 +25,15 @@ public class OrderBiz {
 	
 	@Resource
 	private StGoodsMapper sgm;
-	//添加订单
+	
+	// 查询订单
+	public List<StOrder> queryOrder(StUser su){
+		StOrderExample soe = new StOrderExample();
+		soe.createCriteria().andUIdEqualTo(su.getId());
+		return som.selectByExample(soe);
+	}
+	
+	// 添加订单
 	public int addOrder(StOrder so,StUser su){
 		so.setuId(su.getId());
 		so.setoStatus(0); // 未支付状态 0
@@ -30,6 +41,7 @@ public class OrderBiz {
 	}
 	
 	@Transactional
+	// 支付
 	public int pay(StOrder so,StUser su){
 		so.setoStatus(1);
 		int i;
@@ -48,4 +60,3 @@ public class OrderBiz {
 		return sum.updateByPrimaryKeySelective(su);
 	}
 }
-

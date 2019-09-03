@@ -39,15 +39,21 @@ public class SelfServlet {
 	@Resource
 	private GoodsBiz gbiz;
 	
+	@Resource
+	private OrderBiz obiz;
+	
 	//获取收藏夹
 	@GetMapping("collect")
 	public String collect(@SessionAttribute(name="loginedUser",required=false) StUser user,
 			@RequestParam(defaultValue="1") int page,Model model){
 	
+		// 查询收藏夹
 		List<StCollection> query = cbiz.query(user,page);
 		System.out.println(query);
 		model.addAttribute("count",cbiz.queryAll(user));
 		model.addAttribute("coList",query);
+		// 查询订单
+		model.addAttribute("taList",obiz.queryOrder(user));
 		return "self";
 	}
 	

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface StCollectionMapper {
+	
     long countByExample(StCollectionExample example);
 
     int deleteByExample(StCollectionExample example);
