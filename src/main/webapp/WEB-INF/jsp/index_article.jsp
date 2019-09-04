@@ -28,7 +28,7 @@
    <ul class="con_list clear">
    	   <c:forEach items="${category_pagebooks }" var="cpb">
        <li class="ease">
-       <a href="javascript:;"><img src="img/article2.jpg"></a>
+       <a href="javascript:;"><img src="${cpb.bFace }"></a>
        <div class="sm">
        <p> <a href="arcticle3.html">有声阅读</a> 
         <a href="detail?id=${cpb.id }">在线阅读</a> </p>
