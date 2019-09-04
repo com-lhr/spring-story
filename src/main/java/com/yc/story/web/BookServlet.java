@@ -65,6 +65,12 @@ public class BookServlet {
 		}				
 		return count+"";
 	}
+	@RequestMapping("doSearch")
+	public String showSearch(String name,Model model) {
+		model.addAttribute("searchBook", bbiz.findBookLikeName(name));		
+		return "showSearch";
+		
+	}
 	
 
 }

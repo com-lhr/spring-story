@@ -74,5 +74,11 @@ public class BookBiz {
 		PageHelper.startPage(1,5);
 		return bookMapper.selectByExample(example);
 	}
+	
+	public List<StBook> findBookLikeName(String name){
+		StBookExample example = new StBookExample();
+		example.createCriteria().andBNameLike("%"+name+"%");
+		return bookMapper.selectByExample(example);
+	}
 
 }

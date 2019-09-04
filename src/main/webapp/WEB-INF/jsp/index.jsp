@@ -57,7 +57,7 @@
       <c:forEach items="${newbook }" var="b">
         <li><a href="javascript:;"><span class="icon_span"></span></a>
              <a href="javascript:;"><b>[${b.stCategory.caName } ]</b></a>
-             <a href="javascript:;"><strong>${b.bName }</strong></a><time><fmt:formatDate value="${b.bTime}" 
+             <a href="detail?id=${b.id }"><strong>${b.bName }</strong></a><time><fmt:formatDate value="${b.bTime}" 
           	pattern="yyyy-MM-dd"/></time></li>
       </c:forEach>
      </ul>

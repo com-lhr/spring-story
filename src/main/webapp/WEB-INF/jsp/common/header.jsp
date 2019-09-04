@@ -24,7 +24,7 @@
     <div class="dropdown" id="search" onclick="search.changeValue(this);search.searchKeyword()">
         <input type="text"  value=""   class="dropdown-selected"
                id="search-input" placeholder="请输入关键字"  onkeypress="searchname();" onkeyup="search.searchKeyword();">
-        <input type="submit" value="搜索">
+        <input type="button" value="搜索" onclick="dosearch();" >
         <ul id="ts">
            
         </ul>
@@ -86,6 +86,13 @@
 </nav><!--导航结束-->
 <script src="js/jquery.js"></script>
 <script type="text/javascript">
+
+function dosearch(){
+	   var name=$("#search-input").val();
+	   if(name!=""&&name!=null){
+		   location.href="doSearch?name="+name;   
+	   }
+}
 var t;
 
 function searchname(){
