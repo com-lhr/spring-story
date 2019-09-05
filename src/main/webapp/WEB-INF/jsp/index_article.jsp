@@ -44,11 +44,11 @@
    <ul class="page clear">
         <li>首页</li>
         <li>上一页</li>
-        <li><a id="p1" href="javascript:;" class="thispage">1</a></li>
-        <li><a id="p2" href="javascript:;">2</a></li>
-        <li><a id="p3" href="javascript:;">3</a></li>
-        <li><a id="p4" href="javascript:;">4</a></li>
-        <li><a id="p5" href="javascript:;">5</a></li>
+        <li><a id="p1" href="javascript:void(0);"  onclick="thispage(this);" class="thispage">1</a></li>
+        <li><a id="p2" href="javascript:void(0);"  onclick="thispage(this);">2</a></li>
+        <li><a id="p3" href="javascript:void(0);"  onclick="thispage(this);">3</a></li>
+        <li><a id="p4" href="javascript:void(0);"  onclick="thispage(this);">4</a></li>
+        <li><a id="p5" href="javascript:void(0);"  onclick="thispage(this);">5</a></li>
         <li><a href="javascript:nextpage();">下一页</a></li>
        <li><a href="javascript:;">尾页</a></li>
        <li class="tz"><select id = "select">
@@ -79,7 +79,60 @@ $.get(
 	}
 	)
 
-
+	//分页的页面跳转
+	function thispage(thispage){
+		var id = $('#id').val();
+		var value =thispage.innerText;
+		$(".thispage").removeAttr("class");
+		var thispage = '#p'+value;
+		$(thispage).attr('class','thispage');
+		var pagenum = $('.thispage').text();
+		/* alert(pagenum); */
+		/* location.href = "artCategory?id="+id+'&page='+pagenum; */
+		showPage(id,pagenum);
+	}
+	
+	function showPage(id,page){
+		var pagenum = page;
+		$.get(
+				"pageartCategory",
+				{id:id,page:pagenum},
+				function(data){
+					$('.con_list').empty();
+					/* alert(data[0].bName); */
+					str='';
+					for(var i=0;i<data.length;i++){
+						str+='<li class="ease">'+
+					       '<a href="javascript:;"><img src="'+data[i].bFace+'"></a>'+
+					       '<div class="sm">'+
+					       '<p> <a href="arcticle3.html">有声阅读</a> '+
+					        '<a href="detail?id='+data[i].id+'">在线阅读</a> </p>'+
+					       '<p> <a href="#"><span class="icon down"></span>下载</a> '+
+					        '<a href="#"><span class="icon sc"></span>收藏</a></p>'+
+					       '</div>'+
+					       '<p class="s_n"><a href="javascript:;">'+data[i].bName+'</a></p>'+
+					       '</li>';
+					       
+					}
+					$('.con_list').html(str);
+					$('.ease').hover(function()
+							{
+							  $(this).find('.sm').slideDown('fast','linear');
+							},function()
+							{
+							  $(this).find('.sm').slideUp('fast','linear'); 
+							});
+				}
+			)
+	}
+$('.ease').hover(function()
+		{
+		  $(this).find('.sm').slideDown('fast','linear');
+		},function()
+		{
+		  $(this).find('.sm').slideUp('fast','linear'); 
+		});
+	
 function nextpage(){
 	/* alert($(".thispage").text());
 	alert($(".thispage").attr("id")); */
@@ -88,7 +141,10 @@ function nextpage(){
 		/* alert(page); */
 		$(".thispage").removeAttr("class");
 		var id = '#p'+page;
-		$(id).attr('class','thispage');		
+		$(id).attr('class','thispage');
+		var id = $('#id').val();
+		var pagenum = $('.thispage').text();
+		showPage(id,pagenum);
 	}
 }
 

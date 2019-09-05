@@ -65,7 +65,7 @@ $(document).ready(function(e) {
 	});
    })();//------------------搜索框
    
-   (function(){
+/*   (function(){
 	   $('.con_list').find('li').each(function(index) 
 		{
 		   $(this).hover(function()
@@ -76,7 +76,7 @@ $(document).ready(function(e) {
 			  $('.con_list').find('.sm').slideUp('fast','linear'); 
 			});
 		});
-   })();//----------------------------- 频道列表页显示书籍详情、说明
+   })();*///----------------------------- 频道列表页显示书籍详情、说明
    
    (function(){
 	  $('.sc_c').one('click',function()

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yc.story.Biz.BookBiz;
 import com.yc.story.Biz.CategoryBiz;
 import com.yc.story.Biz.CommentBiz;
+import com.yc.story.bean.StBook;
 import com.yc.story.bean.StCategory;
 
 @Controller
@@ -36,14 +37,19 @@ public class BookServlet {
 	}
 	
 	@RequestMapping("artCategory")
-	public String ArticleCategory(Model model,String id,@RequestParam(defaultValue="1")int page) {
+	public String ArticleCategory(Model model,int id,@RequestParam(defaultValue="1")int page) {
 		//分类页面右边的新书上架功能 根据该类别和时间排序找出十本小说
-		Integer aid = Integer.valueOf(id);
-		model.addAttribute("category_pagebooks", bbiz.findByCategory(aid, page));
-		model.addAttribute("category_newbooks", bbiz.findByCategoryAndTime(aid));
+		/*Integer aid = Integer.valueOf(id);*/
+		model.addAttribute("category_pagebooks", bbiz.findByCategory(id, page));
+		model.addAttribute("category_newbooks", bbiz.findByCategoryAndTime(id));
 		return "index_article";
 	}
 	
+	@RequestMapping("pageartCategory")
+	@ResponseBody
+	public List<StBook> pageartCategory(Model model,int id,@RequestParam(defaultValue="1")int page) {		
+		return bbiz.findByCategory(id, page);
+	}
 	
 	@RequestMapping("detail")
 	public String Detail(Integer id,Model model) {
