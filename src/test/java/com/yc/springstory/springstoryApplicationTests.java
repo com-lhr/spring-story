@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.yc.story.SpringStoryApplication;
 import com.yc.story.Biz.BookBiz;
+import com.yc.story.Biz.CategoryBiz;
 import com.yc.story.Biz.CommentBiz;
 import com.yc.story.bean.StComment;
 import com.yc.story.bean.StRecommendation;
@@ -21,6 +22,8 @@ import com.yc.story.dao.StRecommendationMapper;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes={SpringStoryApplication.class})
 public class springstoryApplicationTests {
+	@Resource
+	private CategoryBiz cgbiz;
 	@Resource
 	private BookBiz biz;
 	@Resource
@@ -63,6 +66,7 @@ public class springstoryApplicationTests {
 			
 	}
 	
+	
 	@Test
 	public void findBookByid() {
 		System.out.println(biz.findDetail(1));
@@ -77,4 +81,10 @@ public class springstoryApplicationTests {
 	public void searchbooklikenameTest() {
 		System.out.println(biz.findPageBookLikeName("道").get(0).getbName());
 	}
+	
+	@Test
+	public void redisCategoryTest() {
+		System.out.println(cgbiz.allRedisCategory().get(0).getId());
+	}
+	
 }
