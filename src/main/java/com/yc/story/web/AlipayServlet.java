@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
@@ -32,10 +33,7 @@ public class AlipayServlet {
 	
 	
 	@GetMapping("topay")
-	public String topay(String id,int name,float money,Model model){
-		
-		StUser user = new StUser();
-		user.setId(1);
+	public String topay(@SessionAttribute(name="loginedUser",required=false) StUser user,String id,int name,float money,Model model){
 		
 		StOrder so = new StOrder();
 		so.setId(Integer.parseInt(id));

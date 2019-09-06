@@ -248,11 +248,10 @@
             --%>
             <fmt:formatDate value="${c.stBook.bTime}" pattern="yyyy-MM-dd"/>
             </time>
-              <a href="#" onclick="javascript:buy(${c.bId });">
-                 <span>
-                    <c:if test="${c.cStatus == 1}" >已购买</c:if>
-                    <c:if test="${c.cStatus == 0}" >未购买</c:if>
-                 </span></a>
+                <span>
+                   <c:if test="${c.cStatus == 1}" ><a href="#" onclick="javascript:void(0)">已购买</a></c:if>
+                   <c:if test="${c.cStatus == 0}" ><a href="#" onclick="javascript:buy(${c.bId });">未购买</a></c:if>
+                </span>
               <a href="#" onclick="javascript:cancel(${c.bId });">取消收藏</a></span></li>
             </c:forEach>
         </ul>

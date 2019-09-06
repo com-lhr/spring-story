@@ -26,14 +26,19 @@ public class OrderBiz {
 	@Resource
 	private StGoodsMapper sgm;
 	
-	// 查询订单
+	//查询订单（后台）
+	public List<StOrder> queryAll(){
+		return som.selectByExample(null);
+	}
+	
+	// 查询个人订单
 	public List<StOrder> queryOrder(StUser su){
 		StOrderExample soe = new StOrderExample();
 		soe.createCriteria().andUIdEqualTo(su.getId());
 		return som.selectByExample(soe);
 	}
 	
-	// 添加订单
+	// 添加个人订单
 	public int addOrder(StOrder so,StUser su){
 		so.setuId(su.getId());
 		so.setoStatus(0); // 未支付状态 0
