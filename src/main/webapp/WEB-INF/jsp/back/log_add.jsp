@@ -22,44 +22,14 @@
                     <td colspan = "8" ><input type="text" class="frist_input" placeholder="请输入标题" required  minlength ="2"></td>
                 </tr>
                 <tr>
-                    <td>栏目<span>*</span></td>
-                    <td>
-                        <select>
-                            <option>全部</option>
-                            <option>国内新闻</option>
-                            <option>国外新闻</option>
-                            <option>其他新闻</option>
-                        </select>
-                    </td>
+                    
                     <td>发布时间<span>*</span></td>
                     <td>
-                        <input type="text" placeholder="2017-05-03" id="demo" required>
+                        <input type="date" placeholder="2017-05-03" id="demo" required>
                     </td>
                 </tr>
                 <tr>
-                    <td>作者<span>*</span></td>
-                    <td>
-                        <input type="text" placeholder="请输入作者" required  minlength ="2">
-                    </td>
-                    <td>编辑<span>*</span></td>
-                    <td>
-                        <input type="text" placeholder="请输入编辑" required  minlength ="2">
-                    </td>
-
-                </tr>
-                <tr>
-                    <td>Tag标签<span>*</span></td>
-                    <td>
-                        <input type="text" placeholder="多个标签之间用 ';'分隔，最多不超过10个"  required  maxlength="10">
-                    </td>
-                    <td>关键字<span>*</span></td>
-                    <td>
-                        <input type="text" placeholder="多个关键字之间用 ';'分隔，最多不超过10个" required  maxlength ="10">
-                    </td>
-
-                </tr>
-                <tr>
-                    <td>备注<span></span></td>
+                    <td>内容<span></span></td>
                     <td colspan = "8" style="text-align: left">
                         <textarea id="editor"  class="form_area"></textarea>
                     </td>

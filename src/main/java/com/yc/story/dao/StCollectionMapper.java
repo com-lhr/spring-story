@@ -2,10 +2,15 @@ package com.yc.story.dao;
 
 import com.yc.story.bean.StCollection;
 import com.yc.story.bean.StCollectionExample;
+import com.yc.story.bean.StUser;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface StCollectionMapper {
+	
+	//查询已收藏的书籍
+	List<Object> selectByUid(Integer uid);
 	
     long countByExample(StCollectionExample example);
 
