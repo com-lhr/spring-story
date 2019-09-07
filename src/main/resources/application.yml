@@ -4,6 +4,18 @@ spring:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
 
+ # redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 5000
+    # password:
+    pool:
+      minIdle: 2
+      maxIdle: 20
+      maxWait: 3000
+      maxActive: 50
+
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/story
     username: root
