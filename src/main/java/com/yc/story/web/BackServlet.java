@@ -30,4 +30,9 @@ public class BackServlet {
 	public String toadd(){
 		return "back/log_add";
 	}
+	
+	@GetMapping("toupload")
+	public String toupload(){
+		return "back/storyupload";
+	}
 }

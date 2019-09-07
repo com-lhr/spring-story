@@ -1,12 +1,16 @@
 package com.yc.springstory;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.yc.story.SpringStoryApplication;
@@ -32,6 +36,8 @@ public class springstoryApplicationTests {
 	private StRecommendationMapper sram;
 	@Resource
 	private CommentBiz cbiz;
+	@Autowired
+	private RedisTemplate<String, ?> redisTemplate;
 	@Test
 	public void contextLoads() {
 	}
@@ -87,4 +93,15 @@ public class springstoryApplicationTests {
 		System.out.println(cgbiz.allRedisCategory().get(0).getId());
 	}
 	
+	@Test
+	public void saveHash() {
+		Map<String, String> m = new HashMap<>();
+		m.put("1", "玄幻小说");
+		m.put("2", "科幻小说");
+		m.put("3", "都市小说");
+		m.put("4", "穿越小说");
+		m.put("5", "修真小说");
+		m.put("6", "网游小说");
+		redisTemplate.opsForHash().putAll("category", m);
+	}
 }

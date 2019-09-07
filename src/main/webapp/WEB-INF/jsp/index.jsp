@@ -44,7 +44,7 @@
     <h3>编者推荐</h3>
     <ul class="clear">
     <c:forEach items="${recommendationList }" var="recomList">
-    <li><a href="javascript:;"><img src="玄幻小说/东土大茄/反派驾临/反派驾临.jpg"></a>
+    <li><a href="javascript:;"><img src="0/玄幻小说/东土大茄/反派驾临/反派驾临.jpg"></a>
     <p><a href="javascript:;">${recomList.stBook.bName }</a></p>
     </li>
     </c:forEach>
