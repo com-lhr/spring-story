@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,8 +33,15 @@
        <div class="sm">
        <p> <a href="arcticle3.html">有声阅读</a> 
         <a href="detail?id=${cpb.id }">在线阅读</a> </p>
-       <p> <a href="#"><span class="icon down"></span>下载</a> 
-        <a href="#"><span class="icon sc"></span>收藏</a></p>
+       <p> <a href="#"><span class="icon down"></span>下载</a>
+       <!-- style="background-position:-40px -20px;" --> 
+        <a href="#" onclick="javascript:addColl(${cpb.id })">
+        <c:if test="${fn:contains(bookList,cpb.id )}">
+        <span class="icon sc" style="background-position:-40px -20px;"></span>收藏
+        </c:if>
+        <c:if test="${fn:contains(bookList,cpb.id )!=true}">
+        <span class="icon sc" ></span>收藏
+        </c:if></a></p>
        </div>
        <p class="s_n"><a href="javascript:;">${cpb.bName }</a></p>
        </li>
@@ -98,6 +106,7 @@ $.get(
 				"pageartCategory",
 				{id:id,page:pagenum},
 				function(data){
+					console.info(${fn:contains(bookList,13 )})
 					$('.con_list').empty();
 					/* alert(data[0].bName); */
 					str='';
@@ -108,7 +117,13 @@ $.get(
 					       '<p> <a href="arcticle3.html">有声阅读</a> '+
 					        '<a href="detail?id='+data[i].id+'">在线阅读</a> </p>'+
 					       '<p> <a href="#"><span class="icon down"></span>下载</a> '+
-					        '<a href="#"><span class="icon sc"></span>收藏</a></p>'+
+					        '<a href="#" onclick="javascript:addColl('+data[i].id+')">'+
+					        '<c:if test="'+${fn:contains(bookList,data[i].id )}+'">'+
+					        '<span class="icon sc" style="background-position:-40px -20px;"></span>收藏'+
+					        '</c:if>'+
+					        '<c:if test="'+${fn:contains(bookList,data[i].id )!=true}+'">'+
+					        '<span class="icon sc" ></span>收藏'+
+					        '</c:if></a></p>'+
 					       '</div>'+
 					       '<p class="s_n"><a href="javascript:;">'+data[i].bName+'</a></p>'+
 					       '</li>';
@@ -148,6 +163,20 @@ function nextpage(){
 	}
 }
 
+//添加收藏夹
+function addColl(bid){
+	$.get('addColl',{
+		bid:bid
+	},function(data){
+		if(data==1){
+			alert('添加成功');
+		}else if(data==0){
+			alert('请先登录')
+		}else{
+			alert('已添加')
+		}
+	});
+}
 </script>
 </body>
 </html>

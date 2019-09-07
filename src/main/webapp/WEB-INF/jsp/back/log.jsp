@@ -119,7 +119,7 @@
                 },
                 {
                     title: '标题',
-                    field: 'nTitle',
+                    field: 'nTitel',
                     align: 'center',
                     valign: 'middle'
                 },

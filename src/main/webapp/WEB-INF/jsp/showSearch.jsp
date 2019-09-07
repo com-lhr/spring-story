@@ -33,7 +33,7 @@
        <p> <a href="arcticle3.html">有声阅读</a> 
         <a href="detail?id=${sbook.id }">在线阅读</a> </p>
        <p> <a href="#"><span class="icon down"></span>下载</a> 
-        <a href="#"><span class="icon sc"></span>收藏</a></p>
+        <a href="#" onclick="javascript:addColl(${sbook.id });"><span class="icon sc"></span>收藏</a></p>
        </div>
        <p class="s_n"><a href="javascript:;">${sbook.bName }</a></p>
        </li>

@@ -6,17 +6,21 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.yc.story.Biz.BookBiz;
 import com.yc.story.Biz.CategoryBiz;
 import com.yc.story.Biz.CommentBiz;
 import com.yc.story.bean.StBook;
 import com.yc.story.bean.StCategory;
+import com.yc.story.bean.StCollection;
+import com.yc.story.bean.StUser;
 
 @Controller
 public class BookServlet {
@@ -47,7 +51,7 @@ public class BookServlet {
 	
 	@RequestMapping("pageartCategory")
 	@ResponseBody
-	public List<StBook> pageartCategory(Model model,int id,@RequestParam(defaultValue="1")int page) {		
+	public List<StBook> pageartCategory(Model model,int id,@RequestParam(defaultValue="1")int page) {	
 		return bbiz.findByCategory(id, page);
 	}
 	
@@ -78,5 +82,25 @@ public class BookServlet {
 		
 	}
 	
+	//添加收藏夹
+	@GetMapping("addColl")
+	@ResponseBody
+	public int addCollection(@SessionAttribute(name="loginedUser",required=false) StUser user,
+			int bid,Model model){
+		if(user==null){
+			return 0;
+		}
+		return bbiz.addCollection(user,bid);
+	}
 
+
+	@ModelAttribute("bookList")
+	public List<Object> findColl(@SessionAttribute(name="loginedUser",required=false) StUser user){
+		if(user==null){
+			return null;
+		}else{
+			return bbiz.query(user.getId());
+		}
+	}
+	
 }

@@ -51,13 +51,14 @@ public class OrderBiz {
 		so.setoStatus(1);
 		int i;
 		StUser user = sum.selectByPrimaryKey(su.getId());
-		System.out.println(som.selectByPrimaryKey(so.getId()).getbId()+"-----------"+sgm.selectByPrimaryKey(so.getbId()));
+		int bid = som.selectByPrimaryKey(so.getId()).getbId();
+		System.out.println("-----------"+sgm.selectByPrimaryKey(bid));
 		//判断是积分还是月票
-		if("积分".equals(sgm.selectByPrimaryKey(som.selectByPrimaryKey(so.getId()).getbId()).getgDesc())){
-			i = Integer.parseInt(sgm.selectByPrimaryKey(som.selectByPrimaryKey(so.getId()).getbId()).getgName()) + user.getIntegral();
+		if("积分".equals(sgm.selectByPrimaryKey(bid).getgDesc())){
+			i = Integer.parseInt(sgm.selectByPrimaryKey(bid).getgName()) + user.getIntegral();
 			su.setIntegral(i);
-		}else if("月票".equals(sgm.selectByPrimaryKey(som.selectByPrimaryKey(so.getId()).getbId()).getgDesc())){
-			i = Integer.parseInt(sgm.selectByPrimaryKey(som.selectByPrimaryKey(so.getId()).getbId()).getgName()) + user.getTickets();
+		}else if("月票".equals(sgm.selectByPrimaryKey(bid).getgDesc())){
+			i = Integer.parseInt(sgm.selectByPrimaryKey(bid).getgName()) + user.getTickets();
 			su.setTickets(i);
 		}
 		

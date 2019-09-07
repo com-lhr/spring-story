@@ -11,7 +11,10 @@
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="js/jquery.js"></script>
 <!-- 引入BootStrap核心js文件 -->
-<script src="bootstrap/js/bootstrap.min.js"></script>	
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<link  href="bootstrap/bootstrap-table.css" rel="stylesheet" type="text/css">	
+<script src="bootstrap/bootstrap-table.js"></script>
+<script src="bootstrap/bootstrap-table-zh-CN.js"></script>		
 <link  href="css/css.css" rel="stylesheet" type="text/css">
 <link  href="css/self.css" rel="stylesheet" type="text/css">
 
@@ -48,7 +51,7 @@
   </div>-->
   <div class="delu2 clear">
       <div class="self ease">
-      <a href="javascript:;" class="clear">雪剑无影<span class="icon ease"></span></a>
+      <a href="${loginedUser == null ? 'tologin' : ''}" class="clear">${loginedUser == null ? 'Hi,请登录'  :   '欢迎：'.concat(loginedUser.uName)}<span class="icon ease"></span></a>
       <div class="clear"></div>
        <ul  class="clear">
          <li><a href="javascript:;">个人中心</a></li>
@@ -103,12 +106,13 @@
       <div class="list_1">
           <div class="portrait">
                <p class="por_modify">
-                  <img src="img/avatar.jpg">
+                  <img src="${loginedUser.uImage }">
                   <a href="javascript:;">修改图像</a>
                </p>
-              <p>雪剑无影</p>
+              <p>${loginedUser == null ? 'Hi,请登录'  :   '欢迎：'.concat(loginedUser.uName)}</p>
               <p  class="border_b"></p>
-              <p><span>积分</span> <b>498</b></p>
+              <p><span>积分：</span> <b>${loginedUser.integral }</b></p>
+              <p><span>月票：</span> <b>${loginedUser.tickets }</b></p>
           </div>
       </div><!--头像部分-->
       <ul class="list_1">
@@ -138,9 +142,9 @@
           <a href="#">修改密码</a>
         </p> 
        <ul class="tab menu_1"  style="display:block;">
-          <li class="h_portrait"> <p class="por_modify"><img src="img/avatar.jpg"><a href="javascript:;">修改图像</a></p></li>
-          <li><span>用户名</span>：雪剑无影<a href="javascript:;" title="修改用户名"><img src="img/modif.png" class="u_name"></a></li>
-          <li><span>邮 &nbsp; 箱</span>：12dedfdsfdsf@qq.com<a href="javascript:;" title="修改邮箱"><img src="img/modif.png" class="u_email"></a></li>
+          <li class="h_portrait"> <p class="por_modify"><img src="${loginedUser.uImage }"><a href="javascript:;">修改图像</a></p></li>
+          <li><span>用户名</span>：${loginedUser.uName }<a href="javascript:;" title="修改用户名"><img src="img/modif.png" class="u_name"></a></li>
+          <li><span>邮 &nbsp; 箱</span>：${loginedUser.uEmail }<a href="javascript:;" title="修改邮箱"><img src="img/modif.png" class="u_email"></a></li>
       </ul>  
        <div class="tab menu_2">
           <img src="img/avatar.jpg"> 
@@ -256,14 +260,14 @@
             </c:forEach>
         </ul>
         <ul class="page clear">
-            <li>首页</li>
-            <li>上一页</li>
+            <li><a href="javascript:void(0);" onclick="page(1)">首页</a></li>
+            <li><a href="javascript:void(0);" onclick="prePage()">上一页</a></li>
             <!-- href="collect?page=1"   href="collect?page=2"-->
             <c:forEach var="i" begin="1" end="${count}">
             <li><a href="javascript:void(0)" class="thispage" onclick="page(${i })">${i }</a></li>
             </c:forEach>
-            <li><a href="javascript:page()">下一页</a></li>
-           <li><a href="javascript:;">尾页</a></li>
+            <li><a href="javascript:nextPage()">下一页</a></li>
+           <li><a href="javascript:;" onclick="page(${count})">尾页</a></li>
            <li class="tz"><select id="page">
            
            <option value=1>1</option>
@@ -275,6 +279,8 @@
     </div>
     <!--我的收藏-->
 	<script type="text/javascript">
+	
+	//分页查询
     function page(page){
     	$.get("collectPage",{
     		page:page
@@ -383,7 +389,7 @@
         <p class="tit">购买记录</p>
         <p class="border_b"></p>
         <div class="showOrder">
-            <table class="table table-hover">
+            <table class="table table-hover" id="tb">
 				<thead>
 					<tr>
 						<th>订单编号</th>
@@ -409,7 +415,7 @@
 						  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						    详情 <span class="caret"></span>
 						  </button><ul class="dropdown-menu">
-						    <li><a href="../alipay/alipay.trade.page.pay.jsp?WIDout_trade_no=${ta.id }&WIDsubject=${ta.bId}&WIDtotal_amount=${ta.oAmount }&WIDbody='无'">支付</a></li>
+						    <li><a href="topay?WIDout_trade_no=${ta.id }&WIDsubject=${ta.bId}&WIDtotal_amount=${ta.oAmount }&WIDbody='无'">支付</a></li>
 						    <li><a href="javascript:deleteOrder(${ta.id });">删除</a></li>
 						  </ul></div></td>
 					</tr>
@@ -419,7 +425,14 @@
 			</table>
         </div>
    </div><!--查看订单 -->
- 
+   <script type="text/javascript">
+   $("#tb").bootstrapTable({
+       pagination: true,   //是否显示分页条
+       pageSize: 3,   //一页显示的行数
+       paginationLoop: false,   //是否开启分页条无限循环，最后一页时点击下一页是否转到第一页
+       pageList: [5, 10, 20]   //选择每页显示多少行，数据过少时可能会没有效果
+   });
+   </script>
    
     <div class="c_4">
         <p class="tit">购买积分</p>
@@ -430,7 +443,8 @@
         <c:forEach items="${gList }" var="g">
         <div class="clear p_t">
                <div class="up_fm">
-               <a href="javascript:void(0);" onclick="window.location='../alipay/index.jsp?gid=${g.id}&integ=${g.gPrice*g.gCost }'"><img src="img/album_100.jpg"  class="fm_img"><br/>
+               <!-- javascript:pay(${g.id},${g.gName},${g.gPrice*g.gCost }); -->
+               <a href="getpay?name=${g.id}&money=${g.gPrice*g.gCost }"><img src="img/album_100.jpg"  class="fm_img"><br/>
                <label>${g.gName}${g.gDesc }</label><br/>
                <label>原价：￥${g.gPrice}</label><br/>
                <label style="color: red;font-weight: bold;">现价：￥${g.gPrice*g.gCost}</label></a>
@@ -440,18 +454,7 @@
          
      </form><!--积分-->
    </div><!--购买积分-->
-   <script type="text/javascript">
-   function pay(money){
-	   $.get('pay',{
-		   money:money
-	   },function(data){
-		   if(data==null){
-			   alert('支付失败');
-		   }
-	   });
-   }
-       
-   </script>
+   
      <div class="c_3">
         <p class="tit">我的专辑<span><a href="javascript:;" class="del">[删除全部专辑]</a></span>
          <a href="javascript:;" class="right" id="zj_c">创建新专辑</a>
