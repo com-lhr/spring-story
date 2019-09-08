@@ -1,5 +1,3 @@
-
-
 package com.yc.story.web;
 
 import java.io.UnsupportedEncodingException;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
@@ -30,20 +29,29 @@ public class AlipayServlet {
 	@Resource
 	private OrderBiz obiz;
 	
+	@GetMapping("getpay")
+	public String getpay(){
+		//System.out.println("============="+id);
+		
+		return "alipay/index";
+	}
 	
-	@GetMapping("topay")
-	public String topay(String id,int name,float money,Model model){
-		
-		StUser user = new StUser();
-		user.setId(1);
-		
+	@GetMapping("addOrder")
+	public String addOrder(@SessionAttribute(name="loginedUser",required=false) StUser user,
+			String id,String name,String money,Model model){
+		System.out.println(id);
 		StOrder so = new StOrder();
 		so.setId(Integer.parseInt(id));
-		so.setbId(name);
-		so.setoAmount(money);
+		so.setbId(Integer.parseInt(name));
+		so.setoAmount(Float.parseFloat(money));
 		
 		obiz.addOrder(so,user);
-		return "self";
+		return "topay";
+	}
+	
+	@GetMapping("topay")
+	public String topay(@SessionAttribute(name="loginedUser",required=false) StUser user,Model model) throws UnsupportedEncodingException{
+		return "alipay/alipay.trade.page.pay";
 	}
 	
 	@GetMapping("pay")

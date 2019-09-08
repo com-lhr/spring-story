@@ -65,7 +65,7 @@ $(document).ready(function(e) {
 	});
    })();//------------------搜索框
    
-   (function(){
+/*   (function(){
 	   $('.con_list').find('li').each(function(index) 
 		{
 		   $(this).hover(function()
@@ -76,7 +76,7 @@ $(document).ready(function(e) {
 			  $('.con_list').find('.sm').slideUp('fast','linear'); 
 			});
 		});
-   })();//----------------------------- 频道列表页显示书籍详情、说明
+   })();*///----------------------------- 频道列表页显示书籍详情、说明
    
    (function(){
 	  $('.sc_c').one('click',function()
@@ -448,19 +448,19 @@ function preDe_w2()
 	window.onmousewheel=function(){return true;}
 }//阻止和取消默认事件------------------禁止滚动条滚动
 
-function  bubble(e)
-{
-if ( e && e.stopPropagation )
-　   {       　// 因此它支持W3C的stopPropagation()方法
-　       　e.stopPropagation();
-	 }
-	else
-　   {   　//否则，我们需要使用IE的方式来取消事件冒泡
-　　   window.event.cancelBubble = true;
-
-	 }	   return false;
-
-}//阻止冒泡
+//function  bubble(e)
+//{
+//if ( e && e.stopPropagation )
+//　   {       　// 因此它支持W3C的stopPropagation()方法
+//　       　e.stopPropagation();
+//	 }
+//	else
+//　   {   　//否则，我们需要使用IE的方式来取消事件冒泡
+//　　   window.event.cancelBubble = true;
+//
+//	 }	   return false;
+//
+//}//阻止冒泡
 
 function fm(form)
 {

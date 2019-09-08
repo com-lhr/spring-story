@@ -59,7 +59,7 @@ function sendemail() {
 			function(data){
 				if(data.code == 0){					
 					code = data.data;
-					alert(data.msg+code);
+					alert(data.msg);
 				}else{
 					alert(data.msg);
 				}	

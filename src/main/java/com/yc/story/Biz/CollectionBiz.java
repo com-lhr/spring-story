@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.github.pagehelper.PageHelper;
@@ -23,6 +24,7 @@ public class CollectionBiz {
 	public List<StCollection> query(@SessionAttribute(name="loginedUser",required=false) StUser su,int page){
 		StCollectionExample sce = new StCollectionExample();
 		sce.createCriteria().andUIdEqualTo(su.getId()).andCRecordEqualTo(1);
+		sce.setOrderByClause("c_time desc");
 		PageHelper.startPage(page,5);
 		return scm.selectByExample(sce);
 	}

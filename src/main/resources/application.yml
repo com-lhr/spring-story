@@ -3,7 +3,23 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
+
   #打包jar  clean package  -Dmaven.test.skip=true
+
+
+ # redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 5000
+    # password:
+    pool:
+      minIdle: 2
+      maxIdle: 20
+      maxWait: 3000
+      maxActive: 50
+
+
   datasource:
     url: jdbc:mysql://120.27.247.236:3306/story?useSSL=false&characterEncoding=utf-8&serverTimezone=UTC
     username: root
@@ -19,6 +35,7 @@ spring:
   resources:
     staticLocations:
       - classpath:/static/
+
       - file:/story/
     
   mail:

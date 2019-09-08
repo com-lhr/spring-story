@@ -175,8 +175,7 @@
       <input name="bId" type="hidden" value="${detailBook.id}">
       <input type="button" value="提交" class="onSubmit" />
       </form>
-  </div><!--当前用户评论-->
- 
+  </div><!--当前用户评论--> 
 				<ul class="com_con clear">
 					<!-- 第一条评论 -->
 					<c:forEach items="${comments}" var="c">
@@ -200,12 +199,8 @@
 									</div>
 								</div>								 
 								<!--回复框--> <%@ include file="common/reply.jsp"%>
-							</li>
-							
-	
-							<!--第一条评论的回复-->
-							
-														
+							</li>	
+							<!--第一条评论的回复-->														
 									<li class="go2">
 										<c:if test="${c.sList != null && fn:length(c.sList) > 0}">
 										<c:forEach items="${c.sList}" var = "s">																			
@@ -232,7 +227,6 @@
 										</c:forEach>
 										</c:if>
 									</li>								
-							
 						</div>
 					</c:forEach>					
 					<!--      -第一条评论结束  -->

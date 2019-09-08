@@ -75,7 +75,7 @@ function sendemail() {
 			function(data){
 				if(data.code == 0){					
 					code = data.data;
-					alert(data.msg+code);
+					alert(data.msg);
 				}else{
 					alert(data.msg);
 				}	
@@ -196,6 +196,7 @@ $(document).ready(function(e) {
 				$('.text_3').eq(1).siblings('.none').find('i').css('color','red');				
 				return false;
 			}else{
+				console.info($.md5);
 				$('input[name="uPwd"]').val($.md5($('.text_3').eq(1).val()));
 			}
 			var a = er();

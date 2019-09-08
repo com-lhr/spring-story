@@ -5,11 +5,11 @@
 
  <div class="list2">
            <div class="one">
-                <p>新书上架</p>
+                <p>相关分类新书上架</p>
                 <div class="notice">
                     <ul>
                     <c:forEach items="${category_newbooks }" var="cb">
-                    <li><a href="list_info.html">${cb.bName }</a></li>
+                    <li><a href="detail?id=${cb.id }">${cb.bName }</a></li>
                     </c:forEach>
                    </ul>
                 </div>
@@ -28,7 +28,7 @@
                    </ul>
                     <ul>
                     <li><a href="javascrip:;">文化苦旅</a></li>
-                    <li><a href="javascrip:;">谢谢你曾来过我的世界</a></li>
+                    <li><a href="javascrip:;">aaa</a></li>
                     <li><a href="javascrip:;">文化苦旅</a></li>
                     <li><a href="javascrip:;">文化苦旅</a></li>
                     <li><a href="javascrip:;">文化苦旅</a></li>

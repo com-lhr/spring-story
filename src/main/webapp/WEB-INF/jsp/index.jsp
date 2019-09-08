@@ -44,7 +44,7 @@
     <h3>编者推荐</h3>
     <ul class="clear">
     <c:forEach items="${recommendationList }" var="recomList">
-    <li><a href="javascript:;"><img src="img/article.jpg"></a>
+    <li><a href="javascript:;"><img src="0/玄幻小说/东土大茄/反派驾临/反派驾临.jpg"></a>
     <p><a href="javascript:;">${recomList.stBook.bName }</a></p>
     </li>
     </c:forEach>
@@ -57,7 +57,7 @@
       <c:forEach items="${newbook }" var="b">
         <li><a href="javascript:;"><span class="icon_span"></span></a>
              <a href="javascript:;"><b>[${b.stCategory.caName } ]</b></a>
-             <a href="javascript:;"><strong>${b.bName }</strong></a><time><fmt:formatDate value="${b.bTime}" 
+             <a href="detail?id=${b.id }"><strong>${b.bName }</strong></a><time><fmt:formatDate value="${b.bTime}" 
           	pattern="yyyy-MM-dd"/></time></li>
       </c:forEach>
      </ul>

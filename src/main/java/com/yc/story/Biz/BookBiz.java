@@ -1,5 +1,6 @@
 package com.yc.story.Biz;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,7 +10,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import java.util.Date;
 import java.util.List;
+
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -24,9 +28,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.pagehelper.PageHelper;
 import com.yc.story.bean.StBook;
 import com.yc.story.bean.StBookExample;
+import com.yc.story.bean.StCollection;
+import com.yc.story.bean.StCollectionExample;
 import com.yc.story.bean.StRecommendation;
 import com.yc.story.bean.StRecommendationExample;
+import com.yc.story.bean.StUser;
 import com.yc.story.dao.StBookMapper;
+import com.yc.story.dao.StCollectionMapper;
 import com.yc.story.dao.StRecommendationMapper;
 
 @Service
@@ -34,6 +42,9 @@ public class BookBiz {
 	
 	@Resource
 	private StBookMapper bookMapper;
+	
+	@Resource
+	private StCollectionMapper collMapper;
 	
 	@Resource
 	private StRecommendationMapper recommendationMapper;
@@ -44,6 +55,12 @@ public class BookBiz {
 		StBookExample bookExample = new StBookExample();
 		bookExample.setOrderByClause("b_time desc");
 		PageHelper.startPage(1, 10);
+		return bookMapper.selectByExample(bookExample);
+	}
+	public List<StBook> findByCategory(int bCategory,int page){
+		StBookExample bookExample = new StBookExample();
+		bookExample.createCriteria().andBCategoryEqualTo(bCategory);
+		PageHelper.startPage(page,5);
 		return bookMapper.selectByExample(bookExample);
 	}
 	
@@ -61,6 +78,7 @@ public class BookBiz {
 		
 	}*/
 	
+
 	//更新某本书的信息
 	public int updateReadCnt(StBook book) {
 		return bookMapper.updateByPrimaryKey(book);
@@ -95,6 +113,13 @@ public class BookBiz {
 		
 	}
 	
+
+	public int bookcount(Integer bCategory) {
+		StBookExample example = new StBookExample();
+		example.createCriteria().andBCategoryEqualTo(bCategory);
+		return (int) bookMapper.countByExample(example);
+	}
+
 	
 	//根据id一本书的详情
 	public StBook findDetail(Integer id){
@@ -153,4 +178,53 @@ public class BookBiz {
 		PageHelper.startPage(1,10);
 		return recommendationMapper.selectByExample(example);
 	}
+	
+	public List<StBook> findPageBookLikeName(String name){
+		StBookExample example = new StBookExample();
+		example.createCriteria().andBNameLike("%"+name+"%");
+		PageHelper.startPage(1,5);
+		return bookMapper.selectByExample(example);
+	}
+	
+	public List<StBook> findBookLikeName(String name){
+		StBookExample example = new StBookExample();
+		example.createCriteria().andBNameLike("%"+name+"%");
+		return bookMapper.selectByExample(example);
+	}
+	
+	//查询收藏夹已有图书
+	public List<Object> query(int uid){
+		
+		return collMapper.selectByUid(uid);
+	}
+
+	//添加收藏
+	public int addCollection(StUser user, int bid){
+		/*for(int i=0;i<query(user.getId()).size();i++){
+			if(bid==query(user.getId()).get(i).getbId()){
+				return 3;
+			}
+		}*/
+		
+		if(query(user.getId()).contains(bid)){
+			StCollectionExample example = new StCollectionExample();
+			example.createCriteria().andUIdEqualTo(user.getId()).andBIdEqualTo(bid);
+			if(collMapper.selectByExample(example).get(0).getcStatus()==0){
+				StCollection sc = new StCollection();
+				sc.setcRecord(1);
+				return collMapper.updateByExampleSelective(sc, example);
+			}else{
+				return 3;
+			}
+			
+		}
+		StCollection sc = new StCollection();
+		sc.setbId(bid);
+		sc.setuId(user.getId());
+		sc.setcStatus(0);
+		sc.setcTime(new Date());
+		sc.setcRecord(1);
+		return collMapper.insertSelective(sc);
+	}
+	
 }

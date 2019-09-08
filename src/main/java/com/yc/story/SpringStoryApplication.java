@@ -30,7 +30,9 @@ public class SpringStoryApplication implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/comment").addPathPatterns("/reply");
+
+		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/comment").addPathPatterns("/reply").addPathPatterns("/collect");
+
 	}	
 	
 }
