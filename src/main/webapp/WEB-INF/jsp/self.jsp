@@ -425,14 +425,7 @@
 			</table>
         </div>
    </div><!--查看订单 -->
-   <script type="text/javascript">
-   $("#tb").bootstrapTable({
-       pagination: true,   //是否显示分页条
-       pageSize: 3,   //一页显示的行数
-       paginationLoop: false,   //是否开启分页条无限循环，最后一页时点击下一页是否转到第一页
-       pageList: [5, 10, 20]   //选择每页显示多少行，数据过少时可能会没有效果
-   });
-   </script>
+   
    
     <div class="c_4">
         <p class="tit">购买积分</p>
@@ -454,7 +447,14 @@
          
      </form><!--积分-->
    </div><!--购买积分-->
-   
+   <script>
+   $("#tb").bootstrapTable({
+       pagination: true,   //是否显示分页条
+       pageSize: 3,   //一页显示的行数
+       paginationLoop: false,   //是否开启分页条无限循环，最后一页时点击下一页是否转到第一页
+       pageList: [5, 10, 20]   //选择每页显示多少行，数据过少时可能会没有效果
+   });
+   </script>
      <div class="c_3">
         <p class="tit">我的专辑<span><a href="javascript:;" class="del">[删除全部专辑]</a></span>
          <a href="javascript:;" class="right" id="zj_c">创建新专辑</a>
