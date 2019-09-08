@@ -24,7 +24,7 @@ public class IndexServlet {
 	
 	@ModelAttribute("cList")
 	public List<StCategory> init(){
-		return cbiz.allCategory();
+		return cbiz.allRedisCategory();
 	}
 	
 	
