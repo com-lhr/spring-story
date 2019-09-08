@@ -83,7 +83,7 @@ $(function(){
 			tab(n);
 		 },4000);		
 		}
-	})();//tab 菜单切换
+	});//tab 菜单切换
 	
 	(function(){
 	  var catalog=$('.tab_1 .tab_list')

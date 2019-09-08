@@ -10,6 +10,7 @@
 <script src="js/jquery.js"></script>
 <script src="js/js.js"></script>
 <script src="js/sign.js"></script>
+<script src="js/jQuery.md5.js"></script>
 <style>
 .submit{ margin-left:73px;}
 </style>
@@ -49,7 +50,7 @@ $(function(){
 				$('.style_none').siblings('.none').find('i').css('color','red');
 				return false;
 			}
-			$.post("userLogin", { uName: $('.text_1').val(), uPwd: $('.text_3').val() },
+			$.post("userLogin", { uName: $('.text_1').val(), uPwd:$.md5( $('.text_3').val()) },
 				function(data){
 					if(data.code == 1){
 						alert('登录成功');
@@ -73,7 +74,7 @@ $(function(){
 <%@ include file="common/header.jsp" %>
 
 <div class="box">
-<h3>用户登录   <span class="right">还没有账号 点击<a href="javascript:;">注册</a></span></h3>
+<h3>用户登录   <span class="right">还没有账号 点击<a href="toregister">注册</a></span></h3>
 
        <div class="menu_3">
          <form  id="user_name">  
@@ -83,8 +84,7 @@ $(function(){
           <p><span>密 &nbsp; &nbsp;码：</span> <input type="password" name="uPwd"  class="text_3">
               <br/><span  class="none">  <em>*</em><i>请输入正确的密码</i></span>
           </p>
-          <p style=" margin-left:70px;"><input  type="checkbox" value="1" name="cookie">两周内免登录 <a href="pass.html">忘记密码</a></p>
-          <p><input type="button"  value="提交"  class="submit"></p>
+          <p style=" margin-left:70px;"> <a href="topass">忘记密码</a><input type="button"  value="提交"  class="submit"></p>
           <p><span>使用其他帐号直接登录</span>  <a href="javascript:;">腾讯QQ</a> <a href="javascript:;">新浪微博</a></p>
           </form>
        </div>

@@ -18,7 +18,7 @@
 
 
     <result column="b_commCount" jdbcType="INTEGER" property="bCommcount" /> 
-  <association property="stCategory" column="id" fetchType="lazy"
+  <association property="stCategory" column="b_category" fetchType="lazy"
     select="com.yc.story.dao.StCategoryMapper.selectByPrimaryKey"></association>       
    
     <!-- 评论表关联 -->

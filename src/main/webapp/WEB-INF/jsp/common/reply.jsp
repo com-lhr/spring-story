@@ -10,6 +10,8 @@
 	<form action="" method="get" class="right kdit_w_550">
 		<textarea name="content">发表评论</textarea>
 		<p></p>
-		<input type="bottom" value="提交" class="ease">
+		<input name="bId" type="hidden" value="${detailBook.id}">
+		<input name="otherCommid" class="otherCommid" type="hidden" value="${c.id}"/>
+		<input type="button" value="提交" class="ease">
 	</form>
 </div>

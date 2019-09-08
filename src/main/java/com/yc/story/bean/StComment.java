@@ -31,7 +31,16 @@ public class StComment implements Serializable {
     
 
     private StUser user;
-               	
+    //临时储存下一级的用户
+    private StUser nextuser;
+                 	
+	public StUser getNextuser() {
+		return nextuser;
+	}
+
+	public void setNextuser(StUser nextuser) {
+		this.nextuser = nextuser;
+	}
 
 	public StUser getUser() {
 		return user;

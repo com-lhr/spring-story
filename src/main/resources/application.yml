@@ -3,11 +3,11 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
-
+  #打包jar  clean package  -Dmaven.test.skip=true
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/story
+    url: jdbc:mysql://120.27.247.236:3306/story?useSSL=false&characterEncoding=utf-8&serverTimezone=UTC
     username: root
-    password: a
+    password: ZZX93526088@.com
     driver-class-name: com.mysql.jdbc.Driver
     
   http:
@@ -19,7 +19,7 @@ spring:
   resources:
     staticLocations:
       - classpath:/static/
-      - file:/e:/story/
+      - file:/story/
     
   mail:
     #邮箱服务器地址
