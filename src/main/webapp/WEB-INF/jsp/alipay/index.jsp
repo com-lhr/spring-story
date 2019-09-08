@@ -204,7 +204,7 @@ h2 {
 			<h2 id="tab4" name="tab">退 款 查 询</h2>
 			<h2 id="tab5" name="tab">交 易 关 闭</h2>
 		</div>
-		<form name=alipayment action=alipay.trade.page.pay.jsp method=post
+		<form name=alipayment action=addOrder method=post
 			target="_blank">
 			<div id="body1" class="show" name="divcontent">
 				<dl class="content">
@@ -231,7 +231,7 @@ h2 {
 					<dt></dt>
 					<dd id="btn-dd">
 						<span class="new-btn-login-sp">
-							<button class="new-btn-login" type="submit"
+							<button class="new-btn-login" type="button"
 								style="text-align: center;" onclick="javascript:add();">付 款</button>
 						</span> <span class="note-help">如果您点击“付款”按钮，即表示您同意该次的执行操作。</span>
 					</dd>

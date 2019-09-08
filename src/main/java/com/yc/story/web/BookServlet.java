@@ -44,7 +44,7 @@ public class BookServlet {
 	
 	@ModelAttribute("cList")
 	public List<StCategory> init(){
-		return cbiz.allRedisCategory();
+		return cbiz.allCategory();
 	}
 	
 	@RequestMapping("artCategory")
