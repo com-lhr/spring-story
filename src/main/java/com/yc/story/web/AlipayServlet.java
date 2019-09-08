@@ -55,7 +55,7 @@ public class AlipayServlet {
 	}
 	
 	@GetMapping("pay")
-	public String pay(String orderId, HttpServletRequest request, HttpServletRequest response) throws UnsupportedEncodingException, AlipayApiException{
+	public String pay(@SessionAttribute(name="loginedUser",required=false) StUser user,String orderId, HttpServletRequest request, HttpServletRequest response) throws UnsupportedEncodingException, AlipayApiException{
 		
 		//获取支付宝GET过来反馈信息
 		Map<String,String> params = new HashMap<String,String>();
@@ -85,9 +85,6 @@ public class AlipayServlet {
 		
 			//付款金额
 			String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");
-			
-			StUser user = new StUser();
-			user.setId(1);
 			
 			StOrder so = new StOrder();
 			so.setId(Integer.parseInt(out_trade_no));
