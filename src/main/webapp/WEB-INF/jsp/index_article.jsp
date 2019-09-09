@@ -107,7 +107,7 @@ $.get(
 				"pageartCategory",
 				{id:id,page:pagenum},
 				function(data){
-					var li = ${bookList};
+					var li =${bookList};
 					$('.con_list').empty();
 					/* alert(data[0].bName); */
 					str='';

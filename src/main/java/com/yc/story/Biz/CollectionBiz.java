@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.github.pagehelper.PageHelper;
@@ -51,6 +50,7 @@ public class CollectionBiz {
 		
 		return scm.updateByExampleSelective(sc, sce);
 	}
+	
 	//取消收藏书籍
 	public int del(@SessionAttribute(name="loginedUser",required=false) StUser su,int bid){
 		StCollectionExample sce = new StCollectionExample();
@@ -59,8 +59,6 @@ public class CollectionBiz {
 		}else{
 			sce.createCriteria().andUIdEqualTo(su.getId()).andBIdEqualTo(bid);
 		}
-		
-		
 		StCollection sc = new StCollection();
 		sc.setcRecord(0);
 		return scm.updateByExampleSelective(sc, sce);
