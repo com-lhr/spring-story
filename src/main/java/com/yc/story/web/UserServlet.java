@@ -1,30 +1,43 @@
 package com.yc.story.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Resource;
 
-
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yc.story.Biz.BizException;
 import com.yc.story.Biz.CategoryBiz;
 import com.yc.story.Biz.UserBiz;
 import com.yc.story.bean.StCategory;
 import com.yc.story.bean.StUser;
+import com.yc.story.util.Code;
+import com.yc.story.util.MailServiceImpl;
 import com.yc.story.vo.Result;
 
 @Controller
 @SessionAttributes("loginedUser")
 public class UserServlet {
 	
+	@Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+	
+	@Resource
+	private MailServiceImpl msi;
 	
 	@Resource
 	private CategoryBiz cbiz;
@@ -37,9 +50,59 @@ public class UserServlet {
 		return cbiz.allCategory();
 	}
 	
+	//用户修改密码
+	@PostMapping("forgetpass")
+	@ResponseBody
+	public Result forgetpass(StUser user) {
+		try {
+			user.setuPwd(passwordEncoder.encode(user.getuPwd()));
+			int i = ubiz.updata(user);
+			if(i == 0) {
+				System.out.println("失败");
+				return new Result(0,"密码修改失败");				
+			}else {
+				System.out.println("成功");
+				return new Result(1,"密码修改成功");
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("失败");
+			return new Result(0,"密码修改失败");
+		}
+	}
 	
+	//用户注册
+	@PostMapping("register")
+	@ResponseBody
+	public Result register(StUser user , @RequestParam("img") MultipartFile file) {
+		user.setLevel(2);
+		System.out.println(user);
+		user.setuPwd(passwordEncoder.encode(user.getuPwd()));
+		
+		//设置文件名
+		String filename = System.currentTimeMillis()+new Random().nextInt(1000)+file.getOriginalFilename();
+		try {
+			File f = new File("/e:/story/userImages",filename);		
+			file.transferTo(f);
+			user.setuImage("userImages/"+filename);
+			int i= ubiz.register(user);
+			if( i == 0) {
+				return new Result(0 , "注册失败，请稍后再试");
+			}else {
+				return new Result(1,"注册成功,请立即登录！");
+			}			
+		} catch (IllegalStateException e) {			
+			e.printStackTrace();
+			return new Result(0 , "注册失败，请稍后再试");
+		} catch (IOException e) {			
+			e.printStackTrace();
+			return new Result(0 , "注册失败，请稍后再试");
+		}
+		
+		
+	}
 
-	
+	//用户登录
 	@RequestMapping("userLogin")
 	@ResponseBody
 	public Result userLogin(StUser user, Model model) {	
@@ -67,9 +130,36 @@ public class UserServlet {
 		
 	}
 	
+	//邮箱发送验证码
+	@RequestMapping("mail")
+	@ResponseBody
+	public Result testSendMail( String uEmail,Model model) {
+		//产生一个6位数的验证码
+		String a=Code.createData() ;	
+		try {
+			msi.sendSimpleMail(uEmail, "验证邮件", "这是一封验证邮件，你的验证码为"+a+",为保障你的信息安全，切勿让其他人观看");
+			model.addAttribute("code", a);
+			return new Result(0,"发送成功,请注意接收信息",a);
+		}catch(Exception e) {
+			e.printStackTrace();		
+			return new Result(-1,"发送失败，请稍后再试");
+		}
+		
+	}
+
+	@RequestMapping("topass")
+	public String toPass() {
+		return "pass";
+	}
+		
 	@RequestMapping("tologin")
 	public String toLogin() {
 		return "login";
+	}
+	
+	@RequestMapping("toregister")
+	public String toRegister() {
+		return "register";
 	}
 	
 }

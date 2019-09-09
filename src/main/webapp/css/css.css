@@ -172,6 +172,7 @@ background: -moz-linear-gradient(#6AABFB, #5EA4EC 25%, #2E92F9);}
 .menu_3 input.text_1{background-position:10px -42px;} 
 .menu_3 input.text_2{background-position:10px 5px;} 
 .menu_3 input.text_3{background-position:10px -92px;} 
+.menu_3 input.text_4{background-position: 10px 5px;}
 .menu_3 p{ margin:30px 0px;}
 /*----------------个人登录注册----------------*/
 
@@ -202,7 +203,6 @@ background: -moz-linear-gradient(#6AABFB, #5EA4EC 25%, #2E92F9);}
 form i{ font-style:normal; margin:0px 5px;color:#999; font-size:12px;}
 form p em{color:#F00; font-style:normal;vertical-align: middle;}
 .p_t{ padding-top:40px;}
-
 
 
 

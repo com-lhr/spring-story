@@ -36,4 +36,5 @@ public interface StCollectionMapper {
     int updateByPrimaryKeySelective(StCollection record);
 
     int updateByPrimaryKey(StCollection record);
+
 }

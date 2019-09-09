@@ -13,8 +13,67 @@
 <script src="js/js.js"></script>
 <script src="js/list.js"></script>
 <script src="js/comment.js"></script>
+<script type="text/javascript" src="js/MyPage.js"></script>
 <style>
 .fx{ margin-bottom:30px;}
+
+.page0{
+	padding-left: 5%;
+}
+
+.page0 ul {
+	padding: 0;
+	min-width: 450px;
+}
+
+.page0 ul::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.page0 ul li {
+	float: left;
+	width: auto;
+	min-width: 32px;
+	height: 30px;
+	line-height: 30px;
+	list-style: none;
+}
+
+.page0 a {
+	color: #aaa;
+	font-family: "微软雅黑";
+	padding: 0 10px;
+	text-decoration: none;
+	display: block;
+	text-align: center;
+	border: 1px solid #ccc;
+	border-left: none;
+}
+
+.page0 ul li:first-child a {
+	border-left: 1px solid #ccc;
+}
+
+.page0 ul li a:hover {
+	background-color: dodgerblue;
+}
+
+.page0 ul li a:hover {
+	color: white;
+}
+
+.page0 .disabled a:hover {
+	background-color: white;
+	cursor: not-allowed;
+	color: #aaa;
+}
+
+.page0 .active a {
+	background-color: dodgerblue;
+	color: white;
+}
 </style>
 
 
@@ -33,7 +92,7 @@
  <ul class="tab clear">
      <li class="active"><a href="#">简介</a></li>
      <li><a href="#">章节目录<b>(${detailBook.bNum})</b></a></li>
-     <li><a class="pl_c" href="#">评论<b>(${detailBook.bCommcount})</b></a></li>
+     <li><a class="pl_c" href="#">评论<b>(${detailBook.bCommcount == null ? 0: detailBook.bCommcount})</b></a></li>
  </ul>
   <div class="tab_1">
     <div class="info clear">
@@ -45,127 +104,60 @@
      <li><span>作 &nbsp; &nbsp; &nbsp; 者：</span>${detailBook.bAuthor}</li>
      <li><span>出版时间：</span><fmt:formatDate value="${detailBook.bTime}" pattern="yyyy-MM-dd HH:mm:ss"/></li>
      <li><span>分 &nbsp; &nbsp; &nbsp; 类：</span>${detailBook.stCategory.caName}</li>
-     <li><span>评 &nbsp; &nbsp; &nbsp; 价：</span>${detailBook.bCommcount}人评论 <samp>|</samp> ${detailBook.bReadcnt}人在读</li>
+     <li><span>评 &nbsp; &nbsp; &nbsp; 价：</span>${detailBook.bCommcount == null ? 0: detailBook.bCommcount}人评论 <samp>|</samp> ${detailBook.bReadcnt == null ? 0:detailBook.bReadcnt }人在读</li>
      </ul>
   </div><!--简介介绍-->
  
-  <div class="tab_1">
-     <div class="play">
-          <p class="play_t"><a href="#">新版小叙</a><time>00:01/14:00</time></p>
-          <div class="start clear">
-               <div class="left">
-                  <a href="javascript:;" class="icon play_1" id="p1"></a>
-               </div>
-               <div class="sound" title="点击播放"><img src="img/play.gif" class="b1">
-               <div class="sound_stream clear">
-                 <p class="time">00:23</p>
-                 <div  class="s_2">
-                     <p class="dian"></p>
-                     <p class="line"></p>
-                 </div>
-               </div><!--声音流-->
-               </div><!--控制声音-->
-         </div>
-         <div class="fx clear">
+  <div class="tab_1">     
+      <div class="fx clear">
          <div class="bdsharebuttonbox right"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_more" data-cmd="more"></a></div>
              <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
          </script>
          <p class="dsf1">
            <a href="javascript:;"><span  class="icon down"></span>下载到手机</a> 
            <a href="javascript:;" class="sc_c"><span  class="icon sc"></span>收藏<b>+1</b></a>
-           <a href="javascript:;" class="pl_c">评论(345)</a>
+           <a href="javascript:;" class="pl_c">评论(${detailBook.bCommcount == null ? 0: detailBook.bCommcount})</a>
          <b>分享到 :  &nbsp; </b>
          </p>
-     </div>
-     </div><!--有声播放-->
-     
+     	</div>
      <div class="tit">章节目录<b>(${detailBook.bNum})</b><a href="javascript:;" class="right f_s_12">更新排序</a></div>
      <div class="mu">
-         <ul class="clear">
-         <p>第一部分</p>
-         <li class="active"><span class="icon play_3" id="b1"></span><a href="#">新版小叙</a>
-               <div class="play_xq">
-                <a href="javascript:;" class="sc_c"><span class="icon sc" title="收藏"></span><b>+1</b></a>
-                <a href="javascript:;" class="fx_c"><span class="icon xq2" title="分享"></span></a>
-                <a href="javascript:;" class="pl_c"><span class="icon xq3" title="评论"></span></a>
-                <a href="javascript:;" class="xz_c"><span class="icon xq4" title="下载"></span></a>
-                <time>2000-2-34</time>
-                     <div class="fx_con">
-                         <div class="bor_1"></div>
-                         <div class="bor_2"></div>
-                         <div class="colse clear"><a href="javascript:;"  class="icon"></a></div>
-                         <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
-                          <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-                         </script>
-                     </div>
-                 </div>
-           </li>
-         <li><span class="icon play_3" id="b2"></span><a href="#">新版小叙1</a>
-                <div class="play_xq">
-                <a href="javascript:;" class="sc_c"><span class="icon sc" title="收藏"></span><b>+1</b></a>
-                <a href="javascript:;" class="fx_c"><span class="icon xq2" title="分享"></span></a>
-                <a href="javascript:;" class="pl_c"><span class="icon xq3" title="评论"></span></a>
-                <a href="javascript:;" class="xz_c"><span class="icon xq4" title="下载"></span></a>
-                <time>2000-2-34</time>
-                     <div class="fx_con">
-                         <div class="bor_1"></div>
-                         <div class="bor_2"></div>
-                         <div class="colse clear"><a href="javascript:;"  class="icon"></a></div>
-                         <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
-                          <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-                         </script>
-                     </div>
-                 </div>
-         </li>
-         <li><span class="icon play_3" id="b3"></span><a href="#" >新版小叙2</a>
-                <div class="play_xq">
-                <a href="javascript:;" class="sc_c"><span class="icon sc" title="收藏"></span><b>+1</b></a>
-                <a href="javascript:;" class="fx_c"><span class="icon xq2" title="分享"></span></a>
-                <a href="javascript:;" class="pl_c"><span class="icon xq3" title="评论"></span></a>
-                <a href="javascript:;" class="xz_c"><span class="icon xq4" title="下载"></span></a>
-                <time>2000-2-34</time>
-                     <div class="fx_con">
-                         <div class="bor_1"></div>
-                         <div class="bor_2"></div>
-                         <div class="colse clear"><a href="javascript:;"  class="icon"></a></div>
-                         <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
-                          <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-                         </script>
-                     </div>
-                 </div>
+         <ul class="clear"> 
+         <c:forEach items="${chapter1}" var="c">
+         	<li><a href="article?id=${detailBook.id}&character=${c}">${c}</a></li>
+         </c:forEach>            
          
-         </li>
-         <li><a href="#">新版小叙3</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         </ul>
-         <ul class="clear tab_list">
-         <p>第二部分</p>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         </ul>
-         <ul class="clear  tab_list">
-         <p>第三部分</p>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
-         <li><a href="#">新版小叙</a></li>
          </ul>
      </div>
-     <div  id="up" class="clear"><a href="javascript:;"><samp>查看全部</samp><span class="icon ease"></span></a></div>
+     <div class="page0" id="page0"></div>
   </div><!--章节目录-->
+  <script type="text/javascript">
+  P.initMathod({
+      params: {elemId: '#page0',total:${detailBook.bNum == null ? 210 :detailBook.bNum }},
+      requestFunction: function () {	                        
+          
+      }
+  });
+	
+	function indexpage(index){
+		$.post("sections", {
+			page1 : index
+		}, function(data) {
+			console.log(data);
+			showFood(data);
+		},"json");
+		
+	}
+	//显示数据
+	function showFood(arr) {
+		var str = '';
+		for (var i = 0; i < arr.length; i++) {
+			str+='<li><a href="article?id='+${detailBook.id}+'&character='+arr[i]+'">'+arr[i]+'</a></li>';
+		}		
+		$(".mu .clear").html(str);
+	}
+	
+  </script>
   
  <div class="tab_1 ">
    <div class="tit">评论<b>(${detailBook.bCommcount})</b></div>
@@ -240,7 +232,8 @@
 					<!--      -第一条评论结束  -->
 			
 				</ul>
-				<ul class="page clear">
+				
+		<ul class="page clear">
         <li>首页</li>
         <li>上一页</li>
         <li><a href="javascript:;" class="thispage">1</a></li>
@@ -260,3 +253,10 @@
     </ul><!--分页--> 
 
 </div><!--评论结束-->
+</div>
+<%@ include file="common/list.jsp" %>
+
+</div>
+<%@ include file="common/footer.jsp" %>
+</body>
+</html>

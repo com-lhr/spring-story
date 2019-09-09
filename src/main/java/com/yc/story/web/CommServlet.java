@@ -51,5 +51,31 @@ public class CommServlet {
 		
 	}
 	
+	//对回复进行提交
+		@PostMapping("reply")
+		@ResponseBody
+		public Result reply(@Valid StComment comm,Errors errors,@SessionAttribute(name="loginedUser",required=false) StUser user,Integer otherCommid) {
+			
+			comm.setuId(user.getId());
+			
+			comm.setUser(user);			
+			
+			comm.setCmCreatetime(new Date());
+			
+			if(errors.hasErrors()) {
+				return new Result(-1,"评论失败",errors.getAllErrors());
+			}			
+			try {
+				//返回上一级的评论
+				StComment maincomment = cobiz.comment(comm, otherCommid);
+				maincomment.setNextuser(user);
+				return new Result(1,"回复成功",maincomment);
+			}catch(RuntimeException e) {
+				e.printStackTrace();
+				return new Result(0,"业务繁忙，请稍后再试");
+			}
+			
+		}
+	
 	
 }

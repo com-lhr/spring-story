@@ -4,6 +4,9 @@ spring:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
 
+  #打包jar  clean package  -Dmaven.test.skip=true
+
+
  # redis
   redis:
     host: 127.0.0.1
@@ -16,10 +19,11 @@ spring:
       maxWait: 3000
       maxActive: 50
 
+
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/story
+    url: jdbc:mysql://120.27.247.236:3306/story?useSSL=false&characterEncoding=utf-8&serverTimezone=UTC
     username: root
-    password: a
+    password: ZZX93526088@.com
     driver-class-name: com.mysql.jdbc.Driver
     
   http:
@@ -31,8 +35,8 @@ spring:
   resources:
     staticLocations:
       - classpath:/static/
-      - file:/E:/story/
-      
+      - file:/story/
+    
   mail:
     #邮箱服务器地址
     host: smtp.qq.com

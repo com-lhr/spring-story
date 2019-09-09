@@ -36,28 +36,41 @@ public class UserBiz {
 		if(user != null) {
 				sue = new StUserExample();
 				String s= passwordEncoder.encode(user.getuPwd());
-				
+				System.out.println(s);
 //				System.out.println(passwordEncoder.matches("123456","$2a$10$mml8hdNTOCIfIpwCu63RUuWxecJFuuX/8Cc5WvANwfZWOTYKon9Oe"));
 //				System.out.println(s);																	
-				sue.createCriteria().andUNameEqualTo(user.getuName()).andUPwdEqualTo(user.getuPwd());//*
+				sue.createCriteria().andUNameEqualTo(user.getuName());//.andUPwdEqualTo(user.getuPwd());//
 				List<StUser> list = sum.selectByExample(sue);
 				if(list.size() == 0) {
 					throw new BizException("用户名或密码错误");
 				}
-				return list.get(0);//*
+//				return list.get(0);//*
 				//加密验证
-//				for(StUser suer :list) {				
-//					boolean istrue = passwordEncoder.matches(user.getuPwd(),suer.getuPwd());
-//					if(istrue) {
-//						return suer;
-//					}else{
-//						continue;
-//					}				
-//				}				
-//				throw new BizException("用户名或密码错误");
+				for(StUser suer :list) {				
+					boolean istrue = passwordEncoder.matches(user.getuPwd(),suer.getuPwd());
+					if(istrue) {
+						return suer;
+					}				
+				}				
+				throw new BizException("用户名或密码错误");
 			}
 		throw new BizException("用户名或密码错误");
 				
+	}
+	
+	//用户注册
+	public int register(StUser user) {
+		return sum.insert(user);
+	}
+	
+	//修改用户信息
+	public int updata(StUser user) {
+		StUserExample example = new StUserExample();
+		example.createCriteria().andUNameEqualTo(user.getuName()).andUEmailEqualTo(user.getuEmail());
+		List<StUser> uList = sum.selectByExample(example);
+		StUser suer = uList.get(0);
+		suer.setuPwd(user.getuPwd());
+		return sum.updateByPrimaryKey(suer);
 	}
 
 }

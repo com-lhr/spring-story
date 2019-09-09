@@ -154,6 +154,7 @@ function reg_Exp(objParent,i,obj)
 	(function(){
 		var com_two=$('.comment .go2 .come');
 		var txt=null,but=null;
+		var bId = $('input[name="bId"]').val();
 		com_two.each(function(i)
 		{
 		 but_two=$(this).find('.ease');
@@ -196,8 +197,10 @@ function reg_Exp(objParent,i,obj)
 		
 	 var com_one=$('.comment .go');
 	 var txt_one=null,but_one=null;	
+	
 		com_one.each(function(i) 
-		{
+		{	
+			 var otherCommid = $(this).find('.otherCommid').val();
            	 but_one=$(this).find('.ease');
 			 but_one.click(function()
 			 {
@@ -212,28 +215,37 @@ function reg_Exp(objParent,i,obj)
 				    ajax提交如果成功插入内容
 				   
 				   */
-				com_one.eq(i).after('<li class="go2" style="display:block">'+
-             '<div class="come">'+
-            '<div class="com_con clear hui2">'+
-                  '<div class="portrait left">'+
-                 ' <img src="img/avatar.jpg"><br/>'+
-                  '<span>1922527784</span></div>'+
-                  '<div class="word left">'+
-                  '<p><span class="user">222 回复 1111：</span>'+reg.t+'</p>'+
-                  '<p class="right"><time>2001-3-4</time></p>'+
-             '</div></div>'+
-             '<div class="com_con clear hui">'+
-                  '<div class="portrait left mar_top">'+
-                 '<img src="img/avatar.jpg"><br/>'+
-                  '<span>1922527784</span></div>'+
-                  '<form action="" method="get" class="right kdit_w_550">'+
-                  '<textarea name="content" >发表评论</textarea>'+
-                  '<p></p>'+
-                  '<input type="bottom" value="提交" class="ease">'+
-                  '</form></div></div></li>');
-					com_one.eq(i).find('.hui').slideUp('slow','linear');
-					com_one.eq(i).find('.hui textarea').val('发表评论');
-					com_one.eq(i).find('.hui textarea').css({'border-color':'#dcdcdc','color':'#999'});
+				$.post("reply",{bId:bId,cmContent:reg.t,otherCommid:otherCommid},
+					function(data){
+						if(data.code == 1){
+							var time = Format(data.data.cmCreatetime,"yyyy-MM-dd hh-mm-ss");
+							com_one.eq(i).after('<li class="go2" style="display:block">'+
+				             '<div class="come">'+
+				            '<div class="com_con clear hui2">'+
+				                  '<div class="portrait left">'+
+				                 ' <img src="'+data.data.nextuser.uImage+'"><br/>'+
+				                  '<span>'+data.data.nextuser.uName+'</span></div>'+
+				                  '<div class="word left">'+
+				                  '<p><span class="user">'+data.data.nextuser.uName+'回复'+data.data.user.uName+'：</span><br/>'+reg.t+'</p>'+
+				                  '<p class="right"><time>'+time+'</time></p>'+
+				             '</div></div>'+
+				             '<div class="com_con clear hui">'+
+				                  '<div class="portrait left mar_top">'+
+				                 '<img src="img/avatar.jpg"><br/>'+
+				                  '<span>1922527784</span></div>'+
+				                  '<form action="" method="get" class="right kdit_w_550">'+
+				                  '<textarea name="content" >发表评论</textarea>'+
+				                  '<p></p>'+
+				                  '<input type="bottom" value="提交" class="ease">'+
+				                  '</form></div></div></li>');
+									com_one.eq(i).find('.hui').slideUp('slow','linear');
+									com_one.eq(i).find('.hui textarea').val('发表评论');
+									com_one.eq(i).find('.hui textarea').css({'border-color':'#dcdcdc','color':'#999'});
+						}else if(data.code == -2){
+							alert('请先进行登录');
+							window.location.href="tologin";
+						}				
+					});								
 				}
 			 }); 
         });//循环结束--------------------一级评论回复

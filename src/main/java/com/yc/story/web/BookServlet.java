@@ -1,5 +1,7 @@
 package com.yc.story.web;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+
+import com.github.pagehelper.PageHelper;
 import com.yc.story.Biz.BookBiz;
 import com.yc.story.Biz.CategoryBiz;
 import com.yc.story.Biz.CommentBiz;
@@ -23,6 +29,7 @@ import com.yc.story.bean.StCollection;
 import com.yc.story.bean.StUser;
 
 @Controller
+@SessionAttributes(types={java.util.List.class},names= {"chapter"})
 public class BookServlet {
 	
 	@Resource
@@ -37,7 +44,7 @@ public class BookServlet {
 	
 	@ModelAttribute("cList")
 	public List<StCategory> init(){
-		return cbiz.allRedisCategory();
+		return cbiz.allCategory();
 	}
 	
 	@RequestMapping("artCategory")
@@ -57,15 +64,81 @@ public class BookServlet {
 	}
 	
 	@RequestMapping("detail")
-	public String Detail(Integer id,Model model) {
-		model.addAttribute("detailBook", bbiz.findDetail(id));
-
+	public String Detail(@RequestParam(defaultValue="1") int page1 , Integer id,Model model,@RequestParam(defaultValue="1") int page2) {
+		StBook book = bbiz.findDetail(id);
+		model.addAttribute("detailBook", book);		
+		PageHelper.startPage(page2,5);
+		
+		//第一次目录加载
+		List<String> list1 =  book.getChapter();
+		model.addAttribute("chapter", list1);
+		List<String> list2 = new ArrayList<String>();
+		int start = (page1-1)*20;
+		int end = page1*20 >list1.size() ? list1.size() : page1*20;
+		for(int i = start;i<end;i++) {
+			list2.add(list1.get(i));
+		}				
+		model.addAttribute("chapter1", list2);
 		model.addAttribute("comments", cobiz.findCommentByBid(id));
 		
-
 		return "detail";
 	}
 	
+
+	//目录分页
+	@RequestMapping("sections")
+	@ResponseBody
+	public List<String> section(@RequestParam(defaultValue="1") int page1 ,@ModelAttribute(value="chapter")List<String> list1){
+		List<String> list2 = new ArrayList<String>();
+		int start = (page1-1)*20;
+		int end = page1*20 >list1.size() ? list1.size() : page1*20;
+		for(int i = start;i<end;i++) {
+			list2.add(list1.get(i));
+		}		
+		return list2;
+	}
+	
+	@RequestMapping("article")
+	public String article(Integer id ,Model model , String character,@ModelAttribute(value="chapter")List<String> list1) {
+		int index = list1.indexOf(character);
+		System.out.println(index);
+		StBook book = bbiz.findDetail(id);
+		book.setbReadcnt((book.getbReadcnt() == null ? 0 : book.getbReadcnt())+1);
+		bbiz.updateReadCnt(book);
+		String last = null,next = null;
+		String str = null;
+		if("到头了".equals(character) ) {
+			last = "到头了";
+			next = list1.get(index+1);	
+			str = "没有了";
+		}else if("到底了".equals(character) ) {
+			next = "到底了";
+			last = list1.get(index-1);
+			str = "没有了";
+		}else {
+			str = bbiz.chapterDeatil(id, character.replace(" ", ""));
+		}
+		
+		if(index == 0) {
+			last = "到头了";
+			next = list1.get(index+1);	
+		}else if(index == (list1.size()-1)) {
+			next = "到底了";
+			last = list1.get(index-1);
+		}else {
+			last = list1.get(index-1);
+			next = list1.get(index+1);			
+		}
+		
+		model.addAttribute("last", last);
+		model.addAttribute("next", next);
+		
+		model.addAttribute("chapterDeatil", str);
+		model.addAttribute("detailBook", book);
+		model.addAttribute("comments", cobiz.findCommentByBid(id));
+		return "article";
+	}
+
 	@RequestMapping("pagecount")
 	@ResponseBody
 	public String pageCount(int id) {
@@ -104,4 +177,5 @@ public class BookServlet {
 		}
 	}
 	
+
 }
