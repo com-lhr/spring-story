@@ -29,7 +29,7 @@
    <ul class="con_list clear">
    	   <c:forEach items="${category_pagebooks }" var="cpb">
        <li class="ease">
-       <a href="detail?id=${cpb.id }"><img src="${cpb.bFace }"></a>
+       <a href="javascript:;"><img src="${cpb.bFace }"></a>
        <div class="sm">
        <p> <a href="arcticle3.html">有声阅读</a> 
         <a href="detail?id=${cpb.id }">在线阅读</a> </p>
@@ -106,7 +106,7 @@ $.get(
 				"pageartCategory",
 				{id:id,page:pagenum},
 				function(data){
-					console.info(${fn:contains(bookList,13 )})
+					console.info(${fn:contains(bookList,13 )});
 					$('.con_list').empty();
 					/* alert(data[0].bName); */
 					str='';

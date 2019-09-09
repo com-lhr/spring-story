@@ -35,7 +35,6 @@ spring:
   resources:
     staticLocations:
       - classpath:/static/
-
       - file:/story/
     
   mail:
