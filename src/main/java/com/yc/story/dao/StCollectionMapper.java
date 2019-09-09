@@ -12,6 +12,9 @@ public interface StCollectionMapper {
 	//查询已收藏的书籍
 	List<Object> selectByUid(Integer uid);
 	
+	//查询收藏过的书籍
+	List<Object> selectAllByUid(Integer uid);
+	
     long countByExample(StCollectionExample example);
 
     int deleteByExample(StCollectionExample example);

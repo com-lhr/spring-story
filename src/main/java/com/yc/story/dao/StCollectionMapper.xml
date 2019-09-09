@@ -94,6 +94,10 @@
   <select id="selectByUid" parameterType="java.lang.Integer" resultMap="MyMap">
      select b_id from st_collection where u_id = #{id,jdbcType=INTEGER} and c_record = 1
   </select>
+  <!-- 查询收藏过的书籍 -->
+  <select id="selectAllByUid" parameterType="java.lang.Integer" resultMap="MyMap">
+     select b_id from st_collection where u_id = #{id,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
