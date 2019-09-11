@@ -1,13 +1,16 @@
 package com.yc.story.Biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
 import com.yc.story.bean.StUser;
 import com.yc.story.bean.StUserExample;
 import com.yc.story.dao.StUserMapper;
@@ -17,7 +20,8 @@ public class UserBiz {
 	
 	@Resource
 	private StUserMapper sum;
-	
+	@Autowired
+    private RedisTemplate<Object,Object> template;
 	@Autowired
     private BCryptPasswordEncoder passwordEncoder;
 	
@@ -71,6 +75,27 @@ public class UserBiz {
 		StUser suer = uList.get(0);
 		suer.setuPwd(user.getuPwd());
 		return sum.updateByPrimaryKey(suer);
+	}
+	
+	//查询作者
+	public List<StUser> findAuthor() {
+		StUserExample example = new StUserExample();
+		example.createCriteria().andLevelEqualTo(1);
+		PageHelper.startPage(1,8);
+		return sum.selectByExample(example);		
+	}
+	//redis查询作者
+	public List<StUser> redisFindAuthor(){
+		/*template.opsForHash().va*/
+		List<Object> us = new ArrayList<>();
+		List<StUser> uss = new ArrayList<>();
+		System.out.println(template.opsForHash().size("Author"));
+		us =  template.opsForHash().values("Author");
+		for(Object u: us) {
+			uss.add((StUser)u);
+		}		
+		return uss;
+		
 	}
 
 }

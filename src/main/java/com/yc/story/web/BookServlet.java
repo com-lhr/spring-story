@@ -79,7 +79,7 @@ public class BookServlet {
 		}				
 		model.addAttribute("chapter1", list2);
 		model.addAttribute("comments", cobiz.findCommentByBid(id));
-		
+		model.addAttribute("category_newbooks", bbiz.findByCategoryAndTime(book.getbCategory()));
 		return "detail";
 	}
 	

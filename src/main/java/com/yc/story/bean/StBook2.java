@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-@JsonIgnoreProperties(value = {"handler","comments","chapter"})
-public class StBook implements Serializable {
+
+public class StBook2 implements Serializable {
 
     private Integer id;
 
@@ -36,43 +36,6 @@ public class StBook implements Serializable {
 
     private Integer bCommcount;
     
-    private StCategory stCategory;
-    
-    private List<String> chapter;
-        
-
-    public List<String> getChapter() {
-		return chapter;
-	}
-
-	public void setChapter(List<String> chapter) {
-		this.chapter = chapter;
-	}
-
-
-
-	private List<StComment> comments;
-      
-    public List<StComment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<StComment> comments) {
-		this.comments = comments;
-	}
-	
-	
-		
-
-	public StCategory getStCategory() {
-		return stCategory;
-	}
-
-	public void setStCategory(StCategory stCategory) {
-		this.stCategory = stCategory;
-	}
-
-
 
 	private static final long serialVersionUID = 1L;
 
@@ -190,11 +153,10 @@ public class StBook implements Serializable {
 
 	@Override
 	public String toString() {
-		return "StBook [id=" + id + ", bFace=" + bFace + ", bTime=" + bTime + ", bCategory=" + bCategory
+		return "StBook2 [id=" + id + ", bFace=" + bFace + ", bTime=" + bTime + ", bCategory=" + bCategory
 				+ ", bPosition=" + bPosition + ", bIntroduce=" + bIntroduce + ", bNum=" + bNum + ", bCount=" + bCount
 				+ ", bStatus=" + bStatus + ", bPrice=" + bPrice + ", bName=" + bName + ", bAuthor=" + bAuthor
-				+ ", bReadcnt=" + bReadcnt + ", bCommcount=" + bCommcount + ", stCategory=" + stCategory + ", chapter="
-				+ chapter + ", comments=" + comments + "]";
+				+ ", bReadcnt=" + bReadcnt + ", bCommcount=" + bCommcount + "]";
 	}
 
 }
