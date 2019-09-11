@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -25,7 +24,6 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.PageHelper;
 import com.yc.story.bean.StBook;
@@ -211,8 +209,12 @@ public class BookBiz {
 	
 	//查询收藏夹已有图书
 	public List<Object> query(int uid){
-		
 		return collMapper.selectByUid(uid);
+	}
+	
+	//查询收藏夹已有图书
+	public List<Object> queryBefore(int uid){
+		return collMapper.selectAllByUid(uid);
 	}
 
 	//添加收藏
@@ -222,26 +224,30 @@ public class BookBiz {
 				return 3;
 			}
 		}*/
-		
-		if(query(user.getId()).contains(bid)){
+		System.out.println(queryBefore(user.getId()).contains(bid));
+		if(queryBefore(user.getId()).contains(bid)){
 			StCollectionExample example = new StCollectionExample();
 			example.createCriteria().andUIdEqualTo(user.getId()).andBIdEqualTo(bid);
-			if(collMapper.selectByExample(example).get(0).getcStatus()==0){
+			System.out.println(collMapper.selectByExample(example).get(0).getcStatus()+"------------");
+			if(collMapper.selectByExample(example).get(0).getcRecord()==0){
 				StCollection sc = new StCollection();
 				sc.setcRecord(1);
-				return collMapper.updateByExampleSelective(sc, example);
+				collMapper.updateByExampleSelective(sc, example);
+				return 1;
 			}else{
 				return 3;
 			}
 			
+		}else{
+			StCollection sc = new StCollection();
+			sc.setbId(bid);
+			sc.setuId(user.getId());
+			sc.setcStatus(0);
+			sc.setcTime(new Date());
+			sc.setcRecord(1);
+			return collMapper.insertSelective(sc);
 		}
-		StCollection sc = new StCollection();
-		sc.setbId(bid);
-		sc.setuId(user.getId());
-		sc.setcStatus(0);
-		sc.setcTime(new Date());
-		sc.setcRecord(1);
-		return collMapper.insertSelective(sc);
+		
 	}
 	
 	//作者的详情页面 

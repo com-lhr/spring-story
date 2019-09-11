@@ -8,10 +8,6 @@
 		<version>2.1.7.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	
-	<!--打包jar包  clean package  -Dmaven.test.skip=true   -->
-	<!-- dakjhaifha -->
-
 
 	<!-- dakjhaifha  -->
 	<groupId>com.yc</groupId>

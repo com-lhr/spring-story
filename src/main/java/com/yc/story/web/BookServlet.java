@@ -58,7 +58,8 @@ public class BookServlet {
 	
 	@RequestMapping("pageartCategory")
 	@ResponseBody
-	public List<StBook> pageartCategory(Model model,int id,@RequestParam(defaultValue="1")int page) {	
+	public List<StBook> pageartCategory(Model model,int id,@RequestParam(defaultValue="1")int page) {
+		model.addAttribute("bid",bbiz.findByCategory(id, page));
 		return bbiz.findByCategory(id, page);
 	}
 	

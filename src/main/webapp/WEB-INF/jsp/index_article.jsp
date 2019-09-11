@@ -26,6 +26,7 @@
 	<%@ include file="common/list.jsp" %>
  <div class="con left">
    <div class="position"><a href="javascript:;">首页</a> > <a href="javascript:;">文学类</a> > <a href="javascript:;"  class="acative">现代文学</a></div>
+   <div class="bidList" style="display: none;">${bookList }</div>
    <ul class="con_list clear">
    	   <c:forEach items="${category_pagebooks }" var="cpb">
        <li class="ease">
@@ -35,7 +36,7 @@
         <a href="detail?id=${cpb.id }">在线阅读</a> </p>
        <p> <a href="#"><span class="icon down"></span>下载</a>
        <!-- style="background-position:-40px -20px;" --> 
-        <a href="#" onclick="javascript:addColl(${cpb.id })">
+        <a href="#" onclick="javascript:addColl(${cpb.id })" class="coll${cpb.id }">
         <c:if test="${fn:contains(bookList,cpb.id )}">
         <span class="icon sc" style="background-position:-40px -20px;"></span>收藏
         </c:if>
@@ -106,28 +107,40 @@ $.get(
 				"pageartCategory",
 				{id:id,page:pagenum},
 				function(data){
-					console.info(${fn:contains(bookList,13 )});
+					var li =${bookList};
 					$('.con_list').empty();
 					/* alert(data[0].bName); */
 					str='';
 					for(var i=0;i<data.length;i++){
-						str+='<li class="ease">'+
-					       '<a href="javascript:;"><img src="'+data[i].bFace+'"></a>'+
-					       '<div class="sm">'+
-					       '<p> <a href="arcticle3.html">有声阅读</a> '+
-					        '<a href="detail?id='+data[i].id+'">在线阅读</a> </p>'+
-					       '<p> <a href="#"><span class="icon down"></span>下载</a> '+
-					        '<a href="#" onclick="javascript:addColl('+data[i].id+')">'+
-					        '<c:if test="'+${fn:contains(bookList,data[i].id )}+'">'+
-					        '<span class="icon sc" style="background-position:-40px -20px;"></span>收藏'+
-					        '</c:if>'+
-					        '<c:if test="'+${fn:contains(bookList,data[i].id )!=true}+'">'+
-					        '<span class="icon sc" ></span>收藏'+
-					        '</c:if></a></p>'+
-					       '</div>'+
-					       '<p class="s_n"><a href="javascript:;">'+data[i].bName+'</a></p>'+
-					       '</li>';
-					       
+						var bid = data[0].id;
+						if($.inArray(data[i].id, li)==-1){
+							str+='<li class="ease">'+
+						       '<a href="javascript:;"><img src="'+data[i].bFace+'"></a>'+
+						       '<div class="sm">'+
+						       '<p> <a href="arcticle3.html">有声阅读</a> '+
+						        '<a href="detail?id='+data[i].id+'">在线阅读</a> </p>'+
+						       '<p> <a href="#"><span class="icon down"></span>下载</a> '+
+						        '<a href="#" onclick="javascript:addColl('+data[i].id+')" class="coll'+data[i].id+'">'+
+						        '<span class="icon sc" ></span>收藏'+
+						        '</a></p>'+
+						       '</div>'+
+						       '<p class="s_n"><a href="javascript:;">'+data[i].bName+'</a></p>'+
+						       '</li>';
+						}else{
+							str+='<li class="ease">'+
+						       '<a href="javascript:;"><img src="'+data[i].bFace+'"></a>'+
+						       '<div class="sm">'+
+						       '<p> <a href="arcticle3.html">有声阅读</a> '+
+						        '<a href="detail?id='+data[i].id+'">在线阅读</a> </p>'+
+						       '<p> <a href="#"><span class="icon down"></span>下载</a> '+
+						        '<a href="#" onclick="javascript:addColl('+data[i].id+')">'+
+						        '<span class="icon sc" style="background-position:-40px -20px;"></span>收藏'+
+						        '</a></p>'+
+						       '</div>'+
+						       '<p class="s_n"><a href="javascript:;">'+data[i].bName+'</a></p>'+
+						       '</li>';
+						}
+						   
 					}
 					$('.con_list').html(str);
 					$('.ease').hover(function()
@@ -170,6 +183,10 @@ function addColl(bid){
 	},function(data){
 		if(data==1){
 			alert('添加成功');
+			var page = $(".thispage").text();
+			var str='';
+			str+='<span class="icon sc" style="background-position:-40px -20px;"></span>收藏';
+			$('.coll'+bid).html(str);
 		}else if(data==0){
 			alert('请先登录')
 		}else{
