@@ -30,7 +30,7 @@
    <ul class="con_list clear">
    	   <c:forEach items="${category_pagebooks }" var="cpb">
        <li class="ease">
-       <a href="javascript:;"><img src="${cpb.bFace }"></a>
+       <a href="detail?id=${cpb.id }"><img src="${cpb.bFace }"></a>
        <div class="sm">
        <p> <a href="arcticle3.html">有声阅读</a> 
         <a href="detail?id=${cpb.id }">在线阅读</a> </p>
@@ -44,7 +44,7 @@
         <span class="icon sc" ></span>收藏
         </c:if></a></p>
        </div>
-       <p class="s_n"><a href="javascript:;">${cpb.bName }</a></p>
+       <p class="s_n"><a href="detail?id=${cpb.id }">${cpb.bName }</a></p>
        </li>
        </c:forEach>
    </ul>
@@ -115,7 +115,7 @@ $.get(
 						var bid = data[0].id;
 						if($.inArray(data[i].id, li)==-1){
 							str+='<li class="ease">'+
-						       '<a href="javascript:;"><img src="'+data[i].bFace+'"></a>'+
+						       '<a href="detail?id='+data[i].id+'"><img src="'+data[i].bFace+'"></a>'+
 						       '<div class="sm">'+
 						       '<p> <a href="arcticle3.html">有声阅读</a> '+
 						        '<a href="detail?id='+data[i].id+'">在线阅读</a> </p>'+
@@ -124,11 +124,11 @@ $.get(
 						        '<span class="icon sc" ></span>收藏'+
 						        '</a></p>'+
 						       '</div>'+
-						       '<p class="s_n"><a href="javascript:;">'+data[i].bName+'</a></p>'+
+						       '<p class="s_n"><a href="detail?id='+data[i].id+'">'+data[i].bName+'</a></p>'+
 						       '</li>';
 						}else{
 							str+='<li class="ease">'+
-						       '<a href="javascript:;"><img src="'+data[i].bFace+'"></a>'+
+						       '<a href="detail?id='+data[i].id+'"><img src="'+data[i].bFace+'"></a>'+
 						       '<div class="sm">'+
 						       '<p> <a href="arcticle3.html">有声阅读</a> '+
 						        '<a href="detail?id='+data[i].id+'">在线阅读</a> </p>'+
@@ -137,7 +137,7 @@ $.get(
 						        '<span class="icon sc" style="background-position:-40px -20px;"></span>收藏'+
 						        '</a></p>'+
 						       '</div>'+
-						       '<p class="s_n"><a href="javascript:;">'+data[i].bName+'</a></p>'+
+						       '<p class="s_n"><a href="detail?id='+data[i].id+'">'+data[i].bName+'</a></p>'+
 						       '</li>';
 						}
 						   

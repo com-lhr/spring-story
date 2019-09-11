@@ -259,4 +259,20 @@ public class BookBiz {
 		example.createCriteria().andBAuthorEqualTo(name);
 		return bookMapper.selectByExample(example);		
 	}
+	
+	//根据阅读数量排序查询
+	public List<StBook> findBookOrderByReadCnt(){
+		StBookExample example = new StBookExample();
+		example.setOrderByClause("b_readCnt desc");
+		PageHelper.startPage(1,10);
+		return bookMapper.selectByExample(example);		
+	}
+	
+	//根据月票排序查询
+		public List<StBook> findBookOrderByCount(){
+			StBookExample example = new StBookExample();
+			example.setOrderByClause("b_count desc");
+			PageHelper.startPage(1,10);
+			return bookMapper.selectByExample(example);		
+		}
 }
