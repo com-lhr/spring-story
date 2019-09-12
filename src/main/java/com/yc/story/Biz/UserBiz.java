@@ -76,26 +76,38 @@ public class UserBiz {
 		suer.setuPwd(user.getuPwd());
 		return sum.updateByPrimaryKey(suer);
 	}
-	
-	//查询作者
-	public List<StUser> findAuthor() {
-		StUserExample example = new StUserExample();
-		example.createCriteria().andLevelEqualTo(1);
-		PageHelper.startPage(1,8);
-		return sum.selectByExample(example);		
-	}
-	//redis查询作者
-	public List<StUser> redisFindAuthor(){
-		/*template.opsForHash().va*/
-		List<Object> us = new ArrayList<>();
-		List<StUser> uss = new ArrayList<>();
-		System.out.println(template.opsForHash().size("Author"));
-		us =  template.opsForHash().values("Author");
-		for(Object u: us) {
-			uss.add((StUser)u);
-		}		
-		return uss;
-		
+
+	//阅读扣积分
+	public int koujif(StUser user){
+		if(user.getIntegral()-2<0){
+			return 0;
+		}else{
+			System.out.println("----------jf+++++"+user);
+			int integral = user.getIntegral() - 2;
+			user.setIntegral(integral);
+			return sum.updateByPrimaryKeySelective(user);
+		}
 	}
 
+	//查询作者
+		public List<StUser> findAuthor() {
+			StUserExample example = new StUserExample();
+			example.createCriteria().andLevelEqualTo(1);
+			PageHelper.startPage(1,8);
+			return sum.selectByExample(example);		
+		}
+		//redis查询作者
+		public List<StUser> redisFindAuthor(){
+			/*template.opsForHash().va*/
+			List<Object> us = new ArrayList<>();
+			List<StUser> uss = new ArrayList<>();
+			System.out.println(template.opsForHash().size("Author"));
+			us =  template.opsForHash().values("Author");
+			for(Object u: us) {
+				uss.add((StUser)u);
+			}		
+			return uss;
+			
+		}
+	
 }

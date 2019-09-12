@@ -47,6 +47,15 @@ public class BackServlet {
 		model.addAttribute("categorys", cbiz.allRedisCategory());
 		return "back/bookRecommend";
 	}
+	@GetMapping("toanalysis")
+	public String toanalysis(){
+		return "back/analysis";
+	}
+	
+	@GetMapping("tohome")
+	public String tohome(){
+		return "back/home";
+	}
 /*	
 	@GetMapping("toAddBookRecommend")
 	public String toAddBookRecommend(Model model){

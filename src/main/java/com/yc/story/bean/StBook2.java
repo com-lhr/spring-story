@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+@JsonIgnoreProperties(value = {"handler","comments"})
 public class StBook2 implements Serializable {
 
     private Integer id;
@@ -36,6 +36,14 @@ public class StBook2 implements Serializable {
 
     private Integer bCommcount;
     
+    
+ 
+
+	
+	
+
+
+
 
 	private static final long serialVersionUID = 1L;
 
@@ -151,12 +159,6 @@ public class StBook2 implements Serializable {
         this.bCommcount = bCommcount;
     }
 
-	@Override
-	public String toString() {
-		return "StBook2 [id=" + id + ", bFace=" + bFace + ", bTime=" + bTime + ", bCategory=" + bCategory
-				+ ", bPosition=" + bPosition + ", bIntroduce=" + bIntroduce + ", bNum=" + bNum + ", bCount=" + bCount
-				+ ", bStatus=" + bStatus + ", bPrice=" + bPrice + ", bName=" + bName + ", bAuthor=" + bAuthor
-				+ ", bReadcnt=" + bReadcnt + ", bCommcount=" + bCommcount + "]";
-	}
+
 
 }

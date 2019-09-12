@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-@JsonIgnoreProperties(value = {"handler","comments","chapter"})
+@JsonIgnoreProperties(value = {"handler","comments"})
 public class StBook implements Serializable {
 
     private Integer id;

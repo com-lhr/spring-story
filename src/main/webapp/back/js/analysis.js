@@ -1,75 +1,7 @@
 /**
  * Created by Administrator on 2017/4/25.
  */
-$(function(){
-    var myChart = echarts.init($("#container")[0]);
-    var option = {
-        tooltip : {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            orient : 'vertical',
-            x : 'left',
-            data:['全体会议','常委会议','主体会议','其他']
-        },
-        toolbox: {
-            show : true,
-            feature : {
-                mark : {show: true},
-                dataView : {show: true, readOnly: false},
-                magicType : {
-                    show: true,
-                    type: ['pie', 'funnel'],
-                    option: {
-                        funnel: {
-                            x: '25%',
-                            width: '50%',
-                            funnelAlign: 'left',
-                            max: 1548
-                        }
-                    }
-                },
-                restore : {show: true},
-                saveAsImage : {show: true}
-            }
-        },
-        calculable : true,
-        series : [
-            {
-                name:'会议类型',
-                type:'pie',
-                radius : '55%',
-                center: ['50%', '60%'],
-                data:[
-                    {
-                        value:124,
-                        name:'全体会议',
-                        itemStyle:{
-                            normal:{
-                                color:""
-                            }
-                        }
-                    },
-                    {
-                        value:86,
-                        name:'常委会议'
-                    },
-                    {
-                        value:9,
-                        name:'主体会议'
-                    },
-                    {
-                        value:39,
-                        name:'其他'
-                    }
 
-                ]
-            }
-        ]
-    };
-    myChart.setOption(option);
-});
 $(function(){
     var myChart = echarts.init($("#container1")[0]);
 

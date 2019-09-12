@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,59 +22,20 @@
 <%@ include file="common/header.jsp" %>
 
 <div class="box clear">
-	<div class="list2">
-           <div class="one">
-               
-            </div><!--新书上架结束-->
-         
-         <div class="two">
-           <p><a href="javascript:;" class="active">阅读排行</a><a href="javascript:;">本月最热排行</a></p>
-                   <ul class="active">
-                   <c:forEach items="${book_readCnt }" var="brc">
-                    <li><a href="detail?id=${brc.id }">${brc.bName }</a></li>
-                   </c:forEach>
-                   </ul>
-                    <ul id="ul2">
-                     <c:forEach items="${book_readcount }" var="brct">
-                    <li><a href="detail?id=${brct.id }">${brct.bName }</a></li>
-                   </c:forEach>
-                   </ul>
-         </div><!--tab切换-->
-       <script type="text/javascript">
-       		$(".two>p>a").click(function(){
-       			var op =$(this).text();
-       			if(op=="阅读排行"){
-       				$('.active').removeAttr("class");
-       				$(this).attr("class","active");
-       				$(".two>ul:first").attr("class","active");       				
-       			}else{
-       				$('.active').removeAttr("class");
-       				$(this).attr("class","active");
-       				$("#ul2").attr("class","active");  
-       			}
-       		})
-       </script>
-     </div>
+	<%@ include file="common/list.jsp" %>
  <div class="con left">
    <div class="position"><a href="javascript:;">首页</a> > 搜索结果</div>
    <ul class="con_list clear">
-   	    <c:forEach items="${searchBook }" var="cpb">
+   	   <c:forEach items="${searchBook }" var="sbook">
        <li class="ease">
-       <a href="detail?id=${cpb.id }"><img src="${cpb.bFace }"></a>
+       <a href="javascript:;"><img src="img/article2.jpg"></a>
        <div class="sm">
        <p> <a href="arcticle3.html">有声阅读</a> 
-        <a href="detail?id=${cpb.id }">在线阅读</a> </p>
-       <p> <a href="#"><span class="icon down"></span>下载</a>
-       <!-- style="background-position:-40px -20px;" --> 
-        <a href="#" onclick="javascript:addColl(${cpb.id })" class="coll${cpb.id }">
-        <c:if test="${fn:contains(bookList,cpb.id )}">
-        <span class="icon sc" style="background-position:-40px -20px;"></span>收藏
-        </c:if>
-        <c:if test="${fn:contains(bookList,cpb.id )!=true}">
-        <span class="icon sc" ></span>收藏
-        </c:if></a></p>
+        <a href="detail?id=${sbook.id }">在线阅读</a> </p>
+       <p> <a href="#"><span class="icon down"></span>下载</a> 
+        <a href="#" onclick="javascript:addColl(${sbook.id });"><span class="icon sc"></span>收藏</a></p>
        </div>
-       <p class="s_n"><a href="detail?id=${cpb.id }">${cpb.bName }</a></p>
+       <p class="s_n"><a href="javascript:;">${sbook.bName }</a></p>
        </li>
        </c:forEach>
    </ul>
