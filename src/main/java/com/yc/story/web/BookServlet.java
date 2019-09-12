@@ -183,5 +183,11 @@ public class BookServlet {
 		}
 	}
 	
-
+	@RequestMapping("CompositeQueryBook")
+	@ResponseBody
+	public List<StBook> CompositeQueryBook(String id,String bName,
+			String stCategory,String author){
+		
+		return bbiz.CompositeQueryBook(id, bName, stCategory,author);
+	}
 }

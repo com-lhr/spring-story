@@ -29,6 +29,7 @@ import com.github.pagehelper.PageHelper;
 import com.yc.story.bean.StBook;
 import com.yc.story.bean.StBook2;
 import com.yc.story.bean.StBookExample;
+import com.yc.story.bean.StBookExample.Criteria;
 import com.yc.story.bean.StCollection;
 import com.yc.story.bean.StCollectionExample;
 import com.yc.story.bean.StRecommendation;
@@ -269,10 +270,27 @@ public class BookBiz {
 	}
 	
 	//根据月票排序查询
-		public List<StBook> findBookOrderByCount(){
-			StBookExample example = new StBookExample();
-			example.setOrderByClause("b_count desc");
-			PageHelper.startPage(1,10);
-			return bookMapper.selectByExample(example);		
+	public List<StBook> findBookOrderByCount(){
+		StBookExample example = new StBookExample();
+		example.setOrderByClause("b_count desc");
+		PageHelper.startPage(1,10);
+		return bookMapper.selectByExample(example);		
+	}
+		//组合查询
+	public List<StBook> CompositeQueryBook(String id,String bName,
+			String stCategory,String author){
+
+		StBookExample example = new StBookExample();
+		StBookExample.Criteria criteria = example.createCriteria();
+		if(!("".equals(id))&&!(id==null)) {
+			criteria.andIdEqualTo(Integer.valueOf(id));
+		}else if(!("".equals(bName))&&!(bName==null)){
+			criteria.andBNameLike("%"+bName+"%");
+		}else if(!("".equals(stCategory))&&!(stCategory==null)) {
+			criteria.andBCategoryEqualTo(Integer.valueOf(stCategory));
+		}else if(!("".equals(author))&&!(author==null)){
+			criteria.andBAuthorLike("%"+author+"%");
 		}
+		return bookMapper.selectByExample(example);		
+	}
 }

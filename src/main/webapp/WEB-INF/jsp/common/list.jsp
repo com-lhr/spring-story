@@ -16,7 +16,7 @@
             </div><!--新书上架结束-->
          
          <div class="two">
-           <p><a href="javascript:;" class="active">阅读排行</a><a href="javascript:;">本月最热排行</a></p>
+           <p><a href="javascript:;" class="active">阅读排行</a><a href="javascript:;">月票排行</a></p>
                    <ul class="active">
                    <c:forEach items="${book_readCnt }" var="brc">
                     <li><a href="detail?id=${brc.id }">${brc.bName }</a></li>

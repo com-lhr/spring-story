@@ -114,6 +114,11 @@ public class springstoryApplicationTests {
 		m.put("6", "网游小说");
 		redisTemplate.opsForHash().putAll("category", m);
 	}
+	
+	@Test
+	public void findcategoryTest() {
+		System.out.println(redisTemplate.opsForHash().values("category"));
+	}
 	@Test
 	public void findAuthorTest() {
 		ubiz.findAuthor();
