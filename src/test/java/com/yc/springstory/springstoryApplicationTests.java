@@ -1,6 +1,5 @@
 package com.yc.springstory;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,13 +17,8 @@ import com.yc.story.SpringStoryApplication;
 import com.yc.story.Biz.BookBiz;
 import com.yc.story.Biz.CategoryBiz;
 import com.yc.story.Biz.CommentBiz;
-import com.yc.story.Biz.UserBiz;
-import com.yc.story.bean.StBook;
-import com.yc.story.bean.StBook2;
-import com.yc.story.bean.StBookExample;
 import com.yc.story.bean.StComment;
 import com.yc.story.bean.StRecommendation;
-import com.yc.story.bean.StUser;
 import com.yc.story.dao.StBookMapper;
 import com.yc.story.dao.StCommentMapper;
 import com.yc.story.dao.StRecommendationMapper;
@@ -32,16 +26,12 @@ import com.yc.story.dao.StRecommendationMapper;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes={SpringStoryApplication.class})
 public class springstoryApplicationTests {
-	@Autowired
-    private RedisTemplate<Object,Object> template;
 	@Resource
 	private CategoryBiz cgbiz;
 	@Resource
 	private BookBiz biz;
 	@Resource
 	private StBookMapper bookMapper;
-	@Resource
-	private UserBiz ubiz;
 	@Resource
 	private StRecommendationMapper sram;
 	@Resource
@@ -113,48 +103,5 @@ public class springstoryApplicationTests {
 		m.put("5", "修真小说");
 		m.put("6", "网游小说");
 		redisTemplate.opsForHash().putAll("category", m);
-	}
-	@Test
-	public void findAuthorTest() {
-		ubiz.findAuthor();
-	}
-	@Test
-	public void saveHashAuthor() {
-		Map<String,StUser> m = new HashMap<>();
-		List<StUser> users = ubiz.findAuthor();
-		for(StUser u :users ) {
-			m.put(u.getId()+"", u);
-		}
-		template.opsForHash().putAll("Author", m);
-	}
-	@Test
-	public void getHash() {
-		StUser u = new StUser();
-		List<Object> us = new ArrayList<>();
-		System.out.println(template.opsForHash().size("Author"));
-		us =  template.opsForHash().values("Author");
-		u =(StUser)us.get(0);
-		System.out.println(u.getuImage());
-	}
-	
-	@Test 
-	public void savaHashbook() {
-		Map<String,StBook2> m = new HashMap<>();
-		StBookExample bookExample = new StBookExample();
-		bookExample.createCriteria().andBNameEqualTo("斗罗大陆");
-		List<StBook> s = bookMapper.selectByExample(bookExample);
-		for(StBook u :s ) {
-			StBook2 s2 = new StBook2();
-			s2.setId(u.getId());
-			s2.setbFace(u.getbFace());			
-			s2.setbName(u.getbName());
-			m.put(s2.getId()+"", s2);
-		}
-		template.opsForHash().putAll("StRecommendations", m);
-		System.out.println( template.opsForHash().values("StRecommendations"));
-	}
-	@Test
-	public void findAuthortest() {
-		System.out.println(biz.findAuthor(13));
 	}
 }

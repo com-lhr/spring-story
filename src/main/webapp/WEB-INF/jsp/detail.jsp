@@ -124,7 +124,8 @@
      <div class="mu">
          <ul class="clear"> 
          <c:forEach items="${chapter1}" var="c">
-         	<li><a href="article?id=${detailBook.id}&character=${c}">${c}</a></li>
+         <!--  href="article?id=${detailBook.id}&character=${c}" -->
+         	<li><a href="javascript:void(0);" onclick="judge('${detailBook.id}','${c}');">${c}</a></li>
          </c:forEach>            
          
          </ul>
@@ -155,6 +156,45 @@
 			str+='<li><a href="article?id='+${detailBook.id}+'&character='+arr[i]+'">'+arr[i]+'</a></li>';
 		}		
 		$(".mu .clear").html(str);
+	}
+	
+	//判断该书是否被购买
+	function judge(id,content){
+		console.info(id)
+		$.get('judge',{
+			id:id
+		},function(data){
+			console.log(data)
+			if(data!=null&&data!=""){
+				var str = '';
+				window.location.href = 'article?id='+id+'&character='+content;
+			}else{
+				console.log(data)
+				read(id,content);
+			}
+		});
+	}
+	
+	//购买章节阅读
+	//href="article?id=${detailBook.id}&character=${c}"
+    //<li><a id="book${detailBook.id}" href="javascript:void(0);" onclick="javascript:read(${detailBook.id},${c});">${c}</a></li>
+	function read(id,content){
+		console.log(id,content)
+		$.get('spend',{
+			param:id
+		},function(data){
+			console.log(data)
+			if(data==-1){
+				alert('请先登录');
+			}else if(data==0){
+				alert('积分不够');
+			}else{
+				var str = '';
+				window.location.href = 'article?id='+id+'&character='+content;
+				//$('#book"'+id).attr('href',str); 
+			}
+			
+		});
 	}
 	
   </script>

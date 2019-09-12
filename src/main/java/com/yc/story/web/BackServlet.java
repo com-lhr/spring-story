@@ -35,4 +35,14 @@ public class BackServlet {
 	public String toupload(){
 		return "back/storyupload";
 	}
+	
+	@GetMapping("toanalysis")
+	public String toanalysis(){
+		return "back/analysis";
+	}
+	
+	@GetMapping("tohome")
+	public String tohome(){
+		return "back/home";
+	}
 }

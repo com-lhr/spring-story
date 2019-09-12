@@ -124,7 +124,7 @@
             </div>
             <div class="content-iframe" style="overflow: hidden;">
                 <div class="mainContent" id="content-main" style="margin: 10px; margin-bottom: 0; padding: 0;">
-                    <iframe id="myFrame" class="LRADMS_iframe" width="100%" height="100%" src="home.html" frameborder="0" data-id="log"></iframe>
+                    <iframe id="myFrame" class="LRADMS_iframe" width="100%" height="100%" src="tohome" frameborder="0" data-id="log"></iframe>
                 </div>
             </div>
         </div>

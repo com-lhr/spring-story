@@ -11,12 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -145,6 +146,18 @@ public class UserServlet {
 			return new Result(-1,"发送失败，请稍后再试");
 		}
 		
+	}
+	
+	@GetMapping("spend")
+	@ResponseBody
+	public int spend(@SessionAttribute(name="loginedUser",required=false) StUser user){
+	
+		if(user==null){
+			System.out.println("=====user========");
+			return -1;
+		}else{
+			return ubiz.koujif(user);
+		}
 	}
 
 	@RequestMapping("topass")

@@ -35,7 +35,7 @@ spring:
   resources:
     staticLocations:
       - classpath:/static/
-      - file:/story/
+      - file:/e:/story/
     
   mail:
     #邮箱服务器地址

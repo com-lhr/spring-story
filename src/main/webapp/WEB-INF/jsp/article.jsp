@@ -74,10 +74,48 @@
  </div> <!--文章主体部分结束-->
  
  <div class="prenext clear">
-    <p class="left">上一章 : <a href="article?id=${detailBook.id}&character=${last}">${last}</a></p>
-    <p class="right">下一章 : <a href="article?id=${detailBook.id}&character=${next}">${next}</a></p>
+    <!-- <a href="article?id=${detailBook.id}&character=${last}">${last}</a> -->
+    <p class="left">上一章 : <a href="javascript:void(0);" onclick="javascript:judge('${detailBook.id}','${last}')">${last}</a></p>
+    <!-- <a href="article?id=${detailBook.id}&character=${next}">${next}</a> -->
+    <p class="right">下一章 : <a href="javascript:void(0);" onclick="javascript:judge('${detailBook.id}','${next}')">${next}</a></p>
  </div>
-  
+<script type="text/javascript">
+//判断该书是否被购买
+function judge(id,content){
+	console.info(id)
+	$.get('judge',{
+		id:id
+	},function(data){
+		console.log(data)
+		if(data!=null&&data!=""){
+			var str = '';
+			window.location.href = 'article?id='+id+'&character='+content;
+		}else{
+			console.log(data)
+			read(id,content);
+		}
+	});
+}
+function read(id,content){
+	console.log(id,content)
+	$.get('spend',{
+		param:id
+	},function(data){
+		console.log(data)
+		if(data==-1){
+			alert('请先登录');
+		}else if(data==0){
+			alert('积分不够');
+		}else{
+			var str = '';
+			window.location.href = 'article?id='+id+'&character='+content;
+			//$('#book"'+id).attr('href',str); 
+		}
+		
+	});
+}
+
+</script> 
 <div class="fx clear">
     <div class="bdsharebuttonbox right"><span class="left">分享到： </span><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_more" data-cmd="more"></a></div>
     <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];

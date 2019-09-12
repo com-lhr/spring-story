@@ -409,7 +409,7 @@ h2 {
 		var id = document.getElementById("WIDout_trade_no").value =  sNow;
 		var name = document.getElementById("WIDsubject").value = str3;
 		var money = document.getElementById("WIDtotal_amount").value = str2;
-		console.log(sNow);
+		console.log(money);
 		
 	}
 	GetDateNow();
@@ -420,7 +420,7 @@ h2 {
 		var name = $(" input[ name='WIDsubject' ] ").val();
 		console.log(name);
 		var money = $(" input[ name='WIDtotal_amount' ] ").val();
-
+        console.log(money)
 		$.get('addOrder',{
 			id:id,
 			name:name,
@@ -430,7 +430,7 @@ h2 {
 				alert('支付失败！！');
 			}
 		});
-		window.location.href="topay?WIDout_trade_no="+id+"&WIDtotal_amount="+name+"&WIDsubject="+money+"&WIDbody=null";
+		window.location.href="topay?WIDout_trade_no="+id+"&WIDsubject="+name+"&WIDtotal_amount="+money+"&WIDbody=null";
 		
 	}
 </script>

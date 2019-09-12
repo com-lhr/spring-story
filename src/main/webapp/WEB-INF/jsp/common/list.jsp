@@ -16,30 +16,24 @@
             </div><!--新书上架结束-->
          
          <div class="two">
-           <p><a href="javascript:;" class="active">阅读排行</a><a href="javascript:;">本月最热排行</a></p>
+           <p><a href="javascript:;" class="active">本周最热排行</a><a href="javascript:;">本月最热排行</a></p>
                    <ul class="active">
-                   <c:forEach items="${book_readCnt }" var="brc">
-                    <li><a href="detail?id=${brc.id }">${brc.bName }</a></li>
-                   </c:forEach>
+                    <li><a href="javascrip:;">文化苦旅</a></li>
+                    <li><a href="javascrip:;">谢谢你曾来过我的世界</a></li>
+                    <li><a href="javascrip:;">文化苦旅</a></li>
+                    <li><a href="javascrip:;">文化苦旅</a></li>
+                    <li><a href="javascrip:;">文化苦旅</a></li>
+                    <li><a href="javascrip:;">文化苦旅</a></li>
+                    <li><a href="javascrip:;">文化苦旅</a></li>
                    </ul>
-                    <ul id="ul2">
-                     <c:forEach items="${book_readcount }" var="brct">
-                    <li><a href="detail?id=${brct.id }">${brct.bName }</a></li>
-                   </c:forEach>
+                    <ul>
+                    <li><a href="javascrip:;">文化苦旅</a></li>
+                    <li><a href="javascrip:;">aaa</a></li>
+                    <li><a href="javascrip:;">文化苦旅</a></li>
+                    <li><a href="javascrip:;">文化苦旅</a></li>
+                    <li><a href="javascrip:;">文化苦旅</a></li>
+                    <li><a href="javascrip:;">文化苦旅</a></li>
+                    <li><a href="javascrip:;">谢谢你曾来过我的世界</a></li>
                    </ul>
          </div><!--tab切换-->
-       <script type="text/javascript">
-       		$(".two>p>a").click(function(){
-       			var op =$(this).text();
-       			if(op=="阅读排行"){
-       				$('.active').removeAttr("class");
-       				$(this).attr("class","active");
-       				$(".two>ul:first").attr("class","active");       				
-       			}else{
-       				$('.active').removeAttr("class");
-       				$(this).attr("class","active");
-       				$("#ul2").attr("class","active");  
-       			}
-       		})
-       </script>
      </div>

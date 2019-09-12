@@ -1,34 +1,23 @@
 package com.yc.story.web;
 
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import com.alipay.api.AlipayApiException;
-import com.alipay.api.internal.util.AlipaySignature;
 import com.yc.story.Biz.CollectionBiz;
 import com.yc.story.Biz.GoodsBiz;
 import com.yc.story.Biz.OrderBiz;
 import com.yc.story.bean.StCollection;
 import com.yc.story.bean.StGoods;
-import com.yc.story.bean.StOrder;
 import com.yc.story.bean.StUser;
-import com.yc.story.util.AlipayConfig;
 
 @Controller
 public class SelfServlet {
@@ -41,6 +30,24 @@ public class SelfServlet {
 	
 	@Resource
 	private OrderBiz obiz;
+	
+	//购买小说（整本）
+	@GetMapping("buy")
+	@ResponseBody
+	public int buy(@SessionAttribute(name="loginedUser",required=false) StUser user,int id,int money){
+		return cbiz.buy(user, id, money);
+	}
+	
+	//判断书籍是否被购买
+	@GetMapping("judge")
+	@ResponseBody
+	public List<StCollection> judge(@SessionAttribute(name="loginedUser",required=false) StUser user,int id){
+		if(null==user){
+			return null;
+		}else{
+			return cbiz.queryOne(user, id);
+		}
+	}
 	
 	//获取收藏夹
 	@GetMapping("collect")

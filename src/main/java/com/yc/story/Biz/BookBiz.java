@@ -21,13 +21,10 @@ import java.util.TreeMap;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.yc.story.bean.StBook;
-import com.yc.story.bean.StBook2;
 import com.yc.story.bean.StBookExample;
 import com.yc.story.bean.StCollection;
 import com.yc.story.bean.StCollectionExample;
@@ -43,9 +40,6 @@ public class BookBiz {
 	
 	@Resource
 	private StBookMapper bookMapper;
-	
-	@Autowired
-    private RedisTemplate<Object,Object> template;
 	
 	@Resource
 	private StCollectionMapper collMapper;
@@ -182,17 +176,6 @@ public class BookBiz {
 		PageHelper.startPage(1,10);
 		return recommendationMapper.selectByExample(example);
 	}
-	//redis编者推荐
-	public List<StBook2> findRedisRecommendation(){	
-		/*template.opsForHash().va*/		
-		List<Object> rs = new ArrayList<>();
-		List<StBook2> rss = new ArrayList<>();
-		rs =  template.opsForHash().values("StRecommendations");
-		for(int i = 0;i<rs.size();i++) {
-			 rss.add((StBook2)rs.get(i));			
-		}		
-		return rss;
-	}
 	
 	public List<StBook> findPageBookLikeName(String name){
 		StBookExample example = new StBookExample();
@@ -250,29 +233,4 @@ public class BookBiz {
 		
 	}
 	
-	//作者的详情页面 
-	public StUser findAuthor (int id) {
-		 return (StUser)template.opsForHash().get("Author", id+"");	
-	}
-	public List<StBook> findBookByAuthor(String name) {
-		StBookExample example = new StBookExample();
-		example.createCriteria().andBAuthorEqualTo(name);
-		return bookMapper.selectByExample(example);		
-	}
-	
-	//根据阅读数量排序查询
-	public List<StBook> findBookOrderByReadCnt(){
-		StBookExample example = new StBookExample();
-		example.setOrderByClause("b_readCnt desc");
-		PageHelper.startPage(1,10);
-		return bookMapper.selectByExample(example);		
-	}
-	
-	//根据月票排序查询
-		public List<StBook> findBookOrderByCount(){
-			StBookExample example = new StBookExample();
-			example.setOrderByClause("b_count desc");
-			PageHelper.startPage(1,10);
-			return bookMapper.selectByExample(example);		
-		}
 }

@@ -53,8 +53,6 @@ public class BookServlet {
 		/*Integer aid = Integer.valueOf(id);*/
 		model.addAttribute("category_pagebooks", bbiz.findByCategory(id, page));
 		model.addAttribute("category_newbooks", bbiz.findByCategoryAndTime(id));
-		model.addAttribute("book_readCnt", bbiz.findBookOrderByReadCnt());
-		model.addAttribute("book_readcount", bbiz.findBookOrderByCount());
 		return "index_article";
 	}
 	
@@ -82,9 +80,7 @@ public class BookServlet {
 		}				
 		model.addAttribute("chapter1", list2);
 		model.addAttribute("comments", cobiz.findCommentByBid(id));
-		model.addAttribute("category_newbooks", bbiz.findByCategoryAndTime(book.getbCategory()));
-		model.addAttribute("book_readCnt", bbiz.findBookOrderByReadCnt());
-		model.addAttribute("book_readcount", bbiz.findBookOrderByCount());
+		
 		return "detail";
 	}
 	
@@ -155,9 +151,7 @@ public class BookServlet {
 	}
 	@RequestMapping("doSearch")
 	public String showSearch(String name,Model model) {
-		model.addAttribute("searchBook", bbiz.findBookLikeName(name));
-		model.addAttribute("book_readCnt", bbiz.findBookOrderByReadCnt());
-		model.addAttribute("book_readcount", bbiz.findBookOrderByCount());
+		model.addAttribute("searchBook", bbiz.findBookLikeName(name));		
 		return "showSearch";
 		
 	}
@@ -177,7 +171,9 @@ public class BookServlet {
 	@ModelAttribute("bookList")
 	public List<Object> findColl(@SessionAttribute(name="loginedUser",required=false) StUser user){
 		if(user==null){
-			return null;
+			List<Object> li = new ArrayList<>();
+			li.add(-1);
+			return li;
 		}else{
 			return bbiz.query(user.getId());
 		}

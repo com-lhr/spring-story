@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!doctype html>
@@ -51,7 +51,7 @@
   </div>-->
   <div class="delu2 clear">
       <div class="self ease">
-      <a href="${loginedUser == null ? 'tologin' : ''}" class="clear">${loginedUser == null ? 'Hi,请登录'  :   '欢迎：'.concat(loginedUser.uName)}<span class="icon ease"></span></a>
+      <a href="javascript:;" class="clear">雪剑无影<span class="icon ease"></span></a>
       <div class="clear"></div>
        <ul  class="clear">
          <li><a href="javascript:;">个人中心</a></li>
@@ -73,32 +73,15 @@
 <nav class="clear">
     <ul class="nav_1 clear">
     <div class="active"></div>
-    <li><a href="javascript:;">首页</a></li>
-    <li><a href="javascript:;">文学</a>
-       <ul class="clear">
-         <li><a href="javascript:;">现代文学</a></li>
-         <li><a href="javascript:;">外国文学</a></li>
-         <li><a href="javascript:;">古典文学</a></li>
-         <li><a href="javascript:;">散文随笔</a></li>
-       </ul>
-    </li>
-    <li><a href="javascript:;">社会学</a></li>
-    <li><a href="javascript:;">心理学</a></li>
-    <li><a href="javascript:;">经济学</a></li>
-    <li><a href="javascript:;">自然科学</a></li>
-    <li><a href="javascript:;">历史</a></li>
-    <li><a href="javascript:;">其他</a>
-       <ul class="clear">
-         <li><a href="javascript:;">旅游攻略</a></li>
-         <li><a href="javascript:;">周刊杂志</a></li>
-         <li><a href="javascript:;">经典短语</a></li>
-       </ul>    
-    </li>
+    <li><a href="toindex">首页</a></li>
+    
+
     <div class="submission">
     <a href="javascript:;"><span class="icon_span"></span>我要投稿</a>
     </div>
     </ul>
 </nav><!--导航结束-->
+
 
 <div class="box">
    <div class="box_1 clear">
@@ -241,7 +224,7 @@
         <p class="border_b"></p>
         <ul class="list li" id="collect">
             <c:forEach items="${coList }" var="c">
-            <li id="li${c.bId }"><span class="icon_span pos_book"></span><a href="javascript:;">${c.stBook.bName }</a>
+            <li id="li${c.bId }"><span class="icon_span pos_book"></span><a href="detail?id=${c.bId }">${c.stBook.bName }</a>
             <span><c:if test="${c.stBook.bStatus == 0}" >更新中</c:if>
             <c:if test="${c.stBook.bStatus == 1}" >已完结</c:if></span>
             <span class="right">
@@ -254,19 +237,19 @@
             </time>
                 <span>
                    <c:if test="${c.cStatus == 1}" ><a href="#" onclick="javascript:void(0)">已购买</a></c:if>
-                   <c:if test="${c.cStatus == 0}" ><a href="#" onclick="javascript:buy(${c.bId });">未购买</a></c:if>
+                   <c:if test="${c.cStatus == 0}" ><a href="#" onclick="javascript:buy('${c.bId }','${c.stBook.bNum }');">未购买</a></c:if>
                 </span>
               <a href="#" onclick="javascript:cancel(${c.bId });">取消收藏</a></span></li>
             </c:forEach>
         </ul>
         <ul class="page clear">
             <li><a href="javascript:void(0);" onclick="page(1)">首页</a></li>
-            <li><a href="javascript:void(0);" onclick="prePage()">上一页</a></li>
+            <!-- <li><a href="javascript:void(0);" onclick="prePage()">上一页</a></li> -->
             <!-- href="collect?page=1"   href="collect?page=2"-->
             <c:forEach var="i" begin="1" end="${count}">
             <li><a href="javascript:void(0)" class="thispage" onclick="page(${i })">${i }</a></li>
             </c:forEach>
-            <li><a href="javascript:nextPage()">下一页</a></li>
+            <!-- <li><a href="javascript:nextPage()">下一页</a></li> -->
            <li><a href="javascript:;" onclick="page(${count})">尾页</a></li>
            <li class="tz"><select id="page">
            
@@ -296,8 +279,7 @@
         	            '<span>&nbsp;'+(data[i].stBook.bStatus=="0"?"未完结":"已完结")+'</span>'+
         	            '<span class="right">'+
         	            '<time>'+(data[i].stBook.bTime).substring(0,10)+'</time>&nbsp;'+
-        	            '<a href="#" onclick="javascript:buy(${c.bId });"><span>'+
-        	            (data[i].cStatus=="0"?"未购买":"已购买")+
+        	            (data[i].cStatus=="0"?'<a href="#" onclick="javascript:buy('+data[i].bId+','+data[i].stBook.bNum+');"><span>未购买':'<a href="#" onclick="javascript:void(0)"><span>已购买')+
         	            '</span></a>'+
         	            '&nbsp;<a href="javascript:cancel('+data[i].bId+');">取消收藏</a>'+
         	            '</span>'+
@@ -337,7 +319,7 @@
 	        	            '<span>&nbsp;'+(data[i].stBook.bStatus=="0"?"更新中":"已完结")+'</span>'+
 	        	            '<span class="right">'+
 	        	            '<time>'+(data[i].stBook.bTime).substring(0,10)+'</time>&nbsp;'+
-	        	            (data[i].cStatus=="0"?"未购买":"已购买")+
+	        	            (data[i].cStatus=="0"?'<a href="#" onclick="javascript:buy('+data[i].bId+','+data[i].stBook.bNum+');"><span>未购买':'<a href="#" onclick="javascript:void(0)"><span>已购买')+
 	        	            '&nbsp;</span></a>'+
 	        	            '<a href="javascript:cancel('+data[i].bId+');">取消收藏</a>'+
 	        	            '</span>'+
@@ -349,6 +331,29 @@
 	    		
 	     };
 	   	 $.get(url,param,callback);
+    }
+    
+    //购买书籍
+    function buy(id,money){
+    	if(money==0||money==""||money==null){
+    		money=200;
+    	}
+    	console.log(money)
+    	if(confirm("购买需要"+money+"积分，是否继续?")){
+    		$.get('buy',{
+        		id:id,
+        		money:money
+        	},function(data){
+        		if(data==-1){
+        			alert('积分不足，请充值');
+        		}else if(data==1){
+        			alert('购买成功！！！');
+        		}else{
+        			alert('购买失败！！！')
+        		}
+        	});
+    	}
+    	
     }
     
     </script>
@@ -384,7 +389,7 @@
            <li>共 1/3 页</li>
       </ul><!--分页-->
        </div> <!--我的上传-->
-
+	
     <div class="c_5">
         <p class="tit">购买记录</p>
         <p class="border_b"></p>
