@@ -109,5 +109,41 @@ public class UserBiz {
 			return uss;
 			
 		}
+		
+		//删除用户
+		public void deleteUserById(Integer id) {
+			sum.deleteByPrimaryKey(id);
+		}
+		
+		//根据条件查询用户
+		public List<StUser> findUserBy(StUser user) {
+			StUserExample sue = null ;
+			if( user != null) {
+				sue = new StUserExample();
+				if(user.getuEmail() != null && !"".equals(user.getuEmail())) {
+					sue.createCriteria().andUEmailEqualTo(user.getuEmail());
+					return sum.selectByExample(sue);
+				}
+				
+				if(user.getuName() !=null && !"".equals(user.getuName())) {
+					System.out.println(user.getuName());
+					sue.createCriteria().andUNameLike(user.getuName());
+					return sum.selectByExample(sue);
+				}
+				
+				if(user.getuTel() !=null && !"".equals(user.getuTel())) {
+					sue.createCriteria().andUTelEqualTo(user.getuTel());
+					return sum.selectByExample(sue);
+				}
+				
+				if(user.getLevel() !=null ) {
+					sue.createCriteria().andLevelEqualTo(user.getLevel());
+					return sum.selectByExample(sue);
+				}
+			}
+			return sum.selectByExample(sue);
+			
+			
+		}
 	
 }

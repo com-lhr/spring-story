@@ -10,7 +10,19 @@ import com.yc.story.Biz.CategoryBiz;
 
 @Controller
 public class BackServlet {
+	@GetMapping("touser1")		
+	public String touser1() {
+		return "back/user1";
+	}	
+	@GetMapping("user_tail")
+	public String user_tail() {
+		return "back/user_tail";
+	}
 	
+	@GetMapping("user_password")
+	public String user_password() {
+		return "back/user_password";
+	}	
 	@Resource 
 	private CategoryBiz cbiz;
 	@GetMapping("toback")

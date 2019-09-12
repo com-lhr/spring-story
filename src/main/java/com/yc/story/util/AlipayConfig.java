@@ -26,10 +26,10 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA459+Y9tPjFAL5Z30loW0VS49tO/bLz7uVbMVHHAMz9IzbsxTgSKJqvsoU6dglesNf2ciPlP2Yu6haK2xRx2jpkVa0NW7mFRJ0olHWpQ9/qX1VjVx4KsGgBcd6lM9NHq4NYDSTb3GgMk9GjfLH+aso+1gaBFebY8gpKoCmsksG8OZiDd1C6qqmWYq9YFuRw4vTx7ELn25spPtVksvz7qJ3B9UtmEL/AmVfr3bAYnz5vEC08AYYnqu+32P4fAiWtfGj6NWfoq9KzZs6X6O0mUo91i3RSsdK5ILuWxF2k1EX7b22Tjvfx8FIgsgxl5HbZScDKwlMQP8h6IOpbhW7JAeEwIDAQAB";
 
 	// 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String notify_url = "http://127.0.0.1/alipay/notify_url.jsp";
+	public static String notify_url = "http://120.27.247.23/alipay/notify_url.jsp";
 
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String return_url = "http://127.0.0.1/pay";
+	public static String return_url = "http://120.27.247.23/pay";
 
 	// 签名方式
 	public static String sign_type = "RSA2";

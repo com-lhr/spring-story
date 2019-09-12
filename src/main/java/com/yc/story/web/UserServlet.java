@@ -147,6 +147,44 @@ public class UserServlet {
 		}
 		
 	}
+	//所有用户
+		@ResponseBody
+		@RequestMapping("user1")
+		public List<StUser> allUser(){
+			return  ubiz.findUserBy(null);
+		}
+		
+		@PostMapping("deleteUser")
+		@ResponseBody
+		public Result deleteuser(String iArray) {
+			String[] arr = iArray.split(",");
+			try {
+				for(int i=0;i<arr.length;i++) {
+					ubiz.deleteUserById(Integer.parseInt(arr[i]));
+				}
+				return new Result(1,"删除成功");
+			}catch(Exception e) {
+				e.printStackTrace();
+				return  new Result(0,"删除用户失败");
+			}
+		}
+	
+	
+		//根据条件查询出用户
+		@ResponseBody
+		@RequestMapping("condition")
+		public List<StUser> findUserByUser(StUser user,@RequestParam("type") String type){
+			if(type.equals("管理员")) {
+				user.setLevel(0);
+			}else if(type.equals("用户")) {
+				user.setLevel(2);
+			}else if(type.equals("作者")) {
+				user.setLevel(1);
+			}else {
+				user.setLevel(null);
+			}
+			return ubiz.findUserBy(user);
+		}
 	
 	@GetMapping("spend")
 	@ResponseBody

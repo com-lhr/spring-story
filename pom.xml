@@ -177,6 +177,7 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/**</include>
+                    <include>**/*.xml</include>
                 </includes>
                 <filtering>false</filtering>
             </resource>
