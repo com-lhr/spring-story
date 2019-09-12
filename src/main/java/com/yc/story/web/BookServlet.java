@@ -177,7 +177,9 @@ public class BookServlet {
 	@ModelAttribute("bookList")
 	public List<Object> findColl(@SessionAttribute(name="loginedUser",required=false) StUser user){
 		if(user==null){
-			return null;
+			List<Object> list = new ArrayList<>();
+			list.add(-1);
+			return list;
 		}else{
 			return bbiz.query(user.getId());
 		}
